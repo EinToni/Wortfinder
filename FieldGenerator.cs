@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Wortfinder
 {
+	// Class to controll the field. Generate a variable sizes field and fill them with letters.
 	class FieldGenerator
 	{
 		private readonly Grid letterGrid;
@@ -18,6 +17,9 @@ namespace Wortfinder
 
 		public void InitializeField(int size)
 		{
+			// Delete All Fields if any exist
+			letterGrid.Children.Clear();
+			// 
 			for (int i = 0; i < size; i++)
 			{
 				var rowDefinition = new RowDefinition();
@@ -28,14 +30,23 @@ namespace Wortfinder
 				letterGrid.ColumnDefinitions.Add(columnDefinition);
 				for (int j = 0; j < size; j++)
 				{
-					Random rnd = new Random();
-
-					char letterChar = (char)rnd.Next(65, 90);
-					var letter = new LetterBox(letterController, 100, 50, j, i, letterChar);
+					var letter = new LetterBox(letterController, 100, 50, j, i, '-');
 					letterGrid.Children.Add(letter);
 					Grid.SetRow(letter, j);
 					Grid.SetColumn(letter, i);
 				}
+			}
+			NewLetters();
+		}
+
+		public void NewLetters()
+		{
+			//TODO: Shuffle findable Words.
+			foreach(LetterBox letterBox in letterGrid.Children)
+			{
+				Random rnd = new Random();
+				char letterChar = (char)rnd.Next(65, 90);
+				letterBox.Letter = letterChar;
 			}
 		}
 	}

@@ -6,14 +6,25 @@
         xmlns:local="clr-namespace:Wortfinder"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Margin="179,26,223,32"
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Word Missing" Click="WordMissing">
+            </MenuItem>
+        </Menu>
+        <Grid Margin="10,10,10,10"
           MouseUp="MouseRelease">
-        <Grid x:Name="LetterGrid" Margin="0,0,0,92">
-            <Grid.ColumnDefinitions>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-            </Grid.RowDefinitions>
+            <Grid x:Name="LetterGrid" Margin="217,10,272,92">
+                <Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
+            </Grid>
+            <Label Content="Label" HorizontalAlignment="Left" Height="40" Margin="21,10,0,0" VerticalAlignment="Top" Width="93"/>
+            <Button Content="Shuffle Letters" HorizontalAlignment="Left" Margin="21,55,0,0" VerticalAlignment="Top" Height="45" Width="83" Click="NewGame"/>
+            <Label Content="Your Word:" HorizontalAlignment="Left" Margin="655,10,0,0" VerticalAlignment="Top" Width="115"/>
+            <Label Content="Your Score:" HorizontalAlignment="Left" Height="33" Margin="655,67,0,0" VerticalAlignment="Top" Width="115"/>
+            <TextBox x:Name="OutputScore" HorizontalAlignment="Left" Height="23" Margin="655,105,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+            <TextBox x:Name="OutputWord" HorizontalAlignment="Left" Height="26" Margin="655,36,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
         </Grid>
-        <Label x:Name="OutputText" Content="Label" HorizontalAlignment="Left" Height="32" Margin="56,289,0,0" VerticalAlignment="Top" Width="248"/>
-    </Grid>
+    </DockPanel>
 </Window>

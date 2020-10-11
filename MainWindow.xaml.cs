@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Wortfinder
 {
@@ -22,19 +9,26 @@ namespace Wortfinder
 	{
 		private readonly FieldGenerator fieldGenerator;
 		private readonly LetterController letterController;
-		private bool dragActive = false;
 		public MainWindow()
 		{
 			InitializeComponent();
-			letterController = new LetterController(LetterGrid, OutputText);
+			letterController = new LetterController(this, LetterGrid, OutputWord);
 			fieldGenerator = new FieldGenerator(LetterGrid, letterController);
-			fieldGenerator.InitializeField(3);
-			LetterGrid.ShowGridLines = true;
+			fieldGenerator.InitializeField(4);
+			//LetterGrid.ShowGridLines = true;
 		}
 
-		public void MouseRelease(object sender, RoutedEventArgs e)
+		public void MouseRelease(object sender, RoutedEventArgs e) => letterController.MouseRelease();
+		private void NewGame(object sender, RoutedEventArgs e) => fieldGenerator.NewLetters();
+		public void AddPoints(int points)
 		{
-			letterController.MouseRelease();
+			OutputScore.Text = (int.Parse(OutputScore.Text.ToString()) + points).ToString();
+		}
+
+		private void WordMissing(object sender, RoutedEventArgs e)
+		{
+			WordMissingWindow wmw = new WordMissingWindow();
+			wmw.Show();
 		}
 	}
 }

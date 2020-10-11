@@ -1,29 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Wortfinder
 {
+	// Class to manage all letters that get connected and the resulting word.
 	public class LetterController
 	{
 		private string word = "";
 		private int lastRow = -1;
 		private int lastColumn = -1;
-		private Label Label = null;
-		private readonly Grid letterGrid;
-		public LetterController(Grid grid, Label label)
+		private TextBox outputTextBox = null;
+		private readonly Grid letterGrid = null;
+		private readonly WordController wordController = null;
+		private readonly MainWindow mainWindow = null;
+		public LetterController(MainWindow main, Grid grid, TextBox textBox)
 		{
-			Label = label;
+			outputTextBox = textBox;
 			letterGrid = grid;
+			wordController = new WordController();
+			mainWindow = main;
 		}
 
-		internal void ClickLetter(char letter, int row, int column)
+		internal SolidColorBrush ClickLetter(char letter, int row, int column)
 		{
 			if (Math.Abs(lastRow - row) <= 1 && Math.Abs(lastColumn - column) <= 1 || lastRow == -1 && lastColumn == -1)
 			{
 				word += letter.ToString();
-				Label.Content = word;
+				outputTextBox.Text = word;
 				lastRow = row;
 				lastColumn = column;
 			}
@@ -31,15 +35,22 @@ namespace Wortfinder
 			{
 				MouseRelease();
 			}
+			return new SolidColorBrush(Color.FromRgb((byte)(100 + (5 * word.Length)), 0, 0));
 		}
 
 		internal void MouseRelease()
 		{
-			word = "";
 			foreach (LetterBox child in letterGrid.Children)
 			{
 				child.MouseRelease();
 			}
+			if (wordController.CheckWord(word))
+			{
+				mainWindow.AddPoints(1);
+			}
+			word = "";
+			lastRow = -1;
+			lastColumn = -1;
 		}
 	}
 }

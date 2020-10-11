@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Wortfinder
 {
@@ -19,7 +11,7 @@ namespace Wortfinder
 	public partial class LetterBox : UserControl
 	{
 		private readonly LetterController letterController = null;
-		private readonly SolidColorBrush clickedColor = new SolidColorBrush(Color.FromRgb(255, 0, 255));
+		private readonly SolidColorBrush clickedColor = new SolidColorBrush(Color.FromRgb(255, 0, 100));
 		private readonly SolidColorBrush unclickedColor = new SolidColorBrush(Color.FromRgb(100, 100, 100));
 		public LetterBox(LetterController letterContr, int size, int circleSize, int row, int column, char letter)
 		{
@@ -34,6 +26,7 @@ namespace Wortfinder
 			Clicked = false;
 			letterController = letterContr;
 			Background.Fill = unclickedColor;
+			//HitboxCircle.Stroke.Opacity = 0;
 		}
 		private int size;
 		public int Size
@@ -61,23 +54,15 @@ namespace Wortfinder
 
 		private void ClickLetter(object sender, RoutedEventArgs e)
 		{
-			if (!Clicked)
-			{
-				Clicked = true;
-				letterController.ClickLetter(Letter, Row, Column);
-				Background.Fill = clickedColor;
-			}
-
-		}
-		private void HoverLetter(object sender, RoutedEventArgs e)
-		{
 			if (!Clicked && Mouse.LeftButton == MouseButtonState.Pressed)
 			{
 				Clicked = true;
-				letterController.ClickLetter(Letter, Row, Column);
-				Background.Fill = clickedColor;
+				//clickedColor.Color = letterController.ClickLetter(Letter, Row, Column);
+				Background.Fill = letterController.ClickLetter(Letter, Row, Column);
 			}
+
 		}
+		
 		public void MouseRelease()
 		{
 			Clicked = false;

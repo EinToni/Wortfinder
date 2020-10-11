@@ -14,10 +14,10 @@
                  VerticalAlignment="Center">
             <TextBlock x:Name="TextLetter"></TextBlock>
         </Viewbox>
-        <Ellipse Height="{Binding Path=CircleSize}" Width="{Binding Path=CircleSize}" 
+        <Ellipse x:Name="HitboxCircle" Height="{Binding Path=CircleSize}" Width="{Binding Path=CircleSize}" 
                  Canvas.Top="{Binding Path=CircleMargin}" Canvas.Left="{Binding Path=CircleMargin}"
-                 Stroke="Black" Fill="Transparent"
+                 Stroke="Transparent" Fill="Transparent"
                  PreviewMouseDown="ClickLetter"
-                 MouseEnter="HoverLetter"/>
+                 MouseEnter="ClickLetter"/>
     </Canvas>
 </UserControl>
