@@ -7,12 +7,11 @@
         mc:Ignorable="d"
         Title="Report Missing Word" Height="180" Width="300">
     <Grid>
-        <Label Content="What word is missing?" HorizontalAlignment="Left" Height="28" Margin="19,19,0,0" VerticalAlignment="Top" Width="139"/>
-        <TextBox x:Name="ReportedWord" HorizontalAlignment="Left" Margin="19,52,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Height="27"/>
-        <Button Content="Report!" HorizontalAlignment="Left" Height="31" Margin="19,84,0,0" VerticalAlignment="Top" Width="139" Click="ReportMissingWord"/>
+        <Label Content="What word is missing?" HorizontalAlignment="Left" Height="28" Margin="19,19,0,0" VerticalAlignment="Top" Width="139" />
+        <TextBox x:Name="ReportedWord" HorizontalAlignment="Left" Margin="19,52,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Height="27" />
+        <Button x:Name="ReportButton" Content="Report!" HorizontalAlignment="Left" Height="31" Margin="19,84,0,0" VerticalAlignment="Top" Width="139" Click="ReportMissingWord" />
         <Grid Margin="10,120,10,10">
-            <Label x:Name="SuccessMessage" Opacity="0" Content="Your Word was found and added to the database." HorizontalAlignment="Left" Margin="-3,0,0,0" VerticalAlignment="Center" Height="25" Width="273"/>
-
+            <Label x:Name="SuccessMessage" Content="" HorizontalAlignment="Left" Margin="-3,0,0,0" VerticalAlignment="Center" Height="25" Width="273" />
         </Grid>
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wortfinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="605" Width="915">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Word Missing" Click="WordMissing">
@@ -13,18 +13,33 @@
         </Menu>
         <Grid Margin="10,10,10,10"
           MouseUp="MouseRelease">
-            <Grid x:Name="LetterGrid" Margin="217,10,272,92">
+            <Grid x:Name="LetterGrid" Margin="217,10,228,91">
                 <Grid.ColumnDefinitions>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                 </Grid.RowDefinitions>
+                <Border BorderThickness="2" BorderBrush="Black" />
             </Grid>
-            <Label Content="Label" HorizontalAlignment="Left" Height="40" Margin="21,10,0,0" VerticalAlignment="Top" Width="93"/>
-            <Button Content="Shuffle Letters" HorizontalAlignment="Left" Margin="21,55,0,0" VerticalAlignment="Top" Height="45" Width="83" Click="NewGame"/>
-            <Label Content="Your Word:" HorizontalAlignment="Left" Margin="655,10,0,0" VerticalAlignment="Top" Width="115"/>
-            <Label Content="Your Score:" HorizontalAlignment="Left" Height="33" Margin="655,67,0,0" VerticalAlignment="Top" Width="115"/>
-            <TextBox x:Name="OutputScore" HorizontalAlignment="Left" Height="23" Margin="655,105,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
-            <TextBox x:Name="OutputWord" HorizontalAlignment="Left" Height="26" Margin="655,36,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
+
+            <Label Content="Your Word:" Margin="0,32,42,0" HorizontalAlignment="Right" Width="115" Height="26" VerticalAlignment="Top" />
+            <Label Content="Your Score:" Margin="0,89,42,0" Height="33" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" />
+            <TextBox x:Name="OutputScore" Margin="0,127,42,0" Text="0" TextWrapping="Wrap" HorizontalAlignment="Right" Width="115" Height="23" VerticalAlignment="Top" />
+            <TextBox x:Name="OutputWord" Margin="0,58,42,0" Text="" TextWrapping="Wrap" HorizontalAlignment="Right" Width="115" Height="26" VerticalAlignment="Top" />
+            <Label Content="Remaining Time:" HorizontalAlignment="Left" Height="27" Margin="21,197,0,0" VerticalAlignment="Top" Width="100"/>
+            <TextBlock x:Name="remainingTime" HorizontalAlignment="Left" Height="24" Margin="21,229,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+
+
+            <Grid HorizontalAlignment="Left" Height="152" Margin="20,16,0,0" VerticalAlignment="Top" Width="179">
+                <Label Content="Field Size:" HorizontalAlignment="Center" Height="26" VerticalAlignment="Bottom" Width="175" Margin="0,0,0,126"/>
+                <RadioButton GroupName="FieldSize" Tag="4" Content="4x4" HorizontalAlignment="Right" Margin="0,0,132,106" VerticalAlignment="Bottom" Checked="SetFieldSize" IsChecked="True"/>
+                <RadioButton GroupName="FieldSize" Tag="5" Content="5x5" HorizontalAlignment="Center" Margin="0,0,0,106" VerticalAlignment="Bottom" Checked="SetFieldSize"/>
+                <RadioButton GroupName="FieldSize" Tag="6" Content="6x6" HorizontalAlignment="Right" Margin="0,0,14,106" VerticalAlignment="Bottom" Checked="SetFieldSize"/>
+                <Label Content="Game Time:" HorizontalAlignment="Center" Height="26" Margin="0,0,0,75" VerticalAlignment="Bottom" Width="175"/>
+                <RadioButton GroupName="GameTime" Tag="1" Content="1min" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Checked="SetGameTime"/>
+                <RadioButton GroupName="GameTime" Tag="3" Content="3min" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top" Checked="SetGameTime" IsChecked="True"/>
+                <RadioButton GroupName="GameTime" Tag="5" Content="5min" HorizontalAlignment="Left" Margin="124,82,0,0" VerticalAlignment="Top" Checked="SetGameTime"/>
+                <Button Content="Start Game" Margin="0,114,0,0" Click="NewGame" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="101" />
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>

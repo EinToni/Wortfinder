@@ -1,16 +1,12 @@
-﻿using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
-using System.IO;
+﻿using System;
 using System.Net.Http;
-using System.Threading;
 
 namespace Wortfinder
 {
-	class WebScraper
+	internal class WebScraper
 	{
 		public WebScraper()
 		{
-
 		}
 
 		public bool SearchWordAsync(string word)
@@ -19,21 +15,28 @@ namespace Wortfinder
 			var request = httpClient.GetStringAsync("https://duden.de/suchen/dudenonline/" + word);
 			request.Wait();
 			string result = request.Result;
-			if (result.Contains("liefert keine Ergebnisse. Wir haben stattdessen nach"))
+			if (result.Contains("liefert keine Ergebnisse. Wir haben stattdessen nach") || result.Contains("Leider gibt es für Ihre Suchanfrage im"))
 			{
 				return false;
 			}
-			string startOfList = result.Substring(result.IndexOf("<main"));
-
-			string completeFile = startOfList.Substring(startOfList.IndexOf(@"<a class=""vignette__label"""));
-			string textRegion = completeFile.Substring(0, completeFile.IndexOf("</a>"));
-			if (textRegion.Contains(word))
+			string completeFile = result.Substring(result.IndexOf("<main"));
+			while (true)
 			{
-				return true;
+				try
+				{
+					completeFile = completeFile.Substring(1);
+					completeFile = completeFile.Substring(completeFile.IndexOf(@"<a class=""vignette__label"""));
+					string textRegion = completeFile.Substring(0, completeFile.IndexOf("</a>"));
+					if (textRegion.Contains(word))
+					{
+						return true;
+					}
+				}
+				catch (Exception e)
+				{
+					return false;
+				}
 			}
-			return false;
 		}
-
-
 	}
 }

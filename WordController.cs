@@ -1,43 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Wortfinder
 {
-	// Class to controll 
-	class WordController
+	// Class to controll
+	internal class WordController
 	{
-		public WordController()
+		private readonly DataController dataController = null;
+		public WordController(DataController controller)
 		{
-
+			dataController = controller;
 		}
-		public bool CheckWord(string word)
+
+		public bool CheckBeginning(string beginnginWord)
 		{
-			bool returnValue = false;
-			if(word.Length > 0)
+			return true;
+		}
+
+		public bool CheckAllWords(char[,] letters)
+		{
+			List<string> allwords = new List<string>();
+			for (int i = 0; i < letters.GetLength(0); i++)
 			{
-				using (StreamReader file = new StreamReader("E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\wordListGerman.txt"))
+				for(int j = 0; j <= letters.Rank; j++)
 				{
-					string line;
-					char firstLetter = word[0];
-					while ((line = file.ReadLine()) != null)
+					char[,] newLetters = letters.Clone() as char[,];
+					newLetters[i,j] = '-';
+					foreach(string word in CheckLetter(letters[i, j].ToString(), newLetters, i, j))
 					{
-						if (line[0] != 'Ä' && line[0] != 'Ö' && line[0] != 'Ü' && firstLetter < line[0])
-						{
-							break;
-						}
-						if (word.Equals(line))
-						{
-							returnValue = true;
-							break;
-						}
+						allwords.Add(word);
 					}
-					file.Close();
 				}
 			}
-			return returnValue;
+			return false;
 		}
-		
+
+		public List<string> CheckLetter(string initial, char[,] letters, int row, int column)
+		{
+			List<string> allWords = new List<string>();
+			int rows = letters.Rank;
+			int columns = letters.GetLength(0);
+			if (dataController.CheckWordInList(initial))
+			{
+				allWords.Add(initial);
+			}
+			for (int i = -1; i <= 1; i++)
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					int newRow = row + i;
+					int newColumn = column + j;
+					if (newRow <= rows && newRow >= 0 && newColumn < columns && newColumn >= 0)
+					{
+						if (!letters[newRow, newColumn].Equals('-'))
+						{
+							char[,] newLetters = letters.Clone() as char[,];
+							newLetters[newRow, newColumn] = '-';
+							foreach (string s in CheckLetter(initial + letters[newRow, newColumn], newLetters, newRow, newColumn))
+							{
+								allWords.Add(s);
+							}
+						}
+					}
+				}
+			}
+			return allWords;
+		}
 	}
 }

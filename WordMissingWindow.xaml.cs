@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Wortfinder
 {
@@ -18,6 +8,7 @@ namespace Wortfinder
 	public partial class WordMissingWindow : Window
 	{
 		private readonly WebScraper scraper = null;
+
 		public WordMissingWindow()
 		{
 			InitializeComponent();
@@ -26,11 +17,18 @@ namespace Wortfinder
 
 		private async void ReportMissingWord(object sender, RoutedEventArgs e)
 		{
+			SuccessMessage.Content = "";
+			ReportButton.IsEnabled = false;
 			string word = ReportedWord.Text;
 			bool wordExist = scraper.SearchWordAsync(word);
 			if (wordExist)
 			{
-				SuccessMessage.Opacity = 1.0;
+				SuccessMessage.Content = "Your word was found and added.";
+			}
+			else
+			{
+				SuccessMessage.Content = "Your word could not be found.";
+				ReportButton.IsEnabled = true;
 			}
 		}
 	}

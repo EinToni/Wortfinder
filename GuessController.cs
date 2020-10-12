@@ -1,25 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Wortfinder
 {
 	// Class to manage all letters that get connected and the resulting word.
-	public class LetterController
+	public class GuessController
 	{
 		private string word = "";
 		private int lastRow = -1;
 		private int lastColumn = -1;
 		private TextBox outputTextBox = null;
+		private List<string> guessedWords;
 		private readonly Grid letterGrid = null;
 		private readonly WordController wordController = null;
+		private readonly DataController dataController = null;
 		private readonly MainWindow mainWindow = null;
-		public LetterController(MainWindow main, Grid grid, TextBox textBox)
+
+		public GuessController(MainWindow main, DataController dataCtr, Grid grid, TextBox textBox)
 		{
 			outputTextBox = textBox;
 			letterGrid = grid;
-			wordController = new WordController();
+			dataController = dataCtr;
+			wordController = new WordController(dataController);
 			mainWindow = main;
+			guessedWords = new List<string>();
 		}
 
 		internal SolidColorBrush ClickLetter(char letter, int row, int column)
@@ -35,7 +41,7 @@ namespace Wortfinder
 			{
 				MouseRelease();
 			}
-			return new SolidColorBrush(Color.FromRgb((byte)(100 + (5 * word.Length)), 0, 0));
+			return new SolidColorBrush(Color.FromRgb((byte)(100 + (7 * word.Length)), 0, 0));
 		}
 
 		internal void MouseRelease()
@@ -44,8 +50,9 @@ namespace Wortfinder
 			{
 				child.MouseRelease();
 			}
-			if (wordController.CheckWord(word))
+			if (dataController.CheckWordInList(word) && !guessedWords.Contains(word))
 			{
+				guessedWords.Add(word);
 				mainWindow.AddPoints(1);
 			}
 			word = "";
