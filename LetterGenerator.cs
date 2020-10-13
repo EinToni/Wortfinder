@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-	class LetterGenerator
+	public class LetterGenerator
 	{
 		public LetterGenerator()
 		{
@@ -17,7 +17,6 @@ namespace Wortfinder
 			char[] letters = new char[count];
 			for(int i = 0; i < count; i++)
 			{
-
 				letters[i] = (char)rnd.Next(65, 90);
 			}
 			return letters;

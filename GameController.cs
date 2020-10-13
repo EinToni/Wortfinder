@@ -14,7 +14,6 @@ namespace Wortfinder
 		private List<string> foundWords = null;
 		private readonly FieldGenerator fieldGenerator;
 		private readonly GuessController guessController;
-		private readonly DataController dataController;
 		private readonly WordFinder wordFinder;
 		private readonly GameTimer gameTimer;
 		private readonly MainWindow mainWindow;
@@ -23,7 +22,7 @@ namespace Wortfinder
 		public GameController(MainWindow mainW, Grid letterGrid)
 		{
 			gameTimer		= new GameTimer();
-			dataController	= new DataController();
+			DataController dataController = new DataController();
 			wordFinder		= new WordFinder(dataController);
 			guessController = new GuessController(this, dataController, letterGrid, mainW.OutputWord);
 			fieldGenerator	= new FieldGenerator(letterGrid, guessController);

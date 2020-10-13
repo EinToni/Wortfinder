@@ -46,7 +46,7 @@ namespace Wortfinder
 			{
 				child.MouseRelease();
 			}
-			if (dataController.CheckWord(word))
+			if (dataController.CheckWord(word, 0))
 			{
 				gameController.FoundCorrectWord(word);
 			}

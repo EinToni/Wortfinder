@@ -5,11 +5,11 @@ using System.Windows.Threading;
 
 namespace Wortfinder
 {
-	class GameTimer
+	public class GameTimer
 	{
 		private readonly DispatcherTimer dispatcherTimer;
 		private int timeRemaining = 0;
-		private int startTime = 180;
+		private int StartTime { get; set; } = 180;
 		private Func<string, bool> displayTime = null;
 		private Func<bool> timeout = null;
 
@@ -31,14 +31,9 @@ namespace Wortfinder
 			timeout = timeoutFunc;
 		}
 
-		public void SetTime(int seconds)
-		{
-			startTime = seconds;
-		}
-
 		public void StartTimer()
 		{
-			timeRemaining = startTime;
+			timeRemaining = StartTime;
 			dispatcherTimer.Start();
 		}
 
