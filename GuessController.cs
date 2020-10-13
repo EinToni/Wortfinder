@@ -12,21 +12,16 @@ namespace Wortfinder
 		private int lastRow = -1;
 		private int lastColumn = -1;
 		private TextBox outputTextBox = null;
-		private List<string> guessedWords;
 		private readonly Grid letterGrid = null;
-		private readonly WordController wordController = null;
 		private readonly DataController dataController = null;
-		private readonly MainWindow mainWindow = null;
 		private readonly GameController gameController = null;
 
-		public GuessController(MainWindow main, DataController dataCtr, Grid grid, TextBox textBox)
+		public GuessController(GameController gameCtr, DataController dataCtr, Grid grid, TextBox textBox)
 		{
 			outputTextBox = textBox;
 			letterGrid = grid;
 			dataController = dataCtr;
-			wordController = new WordController(dataController);
-			mainWindow = main;
-			guessedWords = new List<string>();
+			gameController = gameCtr;
 		}
 
 		internal SolidColorBrush ClickLetter(char letter, int row, int column)
@@ -51,10 +46,9 @@ namespace Wortfinder
 			{
 				child.MouseRelease();
 			}
-			if (dataController.CheckWordInList(word) && !guessedWords.Contains(word))
+			if (dataController.CheckWord(word))
 			{
-				guessedWords.Add(word);
-				mainWindow.AddPoints(1);
+				gameController.FoundCorrectWord(word);
 			}
 			word = "";
 			lastRow = -1;

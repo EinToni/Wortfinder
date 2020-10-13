@@ -8,7 +8,7 @@ namespace Wortfinder
 	/// <summary>
 	/// Interaktionslogik für LetterBox.xaml
 	/// </summary>
-	public partial class LetterBox : UserControl
+	partial class LetterBox : UserControl
 	{
 		private readonly GuessController guessController = null;
 		private readonly SolidColorBrush clickedColor = new SolidColorBrush(Color.FromRgb(255, 0, 100));

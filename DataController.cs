@@ -32,7 +32,7 @@ namespace Wortfinder
 			return false;
 		}
 
-		public bool CheckWordInList(string word)
+		public bool CheckWord(string word)
 		{
 			if (word.Length > 0)
 			{

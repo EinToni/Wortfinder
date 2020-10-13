@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Wortfinder.App">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wortfinder.DataController">
+    <Position X="11.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAACAAAAAAAAAAAAAAAABAAAAAgAAAAAABAA=</HashCode>
+      <FileName>DataController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wortfinder.FieldGenerator">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAABQAAAAAAgAQQAAAAAAgAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>FieldGenerator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="guessController" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Wortfinder.GameController">
+    <Position X="11.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAABQAAgoAQAMAAEABAAAAAAAAAAAAAAAADA=</HashCode>
+      <FileName>GameController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dataController" />
+      <Field Name="fieldGenerator" />
+      <Field Name="gameTimer" />
+      <Field Name="guessController" />
+      <Field Name="mainWindow" />
+      <Field Name="wordFinder" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Wortfinder.GameTimer">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAAIAAEEAAAAAAgAAAIACAAAAAAAIACAgAAAAA=</HashCode>
+      <FileName>GameTimer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wortfinder.GuessController">
+    <Position X="8.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAECAAABAAAAAAAYAAAAAAAAAgAAAAACAAAAAAAAEAA=</HashCode>
+      <FileName>GuessController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dataController" />
+      <Field Name="gameController" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Wortfinder.LetterBox" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAAAABoAAgAIBAAAACQCABAmAAAAAAKAAAAAA=</HashCode>
+      <FileName>LetterBox.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="guessController" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Wortfinder.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABAgAAAAAQAAAAAAAABAAAAAAAAACAAAAAQAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gameController" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Wortfinder.WebScraper">
+    <Position X="7.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WebScraper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wortfinder.WordFinder">
+    <Position X="15" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgEAAAAIAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>WordFinder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dataController" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Wortfinder.WordMissingWindow" BaseTypeListCollapsed="true">
+    <Position X="4" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAAAAAAAA=</HashCode>
+      <FileName>WordMissingWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="scraper" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

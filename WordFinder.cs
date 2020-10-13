@@ -4,12 +4,12 @@ using System.IO;
 namespace Wortfinder
 {
 	// Class to controll
-	internal class WordController
+	internal class WordFinder
 	{
 		private readonly DataController dataController = null;
-		public WordController(DataController controller)
+		public WordFinder(DataController dataCtr)
 		{
-			dataController = controller;
+			dataController = dataCtr;
 		}
 
 		public bool CheckBeginning(string beginnginWord)
@@ -17,7 +17,8 @@ namespace Wortfinder
 			return true;
 		}
 
-		public bool CheckAllWords(char[,] letters)
+		// Finds all Words in the Grid
+		public bool FindAllWords(char[,] letters)
 		{
 			List<string> allwords = new List<string>();
 			for (int i = 0; i < letters.GetLength(0); i++)
@@ -40,7 +41,7 @@ namespace Wortfinder
 			List<string> allWords = new List<string>();
 			int rows = letters.Rank;
 			int columns = letters.GetLength(0);
-			if (dataController.CheckWordInList(initial))
+			if (dataController.CheckWord(initial))
 			{
 				allWords.Add(initial);
 			}
