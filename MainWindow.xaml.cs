@@ -8,11 +8,12 @@ namespace Wortfinder
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private readonly FieldGenerator fieldGenerator;
-		private readonly GuessController guessController;
-		private readonly DataController dataController;
-		private readonly WordController wordController;
-		private readonly GameTimer gameTimer;
+		private readonly FieldGenerator		fieldGenerator;
+		private readonly GuessController	guessController;
+		private readonly DataController		dataController;
+		private readonly WordController		wordController;
+		private readonly GameTimer			gameTimer;
+		private readonly GameController		gameController;
 
 		public MainWindow()
 		{
@@ -20,8 +21,9 @@ namespace Wortfinder
 			gameTimer		= new GameTimer();
 			dataController	= new DataController();
 			wordController	= new WordController(dataController);
-			guessController = new GuessController(this, dataController, LetterGrid, OutputWord);
+			guessController = new GuessController(this, gameController, dataController, LetterGrid, OutputWord);
 			fieldGenerator	= new FieldGenerator(LetterGrid, guessController);
+			gameController	= new GameController();
 
 			char[,] test = new char[,] { { 'A', 'B', 'C' }, { 'F', 'B', 'C' }, { 'F', 'E', 'C' } };
 			//wordController.CheckAllWords(test);

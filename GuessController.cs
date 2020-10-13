@@ -17,6 +17,7 @@ namespace Wortfinder
 		private readonly WordController wordController = null;
 		private readonly DataController dataController = null;
 		private readonly MainWindow mainWindow = null;
+		private readonly GameController gameController = null;
 
 		public GuessController(MainWindow main, DataController dataCtr, Grid grid, TextBox textBox)
 		{

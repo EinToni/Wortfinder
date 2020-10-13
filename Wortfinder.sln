@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortfinder", "Wortfinder.csproj", "{2C9C3956-97C3-44D7-92DA-B3D63E486C55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wortfinder", "Wortfinder.csproj", "{2C9C3956-97C3-44D7-92DA-B3D63E486C55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wortfinder.XUnitTests", "..\Wortfinder.XUnitTests\Wortfinder.XUnitTests.csproj", "{1A1543F6-5836-4FC7-B7C5-1F049CD7FE30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2C9C3956-97C3-44D7-92DA-B3D63E486C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C9C3956-97C3-44D7-92DA-B3D63E486C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C9C3956-97C3-44D7-92DA-B3D63E486C55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A1543F6-5836-4FC7-B7C5-1F049CD7FE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A1543F6-5836-4FC7-B7C5-1F049CD7FE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A1543F6-5836-4FC7-B7C5-1F049CD7FE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A1543F6-5836-4FC7-B7C5-1F049CD7FE30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
