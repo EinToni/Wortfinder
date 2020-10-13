@@ -10,7 +10,7 @@ namespace Wortfinder
 	{
 		private List<string> wordList = new List<string>();
 		private string[] wordArray = null;
-		private string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\wordListGerman.txt";
+		private string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
 		public DataController()
 		{
 			LoadLanguage(pathGerman);
