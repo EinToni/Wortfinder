@@ -11,9 +11,16 @@ namespace Wortfinder
 
 		}
 
-		public void GetLetters(int count)
+		public char[] GetLetters(int count)
 		{
+			Random rnd = new Random();
+			char[] letters = new char[count];
+			for(int i = 0; i < count; i++)
+			{
 
+				letters[i] = (char)rnd.Next(65, 90);
+			}
+			return letters;
 		}
 	}
 }

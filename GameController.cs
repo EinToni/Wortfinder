@@ -9,8 +9,8 @@ namespace Wortfinder
 	public class GameController
 	{
 		private int score = 0;
-		public int time { get; set; }
-		public int fieldSize { get; set; }
+		public int Time { get; set; }
+		public int FieldSize { get; set; }
 		private List<string> foundWords = null;
 		private readonly FieldGenerator fieldGenerator;
 		private readonly GuessController guessController;
@@ -18,6 +18,7 @@ namespace Wortfinder
 		private readonly WordFinder wordFinder;
 		private readonly GameTimer gameTimer;
 		private readonly MainWindow mainWindow;
+		private readonly LetterGenerator letterGenerator;
 
 		public GameController(MainWindow mainW, Grid letterGrid)
 		{
@@ -26,6 +27,7 @@ namespace Wortfinder
 			wordFinder		= new WordFinder(dataController);
 			guessController = new GuessController(this, dataController, letterGrid, mainW.OutputWord);
 			fieldGenerator	= new FieldGenerator(letterGrid, guessController);
+			letterGenerator = new LetterGenerator();
 			mainWindow		= mainW;
 
 			fieldGenerator.InitializeField();
@@ -35,9 +37,11 @@ namespace Wortfinder
 
 		public void NewGame()
 		{
-			fieldGenerator.NewLetters();
+			int letterAmount = FieldSize * FieldSize;
+			char[] letters = letterGenerator.GetLetters(letterAmount);
+			fieldGenerator.NewLetters(letters);
 			gameTimer.StartTimer();
-			wordFinder.FindAllWords();
+			//wordFinder.FindAllWords();
 		}
 
 		public void FoundCorrectWord(string word)

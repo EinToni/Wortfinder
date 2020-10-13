@@ -44,7 +44,7 @@ namespace Wortfinder
 			
 		}
 
-		public void NewLetters()
+		public void NewLetters(char[] letters)
 		{
 			if (newSize) 
 			{
@@ -52,13 +52,20 @@ namespace Wortfinder
 				InitializeField();
 			}
 
-			//TODO: Shuffle findable Words.
-			foreach (LetterBox letterBox in letterGrid.Children)
+			if(letters.Length != letterGrid.Children.Count)
 			{
-				Random rnd = new Random();
-				char letterChar = (char)rnd.Next(65, 90);
-				letterBox.Letter = letterChar;
+				throw new System.ArgumentException("Letter count does not match the amount of fields.");
 			}
+			else
+			{
+				int i = 0;
+				foreach (LetterBox letterBox in letterGrid.Children)
+				{
+					letterBox.Letter = letters[i];
+					i++;
+				}
+			}
+			
 		}
 
 		public void SetFieldSize(int size)

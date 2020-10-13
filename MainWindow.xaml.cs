@@ -14,7 +14,8 @@ namespace Wortfinder
 		{
 			InitializeComponent();
 			gameController = new GameController(this, LetterGrid);
-			
+			gameController.Time = 180;
+			gameController.FieldSize = 4;
 
 			char[,] test = new char[,] { { 'A', 'B', 'C' }, { 'F', 'B', 'C' }, { 'F', 'E', 'C' } };
 			//wordController.CheckAllWords(test);
@@ -45,7 +46,7 @@ namespace Wortfinder
 			RadioButton radioButton = sender as RadioButton;
 			if (gameController != null)
 			{
-				gameController.time = int.Parse(radioButton.Tag.ToString()) * 60;
+				gameController.Time = int.Parse(radioButton.Tag.ToString()) * 60;
 			}
 		}
 
@@ -54,7 +55,7 @@ namespace Wortfinder
 			RadioButton radioButton = sender as RadioButton;
 			if (gameController != null)
 			{
-				gameController.fieldSize = int.Parse(radioButton.Tag.ToString());
+				gameController.FieldSize = int.Parse(radioButton.Tag.ToString());
 			}
 		}
 	}

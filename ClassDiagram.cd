@@ -27,7 +27,7 @@
   <Class Name="Wortfinder.GameController">
     <Position X="11.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAADAAAAAABQAAgoAQAMAAEABAAAAAAAAAAAAAAAADA=</HashCode>
+      <HashCode>AAADAAAAAABQAAgoAQAMAAEABBAAAAAAAAAAAAAAADA=</HashCode>
       <FileName>GameController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -37,10 +37,11 @@
       <Field Name="guessController" />
       <Field Name="mainWindow" />
       <Field Name="wordFinder" />
+      <Field Name="letterGenerator" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Wortfinder.GameTimer">
-    <Position X="14.75" Y="3.5" Width="1.5" />
+    <Position X="16.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAEAAIAAEEAAAAAAgAAAIACAAAAAAAIACAgAAAAA=</HashCode>
       <FileName>GameTimer.cs</FileName>
@@ -87,7 +88,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Wortfinder.WordFinder">
-    <Position X="15" Y="8" Width="1.5" />
+    <Position X="14" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgEAAAAIAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>WordFinder.cs</FileName>
@@ -106,6 +107,13 @@
       <Field Name="scraper" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Wortfinder.LetterGenerator">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LetterGenerator.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
