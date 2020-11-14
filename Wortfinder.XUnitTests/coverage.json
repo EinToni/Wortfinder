@@ -1,0 +1,1725 @@
+{
+  "Wortfinder.dll": {
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\obj\\Debug\\netcoreapp3.1\\App.g.cs": {
+      "Wortfinder.App": {
+        "System.Void Wortfinder.App::InitializeComponent()": {
+          "Lines": {
+            "48": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\App.xaml": {
+      "Wortfinder.App": {
+        "System.Void Wortfinder.App::InitializeComponent()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\BeginningComparer.cs": {
+      "Wortfinder.BeginningComparer": {
+        "System.Int32 Wortfinder.BeginningComparer::Compare(System.String,System.String)": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "13": 0,
+            "14": 0
+          },
+          "Branches": [
+            {
+              "Line": 9,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 9,
+              "Offset": 10,
+              "EndOffset": 17,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\DataController.cs": {
+      "Wortfinder.DataController": {
+        "System.Void Wortfinder.DataController::LoadGerman()": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.DataController::LoadLanguage(System.String)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 39,
+              "EndOffset": 11,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Collections.Generic.List`1<System.String> Wortfinder.DataController::NormaliseList(System.Collections.Generic.List`1<System.String>)": {
+          "Lines": {
+            "41": 2,
+            "42": 14,
+            "43": 5,
+            "44": 5,
+            "45": 5,
+            "46": 2,
+            "47": 2
+          },
+          "Branches": [
+            {
+              "Line": 42,
+              "Offset": 49,
+              "EndOffset": 5,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            },
+            {
+              "Line": 42,
+              "Offset": 49,
+              "EndOffset": 51,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.String Wortfinder.DataController::NormaliseVowels(System.String)": {
+          "Lines": {
+            "50": 15,
+            "51": 15,
+            "52": 15,
+            "53": 15,
+            "54": 15,
+            "55": 15,
+            "56": 15,
+            "57": 15,
+            "58": 15
+          },
+          "Branches": []
+        },
+        "System.String Wortfinder.DataController::NormaliseToUpper(System.String)": {
+          "Lines": {
+            "61": 5,
+            "62": 5,
+            "63": 5
+          },
+          "Branches": []
+        },
+        "System.Boolean Wortfinder.DataController::AddWord(System.String)": {
+          "Lines": {
+            "66": 0,
+            "67": 0,
+            "68": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean Wortfinder.DataController::CheckWord(System.String,System.Int32)": {
+          "Lines": {
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "76": 0,
+            "77": 0
+          },
+          "Branches": [
+            {
+              "Line": 72,
+              "Offset": 38,
+              "EndOffset": 40,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 72,
+              "Offset": 38,
+              "EndOffset": 45,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Boolean Wortfinder.DataController::CheckBeginning(System.String,System.Int32)": {
+          "Lines": {
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "85": 0,
+            "86": 0
+          },
+          "Branches": [
+            {
+              "Line": 81,
+              "Offset": 42,
+              "EndOffset": 44,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 81,
+              "Offset": 42,
+              "EndOffset": 49,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.DataController::.ctor()": {
+          "Lines": {
+            "11": 6,
+            "12": 6,
+            "13": 6,
+            "14": 6,
+            "15": 6,
+            "17": 6
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\FieldGenerator.cs": {
+      "Wortfinder.FieldGenerator": {
+        "System.Void Wortfinder.FieldGenerator::InitializeField()": {
+          "Lines": {
+            "22": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "45": 0
+          },
+          "Branches": [
+            {
+              "Line": 28,
+              "Offset": 253,
+              "EndOffset": 59,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 233,
+              "EndOffset": 156,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 233,
+              "EndOffset": 235,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 253,
+              "EndOffset": 258,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.FieldGenerator::NewLetters(System.Char[])": {
+          "Lines": {
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "69": 0
+          },
+          "Branches": [
+            {
+              "Line": 49,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 49,
+              "Offset": 9,
+              "EndOffset": 27,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 55,
+              "Offset": 53,
+              "EndOffset": 55,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 55,
+              "Offset": 53,
+              "EndOffset": 67,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 126,
+              "EndOffset": 90,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 126,
+              "EndOffset": 128,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.FieldGenerator::SetFieldSize(System.Int32)": {
+          "Lines": {
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0
+          },
+          "Branches": [
+            {
+              "Line": 73,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 73,
+              "Offset": 15,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.FieldGenerator::StopGame()": {
+          "Lines": {
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "85": 0,
+            "86": 0
+          },
+          "Branches": [
+            {
+              "Line": 82,
+              "Offset": 36,
+              "EndOffset": 21,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 82,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.FieldGenerator::.ctor(System.Windows.Controls.Grid,Wortfinder.GuessController)": {
+          "Lines": {
+            "12": 0,
+            "13": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\GameController.cs": {
+      "Wortfinder.GameController": {
+        "System.Int32 Wortfinder.GameController::get_Time()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Wortfinder.GameController::get_FieldSize()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameController::NewGame()": {
+          "Lines": {
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "45": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameController::FoundCorrectWord(System.String)": {
+          "Lines": {
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0
+          },
+          "Branches": [
+            {
+              "Line": 49,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 49,
+              "Offset": 18,
+              "EndOffset": 48,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.GameController::AddPoints(System.Int32)": {
+          "Lines": {
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean Wortfinder.GameController::DisplayTime(System.String)": {
+          "Lines": {
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameController::MouseRelease()": {
+          "Lines": {
+            "68": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameController::.ctor(Wortfinder.MainWindow,System.Windows.Controls.Grid)": {
+          "Lines": {
+            "11": 0,
+            "14": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\GameTimer.cs": {
+      "Wortfinder.GameTimer": {
+        "System.Int32 Wortfinder.GameTimer::get_StartTime()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameTimer::SetDisplayFunc(System.Func`2<System.String,System.Boolean>)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameTimer::SetTimeoutFunc(System.Func`1<System.Boolean>)": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "32": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameTimer::StartTimer()": {
+          "Lines": {
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameTimer::StopTimer()": {
+          "Lines": {
+            "41": 0,
+            "42": 0,
+            "43": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.GameTimer::DispatcherTimerTick(System.Object,System.EventArgs)": {
+          "Lines": {
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0
+          },
+          "Branches": [
+            {
+              "Line": 48,
+              "Offset": 29,
+              "EndOffset": 31,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 29,
+              "EndOffset": 59,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.GameTimer::.ctor()": {
+          "Lines": {
+            "11": 1,
+            "13": 1,
+            "14": 1,
+            "16": 1,
+            "17": 1,
+            "18": 1,
+            "19": 1,
+            "20": 1,
+            "22": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\GuessController.cs": {
+      "Wortfinder.GuessController": {
+        "System.Windows.Media.SolidColorBrush Wortfinder.GuessController::ClickLetter(System.Char,System.Int32,System.Int32)": {
+          "Lines": {
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 15,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 31,
+              "EndOffset": 33,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 40,
+              "EndOffset": 53,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 31,
+              "EndOffset": 56,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 59,
+              "EndOffset": 61,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 59,
+              "EndOffset": 121,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.GuessController::MouseRelease()": {
+          "Lines": {
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0
+          },
+          "Branches": [
+            {
+              "Line": 45,
+              "Offset": 48,
+              "EndOffset": 21,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 48,
+              "EndOffset": 50,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 49,
+              "Offset": 90,
+              "EndOffset": 92,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 49,
+              "Offset": 90,
+              "EndOffset": 112,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.GuessController::.ctor(Wortfinder.GameController,Wortfinder.DataController,System.Windows.Controls.Grid,System.Windows.Controls.TextBox)": {
+          "Lines": {
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\LetterBox.xaml.cs": {
+      "Wortfinder.LetterBox": {
+        "System.Int32 Wortfinder.LetterBox::get_Size()": {
+          "Lines": {
+            "36": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.LetterBox::set_Size(System.Int32)": {
+          "Lines": {
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Wortfinder.LetterBox::get_Row()": {
+          "Lines": {
+            "40": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Wortfinder.LetterBox::get_Column()": {
+          "Lines": {
+            "41": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Wortfinder.LetterBox::get_Test()": {
+          "Lines": {
+            "42": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Wortfinder.LetterBox::get_CircleSize()": {
+          "Lines": {
+            "47": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.LetterBox::set_CircleSize(System.Int32)": {
+          "Lines": {
+            "48": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 Wortfinder.LetterBox::get_CircleMargin()": {
+          "Lines": {
+            "51": 0
+          },
+          "Branches": []
+        },
+        "System.Char Wortfinder.LetterBox::get_Letter()": {
+          "Lines": {
+            "56": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.LetterBox::set_Letter(System.Char)": {
+          "Lines": {
+            "57": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean Wortfinder.LetterBox::get_Clicked()": {
+          "Lines": {
+            "60": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.LetterBox::ClickLetter(System.Object,System.Windows.RoutedEventArgs)": {
+          "Lines": {
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0
+          },
+          "Branches": [
+            {
+              "Line": 64,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 7,
+              "EndOffset": 19,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 22,
+              "EndOffset": 24,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 22,
+              "EndOffset": 75,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.LetterBox::MouseRelease()": {
+          "Lines": {
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.LetterBox::.ctor(Wortfinder.GuessController,System.Int32,System.Int32,System.Int32,System.Int32,System.Char)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\LetterBox.xaml": {
+      "Wortfinder.LetterBox": {
+        "System.Void Wortfinder.LetterBox::InitializeComponent()": {
+          "Lines": {
+            "1": 0
+          },
+          "Branches": [
+            {
+              "Line": 1,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 1,
+              "Offset": 9,
+              "EndOffset": 14,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.LetterBox::System.Windows.Markup.IComponentConnector.Connect(System.Int32,System.Object)": {
+          "Lines": {
+            "24": 0,
+            "25": 0
+          },
+          "Branches": [
+            {
+              "Line": 24,
+              "Offset": 8,
+              "EndOffset": 27,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 8,
+              "EndOffset": 41,
+              "Path": 2,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 8,
+              "EndOffset": 55,
+              "Path": 3,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 8,
+              "EndOffset": 117,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\LetterGenerator.cs": {
+      "Wortfinder.LetterGenerator": {
+        "System.Char[] Wortfinder.LetterGenerator::GetLetters(System.Int32)": {
+          "Lines": {
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "18": 12,
+            "19": 5,
+            "20": 5,
+            "21": 5,
+            "22": 1,
+            "23": 1
+          },
+          "Branches": [
+            {
+              "Line": 18,
+              "Offset": 44,
+              "EndOffset": 18,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            },
+            {
+              "Line": 18,
+              "Offset": 44,
+              "EndOffset": 46,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void Wortfinder.LetterGenerator::.ctor()": {
+          "Lines": {
+            "9": 1,
+            "10": 1,
+            "12": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\MainWindow.xaml.cs": {
+      "Wortfinder.MainWindow": {
+        "System.Void Wortfinder.MainWindow::MouseRelease(System.Object,System.Windows.RoutedEventArgs)": {
+          "Lines": {
+            "29": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.MainWindow::NewGame(System.Object,System.Windows.RoutedEventArgs)": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.MainWindow::SetPoints(System.Int32)": {
+          "Lines": {
+            "34": 0,
+            "35": 0,
+            "36": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.MainWindow::WordMissing(System.Object,System.Windows.RoutedEventArgs)": {
+          "Lines": {
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0
+          },
+          "Branches": []
+        },
+        "System.Void Wortfinder.MainWindow::SetGameTime(System.Object,System.Windows.RoutedEventArgs)": {
+          "Lines": {
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0
+          },
+          "Branches": [
+            {
+              "Line": 47,
+              "Offset": 19,
+              "EndOffset": 21,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 47,
+              "Offset": 19,
+              "EndOffset": 54,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.MainWindow::SetFieldSize(System.Object,System.Windows.RoutedEventArgs)": {
+          "Lines": {
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0
+          },
+          "Branches": [
+            {
+              "Line": 56,
+              "Offset": 19,
+              "EndOffset": 21,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 56,
+              "Offset": 19,
+              "EndOffset": 51,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.MainWindow::.ctor()": {
+          "Lines": {
+            "11": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "20": 0,
+            "27": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\MainWindow.xaml": {
+      "Wortfinder.MainWindow": {
+        "System.Void Wortfinder.MainWindow::InitializeComponent()": {
+          "Lines": {
+            "1": 0
+          },
+          "Branches": [
+            {
+              "Line": 1,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 1,
+              "Offset": 9,
+              "EndOffset": 14,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.MainWindow::System.Windows.Markup.IComponentConnector.Connect(System.Int32,System.Object)": {
+          "Lines": {
+            "11": 0,
+            "15": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0
+          },
+          "Branches": [
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 99,
+              "Path": 2,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 128,
+              "Path": 3,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 145,
+              "Path": 4,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 162,
+              "Path": 5,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 179,
+              "Path": 6,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 196,
+              "Path": 7,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 225,
+              "Path": 8,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 254,
+              "Path": 9,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 280,
+              "Path": 10,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 306,
+              "Path": 11,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 332,
+              "Path": 12,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 358,
+              "Path": 13,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 8,
+              "EndOffset": 384,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\WebScraper.cs": {
+      "Wortfinder.WebScraper": {
+        "System.Boolean Wortfinder.WebScraper::SearchWordAsync(System.String)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "39": 0,
+            "40": 0
+          },
+          "Branches": [
+            {
+              "Line": 18,
+              "Offset": 50,
+              "EndOffset": 52,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 50,
+              "EndOffset": 65,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 70,
+              "EndOffset": 72,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 70,
+              "EndOffset": 78,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 30,
+              "Offset": 158,
+              "EndOffset": 160,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 30,
+              "Offset": 158,
+              "EndOffset": 166,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.WebScraper::.ctor()": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\WordFinder.cs": {
+      "Wortfinder.WordFinder": {
+        "System.Collections.Generic.List`1<System.String> Wortfinder.WordFinder::FindAllWords(System.Char[0...,0...])": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.List`1<System.String> Wortfinder.WordFinder::CheckRecusive(System.String,System.Char[0...,0...],System.Int32,System.Int32,System.Int32)": {
+          "Lines": {
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "32": 0,
+            "33": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0
+          },
+          "Branches": [
+            {
+              "Line": 26,
+              "Offset": 25,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 96,
+              "EndOffset": 101,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 119,
+              "EndOffset": 121,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 119,
+              "EndOffset": 131,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 305,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 281,
+              "EndOffset": 145,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 162,
+              "EndOffset": 164,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 167,
+              "EndOffset": 169,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 172,
+              "EndOffset": 174,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 162,
+              "EndOffset": 184,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 167,
+              "EndOffset": 184,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 172,
+              "EndOffset": 184,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 189,
+              "EndOffset": 191,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 52,
+              "Offset": 242,
+              "EndOffset": 215,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 52,
+              "Offset": 242,
+              "EndOffset": 244,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 50,
+              "Offset": 189,
+              "EndOffset": 262,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 281,
+              "EndOffset": 286,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 305,
+              "EndOffset": 310,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 96,
+              "EndOffset": 311,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 26,
+              "Offset": 25,
+              "EndOffset": 312,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.WordFinder::.ctor(Wortfinder.DataController)": {
+          "Lines": {
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\WordMissingWindow.xaml": {
+      "Wortfinder.WordMissingWindow": {
+        "System.Void Wortfinder.WordMissingWindow::InitializeComponent()": {
+          "Lines": {
+            "1": 0
+          },
+          "Branches": [
+            {
+              "Line": 1,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 1,
+              "Offset": 9,
+              "EndOffset": 14,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void Wortfinder.WordMissingWindow::System.Windows.Markup.IComponentConnector.Connect(System.Int32,System.Object)": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": [
+            {
+              "Line": 12,
+              "Offset": 8,
+              "EndOffset": 27,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 12,
+              "Offset": 8,
+              "EndOffset": 41,
+              "Path": 2,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 12,
+              "Offset": 8,
+              "EndOffset": 79,
+              "Path": 3,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 12,
+              "Offset": 8,
+              "EndOffset": 93,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\WordMissingWindow.xaml.cs": {
+      "Wortfinder.WordMissingWindow": {
+        "System.Void Wortfinder.WordMissingWindow::.ctor()": {
+          "Lines": {
+            "10": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0
+          },
+          "Branches": []
+        }
+      },
+      "Wortfinder.WordMissingWindow/<ReportMissingWord>d__2": {
+        "System.Void Wortfinder.WordMissingWindow/<ReportMissingWord>d__2::MoveNext()": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0
+          },
+          "Branches": [
+            {
+              "Line": 24,
+              "Offset": 106,
+              "EndOffset": 108,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 106,
+              "EndOffset": 134,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

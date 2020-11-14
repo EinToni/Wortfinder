@@ -18,7 +18,7 @@ namespace Wortfinder
 			guessController = guessContr;
 		}
 
-		public void InitializeField()
+		public void InitializeField(int fieldSize)
 		{
 			// Delete All Fields if any exist
 			letterGrid.Children.Clear();
@@ -46,12 +46,6 @@ namespace Wortfinder
 
 		public void NewLetters(char[] letters)
 		{
-			if (newSize) 
-			{
-				newSize = false;
-				InitializeField();
-			}
-
 			if(letters.Length != letterGrid.Children.Count)
 			{
 				throw new System.ArgumentException("Letter count does not match the amount of fields.");

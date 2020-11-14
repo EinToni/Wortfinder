@@ -6,5 +6,6 @@ namespace Wortfinder.XUnitTests
 {
 	class FieldGeneratorTests
 	{
+		
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Wortfinder
@@ -11,7 +12,13 @@ namespace Wortfinder
 		private List<string> wordList = new List<string>();
 		private string[] wordArray = null;
 		private string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
+
 		public DataController()
+		{
+			
+		}
+
+		public void LoadGerman()
 		{
 			LoadLanguage(pathGerman);
 		}
@@ -36,23 +43,39 @@ namespace Wortfinder
 		{
 			for(int i = 0; i < list.Count; i++)
 			{
-				list[i] = NormaliseWord(list[i]);
+				list[i] = NormaliseToUpper(NormaliseVowels(list[i]));
 			}
 			return list;
 		}
 
-		public string NormaliseWord(string word)
+		public string NormaliseVowels(string word)
 		{
-			word = word.ToUpper();
-			word = word.Replace("Ä", "AE");
-			word = word.Replace("Ö", "OE");
-			word = word.Replace("Ü", "UE");
+			word = word.Replace("Ä", "Ae");
+			word = word.Replace("Ö", "Oe");
+			word = word.Replace("Ü", "Ue");
+			word = word.Replace("ä", "ae");
+			word = word.Replace("ö", "oe");
+			word = word.Replace("ü", "ue");
 			return word;
 		}
 
-		public bool AddWord(string word)
+		public string NormaliseToUpper(string word)
 		{
-			return false;
+			return word.ToUpper();
+		}
+
+		public void AddWord(string word)
+		{
+			InsertWord(word, wordList);
+			wordList = NormaliseList(wordList);
+		}
+
+		public void InsertWord(string word, List<string> list)
+		{
+			if(word.Length > 0)
+			{
+				list.Add(word);
+			}
 		}
 
 		public bool CheckWord(string word, int startIndex)

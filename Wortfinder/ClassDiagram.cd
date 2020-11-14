@@ -10,7 +10,7 @@
   <Class Name="Wortfinder.DataController">
     <Position X="11.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAQAAACAAAGAAAAAABAAAAAAAAABAAAAAgAAAAAABAA=</HashCode>
+      <HashCode>CAUAAAAAAAGAAAAgABAAAAAAAAABAAIQAgAAAAAABAA=</HashCode>
       <FileName>DataController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -99,20 +99,20 @@
   <Class Name="Wortfinder.WordMissingWindow" BaseTypeListCollapsed="true">
     <Position X="4" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>WordMissingWindow.xaml.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="scraper" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Wortfinder.LetterGenerator">
     <Position X="16.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgACAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>LetterGenerator.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="probalilitys" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Wortfinder.BeginningComparer">
     <Position X="0.5" Y="2" Width="1.5" />
@@ -121,6 +121,20 @@
       <FileName>BeginningComparer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Wortfinder.Letter">
+    <Position X="21.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Letter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wortfinder.LetterProbalilitys">
+    <Position X="19.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LetterProbalilitys.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

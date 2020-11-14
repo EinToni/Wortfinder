@@ -17,7 +17,6 @@ namespace Wortfinder
 			gameController.Time = 180;
 			gameController.FieldSize = 4;
 
-			char[,] test = new char[,] { { 'A', 'B', 'C' }, { 'F', 'B', 'C' }, { 'F', 'E', 'C' } };
 			//wordController.CheckAllWords(test);
 			
 			

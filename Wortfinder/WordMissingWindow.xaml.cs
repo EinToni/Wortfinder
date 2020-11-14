@@ -7,7 +7,6 @@ namespace Wortfinder
 	/// </summary>
 	public partial class WordMissingWindow : Window
 	{
-		private readonly WebScraper scraper = null;
 
 		public WordMissingWindow()
 		{

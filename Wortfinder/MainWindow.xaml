@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wortfinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="605" Width="915">
+        Title="MainWindow" Height="600" Width="900"
+        MinHeight="600" MinWidth="900">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Word Missing" Click="WordMissing">
@@ -13,7 +14,8 @@
         </Menu>
         <Grid Margin="10,10,10,10"
           MouseUp="MouseRelease">
-            <Grid x:Name="LetterGrid" Margin="217,10,228,91">
+            <Grid x:Name="LetterGrid" Margin="217,10,228,91"
+                  MinHeight="250px" MinWidth="250px">
                 <Grid.ColumnDefinitions>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
