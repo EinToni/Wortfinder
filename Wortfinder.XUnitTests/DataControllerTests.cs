@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Documents;
 using Xunit;
 
@@ -102,6 +103,19 @@ namespace Wortfinder.XUnitTests
 			Assert.Equal("Aepfel", dataController.NormaliseVowels("Äpfel"));
 			Assert.Equal("Oefen", dataController.NormaliseVowels("Öfen"));
 			Assert.Equal("Ueber", dataController.NormaliseVowels("Über"));
+		}
+
+		[Fact]
+		public void CheckBeginning_()
+		{
+			DataController dataController = new DataController
+			{
+				wordList = new List<string> { "abhjk", "bdfgh", "casdf", "dasdf", "test" }
+			};
+
+			int result = dataController.FindBeginning("te", 1);
+
+			Assert.Equal(4, result);
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Wortfinder
 {
 	public class DataController
 	{
-		private List<string> wordList = new List<string>();
+		public List<string> wordList = new List<string>();
 		private string[] wordArray = null;
 		private string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
 
@@ -80,20 +80,40 @@ namespace Wortfinder
 
 		public bool CheckWord(string word, int startIndex)
 		{
-			if(wordList.BinarySearch(startIndex, wordList.Count-startIndex-1, word, null) >= 0)
+			if(wordList.BinarySearch(startIndex, wordList.Count-startIndex, word, null) >= 0)
 			{
 				return true;
 			}
 			return false;
 		}
 
-		public bool CheckBeginning(string word, int startIndex)
+		public int FindBeginning(string word, int startIndex)
 		{
-			if (wordList.BinarySearch(startIndex, wordList.Count - startIndex - 1, word, new BeginningComparer()) >= 0)
+			if (word == "")
 			{
-				return true;
+				return 0;
 			}
-			return false;
+			return wordList.BinarySearch(startIndex, wordList.Count - startIndex, word, new BeginningComparer());
+		}
+
+		public int FindBeginningLinear(string word, int startIndex)
+		{
+			if (word == "")
+			{
+				return 0;
+			}
+			for (int i = startIndex; i < wordList.Count; i++)
+			{
+				string wordFromList = wordList[i];
+				if (wordFromList.StartsWith(word))
+				{
+					return i;
+				}else if (wordFromList[0] > word[0])
+				{
+					return -1;
+				}
+			}
+			return -1;
 		}
 	}
 }

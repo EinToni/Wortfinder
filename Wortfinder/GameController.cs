@@ -18,6 +18,7 @@ namespace Wortfinder
 		private readonly GameTimer gameTimer;
 		private readonly MainWindow mainWindow;
 		private readonly LetterGenerator letterGenerator;
+		public List<Word> finableWords; // TODO WEG HIER
 
 		public GameController(MainWindow mainW, Grid letterGrid)
 		{
@@ -42,7 +43,8 @@ namespace Wortfinder
 			fieldGenerator.InitializeField(FieldSize);
 			fieldGenerator.NewLetters(letters);
 			gameTimer.StartTimer();
-			//wordFinder.FindAllWords();
+			finableWords = wordFinder.FindAllWords(letters, FieldSize);
+			mainWindow.amountOfWords.Content = finableWords.Count;
 		}
 
 		public void FoundCorrectWord(string word)
@@ -51,12 +53,13 @@ namespace Wortfinder
 			{
 				foundWords.Add(word);
 				AddPoints(word.Length);
+				mainWindow.amountOfFoundWords.Content = int.Parse(mainWindow.amountOfFoundWords.Content.ToString()) + 1;
 			}
 		}
 
 		private void AddPoints(int wordLenth)
 		{
-			score += wordLenth - 3;
+			score += wordLenth - 2;
 			mainWindow.SetPoints(score);
 		}
 
