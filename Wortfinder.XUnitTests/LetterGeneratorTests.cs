@@ -9,7 +9,7 @@ namespace Wortfinder.Tests
 		{
 			LetterGenerator letterGenerator = new LetterGenerator();
 			int amount = 5;
-			var result = letterGenerator.GetLetters(amount);
+			var result = letterGenerator.GetNewLetters(amount);
 			Assert.Equal(amount, result.Length);
 		}
 	}

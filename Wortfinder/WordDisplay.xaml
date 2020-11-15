@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Wortfinder.WordDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wortfinder"
+             mc:Ignorable="d" Visibility="Collapsed" >
+    <Grid Height="26" MouseEnter="Grid_MouseEnter">
+        <Label x:Name="NameLabel" Content="asdf" VerticalAlignment="Center" Margin="0,0,0,0"/>
+        <Rectangle x:Name="Background" Stroke="Black" RadiusX="1" RadiusY="1" Fill="#FFA52525" Panel.ZIndex="-1"/>
+    </Grid>
+</UserControl>

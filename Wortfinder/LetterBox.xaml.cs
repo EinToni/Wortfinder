@@ -10,11 +10,11 @@ namespace Wortfinder
 	/// </summary>
 	partial class LetterBox : UserControl
 	{
-		private readonly GuessController guessController = null;
+		private readonly WordBuilder guessController = null;
 		private readonly SolidColorBrush clickedColor = new SolidColorBrush(Color.FromRgb(255, 0, 100));
 		private readonly SolidColorBrush unclickedColor = new SolidColorBrush(Color.FromRgb(100, 100, 100));
 
-		public LetterBox(GuessController guessContr, int size, int circleSize, int row, int column, char letter)
+		public LetterBox(WordBuilder guessContr, int size, int circleSize, int row, int column, char letter)
 		{
 			InitializeComponent();
 			DataContext = this;
@@ -29,7 +29,6 @@ namespace Wortfinder
 			Background.Fill = unclickedColor;
 			
 		}
-		private bool active = false;
 		private int size;
 		public int Size
 		{
@@ -37,6 +36,7 @@ namespace Wortfinder
 			set { size = value; CircleMargin = (int)((value - CircleSize) / 2); }
 		}
 
+		public bool Activated { get; set; }
 		public int Row { get; set; }
 		public int Column { get; set; }
 		public int Test { get; set; }
@@ -61,7 +61,7 @@ namespace Wortfinder
 
 		private void ClickLetter(object sender, RoutedEventArgs e)
 		{
-			if (!Clicked && Mouse.LeftButton == MouseButtonState.Pressed)
+			if (Activated && !Clicked && Mouse.LeftButton == MouseButtonState.Pressed)
 			{
 				Clicked = true;
 				//clickedColor.Color = letterController.ClickLetter(Letter, Row, Column);
@@ -71,6 +71,12 @@ namespace Wortfinder
 		
 		public void MouseRelease()
 		{
+			Clicked = false;
+			Background.Fill = unclickedColor;
+		}
+		public void MouseRelease(object sender, MouseButtonEventArgs e)
+		{
+			guessController.MouseRelease();
 			Clicked = false;
 			Background.Fill = unclickedColor;
 		}

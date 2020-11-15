@@ -11,49 +11,50 @@ namespace Wortfinder
 		private int score = 0;
 		public int Time { get; set; }
 		public int FieldSize { get; set; } = 4;
-		private List<string> foundWords = null;
+		private bool AllWordsSaved { get; set; } = false;
+		private readonly List<string> foundWords = null;
 		private readonly FieldGenerator fieldGenerator;
-		private readonly GuessController guessController;
-		private readonly WordFinder wordFinder;
 		private readonly GameTimer gameTimer;
 		private readonly MainWindow mainWindow;
 		private readonly LetterGenerator letterGenerator;
-		public List<Word> finableWords; // TODO WEG HIER
+		private readonly GuessController guessController;
 
 		public GameController(MainWindow mainW, Grid letterGrid)
 		{
+			mainWindow = mainW;
 			gameTimer		= new GameTimer();
 			DataController dataController = new DataController();
 			dataController.LoadGerman();
-			wordFinder		= new WordFinder(dataController);
-			guessController = new GuessController(this, dataController, letterGrid, mainW.OutputWord);
-			fieldGenerator	= new FieldGenerator(letterGrid, guessController);
+			guessController = new GuessController(this, dataController, mainWindow.allWords);
+			fieldGenerator	= new FieldGenerator(guessController, letterGrid);
 			letterGenerator = new LetterGenerator();
-			mainWindow		= mainW;
+			
 
 			fieldGenerator.InitializeField(FieldSize);
 			gameTimer.SetDisplayFunc(DisplayTime);
+			gameTimer.SetTimeoutFunc(EndGame);
 			foundWords = new List<string>();
 		}
 
-		public void NewGame()
+		public void NewGame(int fieldSize, int gameTimeInMinutes)
 		{
-			int letterAmount = FieldSize * FieldSize;
-			char[] letters = letterGenerator.GetLetters(letterAmount);
-			fieldGenerator.InitializeField(FieldSize);
-			fieldGenerator.NewLetters(letters);
-			gameTimer.StartTimer();
-			finableWords = wordFinder.FindAllWords(letters, FieldSize);
-			mainWindow.amountOfWords.Content = finableWords.Count;
+			char[] letters = letterGenerator.GetNewLetters(fieldSize);
+			guessController.LoadAllFindableWords(letters, fieldSize);
+			fieldGenerator.NewGameField(fieldSize, letters);
+			gameTimer.StartTimerInMinutes(gameTimeInMinutes);
+			mainWindow.ActivateAllLetters();
 		}
 
 		public void FoundCorrectWord(string word)
 		{
-			if (!foundWords.Contains(word))
+			AddPoints(word.Length);
+			mainWindow.amountOfFoundWords.Content = int.Parse(mainWindow.amountOfFoundWords.Content.ToString()) + 1;
+			foreach (WordDisplay wordDisplay in mainWindow.allWords.Children)
 			{
-				foundWords.Add(word);
-				AddPoints(word.Length);
-				mainWindow.amountOfFoundWords.Content = int.Parse(mainWindow.amountOfFoundWords.Content.ToString()) + 1;
+				if (wordDisplay.Word.Name.Equals(word))
+				{
+					wordDisplay.WordGotFound();
+				}
 			}
 		}
 
@@ -69,6 +70,21 @@ namespace Wortfinder
 			return true;
 		}
 
-		public void MouseRelease() => guessController.MouseRelease();
+		public void AddWordToList(Word word)
+		{
+			mainWindow.AddWordToList(word);
+		}
+
+		public void AddAllWordsToList(List<Word> allWords)
+		{
+			mainWindow.AddAllWordsToList(allWords);
+		}
+
+		public bool EndGame()
+		{
+			mainWindow.ShowAllWords();
+			mainWindow.DeactivateAllLetters();
+			return true;
+		}
 	}
 }

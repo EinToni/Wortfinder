@@ -1,58 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Wortfinder
 {
-	// Class to manage all letters that get connected and the resulting word.
 	public class GuessController
 	{
-		private string word = "";
-		private int lastRow = -1;
-		private int lastColumn = -1;
-		private TextBox outputTextBox = null;
-		private readonly Grid letterGrid = null;
-		private readonly DataController dataController = null;
-		private readonly GameController gameController = null;
+		private readonly DataController dataController;
+		private char[] letters;
+		private int fieldSize;
+		private bool findableWordsLoaded = false;
+		private List<Word> allWords;
+		private readonly WordFinder wordFinder;
+		private readonly GameController gameController;
+		private readonly WrapPanel panel;
 
-		public GuessController(GameController gameCtr, DataController dataCtr, Grid grid, TextBox textBox)
+		public GuessController(GameController gameCtr, DataController dataCtr, WrapPanel allWords)
 		{
-			outputTextBox = textBox;
-			letterGrid = grid;
 			dataController = dataCtr;
 			gameController = gameCtr;
+			panel = allWords;
+			wordFinder = new WordFinder(dataController);
 		}
 
-		internal SolidColorBrush ClickLetter(char letter, int row, int column)
+		public void LoadAllFindableWords(char[] letters, int fieldSize)
 		{
-			if (Math.Abs(lastRow - row) <= 1 && Math.Abs(lastColumn - column) <= 1 || lastRow == -1 && lastColumn == -1)
+			this.letters = letters;
+			this.fieldSize = fieldSize;
+			Thread wordFinderThread = new Thread(new ThreadStart(GetAllWords));
+			wordFinderThread.Start();
+		}
+
+		private void GetAllWords()
+		{
+			allWords = wordFinder.FindAllWords(letters, fieldSize);
+			gameController.AddAllWordsToList(allWords);
+			findableWordsLoaded = true;
+		}
+
+		public void TryWord(Word word)
+		{
+			if (IsWordValid(word))
 			{
-				word += letter.ToString();
-				outputTextBox.Text = word;
-				lastRow = row;
-				lastColumn = column;
+				gameController.FoundCorrectWord(word.Name);
+			}
+		}
+
+		public bool IsWordValid(Word tryWord)
+		{
+			if (findableWordsLoaded)
+			{
+				foreach (Word word in allWords)
+				{
+					if (word.Name.Equals(tryWord.Name))
+					{
+						return true;
+					}
+				}
 			}
 			else
 			{
-				MouseRelease();
+				bool wordValid = dataController.CheckWord(tryWord.Name, 0);
+				if (wordValid)
+				{
+					gameController.AddWordToList(tryWord);
+				}
+				return wordValid;
 			}
-			return new SolidColorBrush(Color.FromRgb((byte)(100 + (7 * word.Length)), 0, 0));
-		}
-
-		internal void MouseRelease()
-		{
-			foreach (LetterBox child in letterGrid.Children)
-			{
-				child.MouseRelease();
-			}
-			if (dataController.CheckWord(word, 0))
-			{
-				gameController.FoundCorrectWord(word);
-			}
-			word = "";
-			lastRow = -1;
-			lastColumn = -1;
+			return false;
 		}
 	}
 }

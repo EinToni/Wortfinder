@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Wortfinder
@@ -8,30 +11,28 @@ namespace Wortfinder
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private readonly GameController		gameController = null;
+		private readonly GameController	gameController = null;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			gameController = new GameController(this, LetterGrid);
-			gameController.Time = 180;
-			gameController.FieldSize = 4;
-
-			//wordController.CheckAllWords(test);
-			
-			
-			
-			//gameTimer.SetTimeoutFunc(guessController.TimeOver);
-			//LetterGrid.ShowGridLines = true;
 		}
 
-		public void MouseRelease(object sender, RoutedEventArgs e) => gameController.MouseRelease();
+		private void NewGame(object sender, RoutedEventArgs e) {
+			List<RadioButton> radioButtons = controllGrid.Children.OfType<RadioButton>().ToList();
+			RadioButton fieldSizeButton = radioButtons.Where(r => r.GroupName == "FieldSize" && r.IsChecked == true).Single();
+			int fieldSize = int.Parse(fieldSizeButton.Tag.ToString());
+			RadioButton gameTimeButton  = radioButtons.Where(r => r.GroupName == "GameTime"  && r.IsChecked == true).Single();
+			int gameTime = int.Parse(gameTimeButton.Tag.ToString());
 
-		private void NewGame(object sender, RoutedEventArgs e) => gameController.NewGame();
+			allWords.Children.Clear();
+			gameController.NewGame(fieldSize, gameTime);
+		}
 
 		public void SetPoints(int points)
 		{
-			OutputScore.Text = points.ToString();
+			OutputScore.Content = points.ToString();
 		}
 
 		private void WordMissing(object sender, RoutedEventArgs e)
@@ -40,21 +41,58 @@ namespace Wortfinder
 			wmw.Show();
 		}
 
-		private void SetGameTime(object sender, RoutedEventArgs e)
+		public void AddAllWordsToList(List<Word> words)
 		{
-			RadioButton radioButton = sender as RadioButton;
-			if (gameController != null)
+			Dispatcher.Invoke(new System.Action(() => { AddWordsInvoke(words); }));
+		}
+
+		public void AddWordToList(Word word)
+		{
+			allWords.Children.Add(new WordDisplay(word));
+		}
+
+		private void AddWordsInvoke(List<Word> words)
+		{
+			List<WordDisplay> wordDisplays = new List<WordDisplay>();
+			for(int i = 0; i < words.Count; i++)
 			{
-				gameController.Time = int.Parse(radioButton.Tag.ToString()) * 60;
+				wordDisplays.Add(new WordDisplay(words[i]));
+				foreach (WordDisplay wordAlreadyInList in allWords.Children)
+				{
+					if(words[i].Name.Equals(wordAlreadyInList.Word.Name))
+					{
+						wordDisplays[i] = wordAlreadyInList;
+					}
+				}
+			}
+			allWords.Children.Clear();
+			foreach(WordDisplay word in wordDisplays)
+			{
+				allWords.Children.Add(word);
 			}
 		}
 
-		private void SetFieldSize(object sender, RoutedEventArgs e)
+		public void ActivateAllLetters()
 		{
-			RadioButton radioButton = sender as RadioButton;
-			if (gameController != null)
+			foreach (LetterBox letter in LetterGrid.Children)
 			{
-				gameController.FieldSize = int.Parse(radioButton.Tag.ToString());
+				letter.Activated = true;
+			}
+		}
+
+		public void DeactivateAllLetters()
+		{
+			foreach(LetterBox letter in LetterGrid.Children)
+			{
+				letter.Activated = false;
+			}
+		}
+
+		internal void ShowAllWords()
+		{
+			foreach(WordDisplay wordDisplay in allWords.Children)
+			{
+				wordDisplay.Visibility = Visibility.Visible;
 			}
 		}
 	}

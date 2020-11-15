@@ -8,7 +8,7 @@ namespace Wortfinder
 	// Class to controll
 	internal class WordFinder
 	{
-		private readonly DataController dataController = null;
+		private readonly DataController dataController;
 		public WordFinder(DataController dataCtr)
 		{
 			dataController = dataCtr;
@@ -33,7 +33,19 @@ namespace Wortfinder
 					List<Word> words = CheckRecusive("", (char[,])letters2D.Clone(), new List<int[]> { new int[] { row, column } }, 0);
 					foreach(Word word in words)
 					{
-						allWords.Add(word);
+						bool wordAlreadyFound = false;
+						foreach(Word existingWord in allWords)
+						{
+							if (existingWord.Name.Equals(word.Name))
+							{
+								wordAlreadyFound = true;
+								break;
+							}
+						}
+						if (!wordAlreadyFound)
+						{
+							allWords.Add(word);
+						}
 					}
 				}
 			}

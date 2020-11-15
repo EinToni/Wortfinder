@@ -31,9 +31,9 @@ namespace Wortfinder
 			timeout = timeoutFunc;
 		}
 
-		public void StartTimer()
+		public void StartTimerInMinutes(int time)
 		{
-			timeRemaining = StartTime;
+			timeRemaining = time * 60;
 			dispatcherTimer.Start();
 		}
 

@@ -14,10 +14,11 @@ namespace Wortfinder
 
 		}
 
-		public char[] GetLetters(int count)
+		public char[] GetNewLetters(int fieldSize)
 		{
-			char[] letters = new char[count];
-			for(int i = 0; i < count; i++)
+			int letterCount = fieldSize * fieldSize;
+			char[] letters = new char[letterCount];
+			for(int i = 0; i < letterCount; i++)
 			{
 				letters[i] = GetSingleLetter();
 			}

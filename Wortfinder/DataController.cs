@@ -87,15 +87,6 @@ namespace Wortfinder
 			return false;
 		}
 
-		public int FindBeginning(string word, int startIndex)
-		{
-			if (word == "")
-			{
-				return 0;
-			}
-			return wordList.BinarySearch(startIndex, wordList.Count - startIndex, word, new BeginningComparer());
-		}
-
 		public int FindBeginningLinear(string word, int startIndex)
 		{
 			if (word == "")

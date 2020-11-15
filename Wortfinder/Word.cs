@@ -6,8 +6,8 @@ namespace Wortfinder
 {
 	public class Word
 	{
-		private string Name { get; }
-		private List<int[]> Coordinates { get; }
+		public string Name { get; }
+		public List<int[]> Coordinates { get; }
 		public Word(string name, List<int[]> coordinates)
 		{
 			Name = name;

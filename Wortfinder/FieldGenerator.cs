@@ -8,14 +8,19 @@ namespace Wortfinder
 	internal class FieldGenerator
 	{
 		private readonly Grid letterGrid;
-		private readonly GuessController guessController;
+		private readonly WordBuilder wordBuilder;
 		private int fieldSize = 4;
-		private bool newSize = false;
 
-		public FieldGenerator(Grid grid, GuessController guessContr)
+		public FieldGenerator(GuessController guessCtr, Grid grid)
 		{
 			letterGrid = grid;
-			guessController = guessContr;
+			wordBuilder = new WordBuilder(guessCtr, letterGrid);
+		}
+
+		public void NewGameField(int fieldSize, char[] letters)
+		{
+			InitializeField(fieldSize);
+			NewLetters(letters);
 		}
 
 		public void InitializeField(int fieldSize)
@@ -25,7 +30,7 @@ namespace Wortfinder
 			letterGrid.RowDefinitions.Clear();
 			letterGrid.ColumnDefinitions.Clear();
 			//
-			for (int i = 0; i < fieldSize; i++)
+			for (int column = 0; column < fieldSize; column++)
 			{
 				var rowDefinition = new RowDefinition();
 				var columnDefinition = new ColumnDefinition();
@@ -33,12 +38,12 @@ namespace Wortfinder
 				columnDefinition.Width = new GridLength(1, GridUnitType.Star);
 				letterGrid.RowDefinitions.Add(rowDefinition);
 				letterGrid.ColumnDefinitions.Add(columnDefinition);
-				for (int j = 0; j < fieldSize; j++)
+				for (int row = 0; row < fieldSize; row++)
 				{
-					var letter = new LetterBox(guessController, 100, 50, j, i, '-');
+					var letter = new LetterBox(wordBuilder, 100, 50, row, column, '-');
 					letterGrid.Children.Add(letter);
-					Grid.SetRow(letter, j);
-					Grid.SetColumn(letter, i);
+					Grid.SetRow(letter, row);
+					Grid.SetColumn(letter, column);
 				}
 			}
 			
@@ -67,7 +72,6 @@ namespace Wortfinder
 			if (fieldSize != size)
 			{
 				fieldSize = size;
-				newSize = true;
 			}
 		}
 
