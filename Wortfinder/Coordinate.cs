@@ -20,22 +20,24 @@ namespace Wortfinder
 			Column = coordinate.Column;
 		}
 
-		public bool Equals(Coordinate coordinate)
+		public bool SameCoordinate(Coordinate coordinate)
 		{
-			if (Row == coordinate.Row && Column == coordinate.Column)
-			{
-				return true;
-			}
-			return false;
+			return Row == coordinate.Row && Column == coordinate.Column;
 		}
 
 		public bool IsNeighbour(Coordinate coordinate)
 		{
-			if (Math.Abs(coordinate.Row - Row) <= 1 && Math.Abs(coordinate.Column - Column) <= 1)
-			{
-				return true;
-			}
-			return false;
+			return RowDistanceTo(coordinate) <= 1 && ColumnDistanceTo(coordinate) <= 1;
+		}
+
+		private int RowDistanceTo(Coordinate coordinate)
+		{
+			return Math.Abs(coordinate.Row - Row);
+		}
+
+		private int ColumnDistanceTo(Coordinate coordinate)
+		{
+			return Math.Abs(coordinate.Row - Row);
 		}
 	}
 }

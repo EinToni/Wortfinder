@@ -16,7 +16,6 @@ namespace Wortfinder
 		private List<Word> allWords;
 		private readonly WordFinder wordFinder;
 		private readonly GameScore gameScore;
-		public event EventHandler<Word> FoundCorrectWordEvent;
 		private FindableWords findableWords;
 		private readonly int minWordLength = 3;
 
@@ -53,7 +52,6 @@ namespace Wortfinder
 			{
 				findableWords.WordFound(word);
 				gameScore.AddPoints(getPoints(word.Name.Length));
-				FoundCorrectWordEvent?.Invoke(this, word);
 			}
 		}
 

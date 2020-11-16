@@ -48,11 +48,6 @@ namespace Wortfinder
 			return true;
 		}
 
-		public void SetPoints(int points)
-		{
-			OutputScore.Content = points.ToString();
-		}
-
 		private void WordMissing(object sender, RoutedEventArgs e)
 		{
 			WordMissingWindow wmw = new WordMissingWindow();
@@ -87,14 +82,6 @@ namespace Wortfinder
 			foreach(WordDisplay word in wordDisplays)
 			{
 				allWords.Children.Add(word);
-			}
-		}
-
-		internal void ShowAllWords()
-		{
-			foreach(WordDisplay wordDisplay in allWords.Children)
-			{
-				wordDisplay.ShowWord();
 			}
 		}
 	}

@@ -56,7 +56,7 @@ namespace Wortfinder
 			{
 				foreach(LetterBox letterBox in grid.Children)
 				{
-					if(letterBox.coordinate.Equals(coordinate))
+					if(letterBox.coordinate.SameCoordinate(coordinate))
 					{
 						if (found)
 						{
