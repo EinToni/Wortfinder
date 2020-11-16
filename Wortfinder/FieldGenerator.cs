@@ -17,10 +17,10 @@ namespace Wortfinder
 			wordBuilder = new WordBuilder(guessCtr, letterGrid);
 		}
 
-		public void NewGameField(int fieldSize, char[] letters)
+		public void NewGameField(GameGrid gameGrid)
 		{
-			InitializeField(fieldSize);
-			NewLetters(letters);
+			InitializeField(gameGrid.FieldSize);
+			NewLetters(gameGrid.Letters);
 		}
 
 		public void InitializeField(int fieldSize)

@@ -8,46 +8,42 @@ namespace Wortfinder
 	// Controlls the running game
 	public class GameController
 	{
-		private int score = 0;
-		public int Time { get; set; }
-		public int FieldSize { get; set; } = 4;
-		private bool AllWordsSaved { get; set; } = false;
-		private readonly List<string> foundWords = null;
 		private readonly FieldGenerator fieldGenerator;
 		private readonly GameTimer gameTimer;
 		private readonly MainWindow mainWindow;
 		private readonly LetterGenerator letterGenerator;
 		private readonly GuessController guessController;
+		private readonly GameGridController gameGridController;
+		private readonly WordListController WordListController;
 
-		public GameController(MainWindow mainW, Grid letterGrid)
+		public GameController(MainWindow mainW, Grid letterGrid, GameScore score)
 		{
 			mainWindow = mainW;
 			gameTimer		= new GameTimer();
 			DataController dataController = new DataController();
 			dataController.LoadGerman();
-			guessController = new GuessController(this, dataController, mainWindow.allWords);
+			guessController = new GuessController(this, dataController, score);
 			fieldGenerator	= new FieldGenerator(guessController, letterGrid);
 			letterGenerator = new LetterGenerator();
-			
+			gameGridController = new GameGridController(letterGrid, dataController, this);
+			WordListController = new WordListController();
 
-			fieldGenerator.InitializeField(FieldSize);
 			gameTimer.SetDisplayFunc(DisplayTime);
 			gameTimer.SetTimeoutFunc(EndGame);
-			foundWords = new List<string>();
 		}
 
 		public void NewGame(int fieldSize, int gameTimeInMinutes)
 		{
 			char[] letters = letterGenerator.GetNewLetters(fieldSize);
-			guessController.LoadAllFindableWords(letters, fieldSize);
-			fieldGenerator.NewGameField(fieldSize, letters);
+			GameGrid gameGrid = new GameGrid(fieldSize, letters);
+			guessController.LoadAllFindableWords(gameGrid);
+			fieldGenerator.NewGameField(gameGrid);
 			gameTimer.StartTimerInMinutes(gameTimeInMinutes);
 			mainWindow.ActivateAllLetters();
 		}
 
 		public void FoundCorrectWord(string word)
 		{
-			AddPoints(word.Length);
 			mainWindow.amountOfFoundWords.Content = int.Parse(mainWindow.amountOfFoundWords.Content.ToString()) + 1;
 			foreach (WordDisplay wordDisplay in mainWindow.allWords.Children)
 			{
@@ -56,12 +52,6 @@ namespace Wortfinder
 					wordDisplay.WordGotFound();
 				}
 			}
-		}
-
-		private void AddPoints(int wordLenth)
-		{
-			score += wordLenth - 2;
-			mainWindow.SetPoints(score);
 		}
 
 		private bool DisplayTime(string time)

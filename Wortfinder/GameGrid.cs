@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-	class GameGrid
+	public class GameGrid
 	{
 		public int FieldSize { get; }
 		public char[] Letters { get; }

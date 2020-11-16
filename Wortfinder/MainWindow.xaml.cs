@@ -11,12 +11,16 @@ namespace Wortfinder
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private readonly GameController	gameController = null;
+		private readonly GameController	gameController;
+		private readonly GameScore gameScore;
+		private readonly GameGridFutureNew gameGrid;
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			gameController = new GameController(this, LetterGrid);
+			gameScore = new GameScore(OutputScore);
+			gameGrid = new GameGridFutureNew(LetterGrid);
+			gameController = new GameController(this, LetterGrid, gameScore);
 		}
 
 		private void NewGame(object sender, RoutedEventArgs e) {
@@ -28,6 +32,8 @@ namespace Wortfinder
 
 			allWords.Children.Clear();
 			gameController.NewGame(fieldSize, gameTime);
+			gameScore.ResetScore();
+			//gameGrid.NewGrid(fieldSize);
 		}
 
 		public void SetPoints(int points)
@@ -92,7 +98,7 @@ namespace Wortfinder
 		{
 			foreach(WordDisplay wordDisplay in allWords.Children)
 			{
-				wordDisplay.Visibility = Visibility.Visible;
+				wordDisplay.ShowWord();
 			}
 		}
 	}

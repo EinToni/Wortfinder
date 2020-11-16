@@ -16,20 +16,21 @@ namespace Wortfinder
 		private List<Word> allWords;
 		private readonly WordFinder wordFinder;
 		private readonly GameController gameController;
-		private readonly WrapPanel panel;
+		private readonly GameScore gameScore;
+		public event EventHandler<Word> FoundCorrectWordEvent;
 
-		public GuessController(GameController gameCtr, DataController dataCtr, WrapPanel allWords)
+		public GuessController(GameController gameCtr, DataController dataCtr, GameScore gameScore)
 		{
 			dataController = dataCtr;
 			gameController = gameCtr;
-			panel = allWords;
+			this.gameScore = gameScore;
 			wordFinder = new WordFinder(dataController);
 		}
 
-		public void LoadAllFindableWords(char[] letters, int fieldSize)
+		public void LoadAllFindableWords(GameGrid gameGrid)
 		{
-			this.letters = letters;
-			this.fieldSize = fieldSize;
+			letters = gameGrid.Letters;
+			fieldSize = gameGrid.FieldSize;
 			Thread wordFinderThread = new Thread(new ThreadStart(GetAllWords));
 			wordFinderThread.Start();
 		}
@@ -46,6 +47,8 @@ namespace Wortfinder
 			if (IsWordValid(word))
 			{
 				gameController.FoundCorrectWord(word.Name);
+				gameScore.AddPoints(word.Name.Length - 3);
+				FoundCorrectWordEvent?.Invoke(this, word);
 			}
 		}
 

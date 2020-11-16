@@ -19,22 +19,28 @@ namespace Wortfinder
 	public partial class WordDisplay : UserControl
 	{
 		public Word Word { get; }
-		private bool wordFound { get; set; } = false;
-		private bool displayWord { get; set; } = false;
+		private bool WordFound { get; set; } = false;
+		private bool DisplayWord { get; set; } = false;
 		public WordDisplay(Word word)
 		{
 			this.Word = word;
 			InitializeComponent();
 			this.NameLabel.Content = this.Word.Name;
 		}
+
 		public void WordGotFound()
 		{
-			this.wordFound = true;
-			this.Background.Fill = new SolidColorBrush(Color.FromArgb(200, 0, 200, 0));
-			this.Visibility = Visibility.Visible;
+			WordFound = true;
+			Background.Fill = new SolidColorBrush(Color.FromArgb(200, 0, 200, 0));
+			ShowWord();
 		}
 
-		private void Grid_MouseEnter(object sender, MouseEventArgs e)
+		public void ShowWord()
+		{
+			Visibility = Visibility.Visible;
+		}
+
+		private void MouseHovers(object sender, MouseEventArgs e)
 		{
 
 		}
