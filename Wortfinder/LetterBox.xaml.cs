@@ -13,16 +13,18 @@ namespace Wortfinder
 		private readonly WordBuilder guessController = null;
 		private readonly SolidColorBrush clickedColor = new SolidColorBrush(Color.FromRgb(255, 0, 100));
 		private readonly SolidColorBrush unclickedColor = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+		public readonly Coordinate coordinate;
 
 		public LetterBox(WordBuilder guessContr, int size, int circleSize, int row, int column, char letter)
 		{
-			InitializeComponent();
 			DataContext = this;
+			coordinate = new Coordinate(row, column);
+
+			InitializeComponent();
+			
 
 			Size = size;
 			CircleSize = circleSize;
-			Row = row;
-			Column = column;
 			Letter = letter;
 			Clicked = false;
 			guessController = guessContr;
@@ -36,9 +38,7 @@ namespace Wortfinder
 			set { size = value; CircleMargin = (int)((value - CircleSize) / 2); }
 		}
 
-		public bool Activated { get; set; }
-		public int Row { get; set; }
-		public int Column { get; set; }
+		public bool Activated { get; set; } = true;
 		public int Test { get; set; }
 
 		private int circleSize;
@@ -64,9 +64,23 @@ namespace Wortfinder
 			if (Activated && !Clicked && Mouse.LeftButton == MouseButtonState.Pressed)
 			{
 				Clicked = true;
-				//clickedColor.Color = letterController.ClickLetter(Letter, Row, Column);
-				Background.Fill = guessController.ClickLetter(Letter, Row, Column);
+				Background.Fill = guessController.ClickLetter(Letter, coordinate);
 			}
+		}
+
+		public void DisplayFound(int index)
+		{
+			Background.Fill = new SolidColorBrush(Color.FromArgb(240, (byte)(index * 20), 150, (byte)(index * 20)));
+		}
+
+		public void DisplayNotFound(int index)
+		{
+			Background.Fill = new SolidColorBrush(Color.FromArgb(240, 150, (byte)(index * 20), (byte)(index * 20)));
+		}
+
+		public void StopDisplay()
+		{
+			Background.Fill = unclickedColor;
 		}
 		
 		public void MouseRelease()

@@ -11,16 +11,21 @@ namespace Wortfinder
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private readonly GameController	gameController;
 		private readonly GameScore gameScore;
-		private readonly GameGridFutureNew gameGrid;
+		private readonly GameGrid gameGrid;
+		private readonly GameTimer gameTimer;
+		private readonly FindableWords findableWords;
 
 		public MainWindow()
 		{
 			InitializeComponent();
+			DataController dataController = new DataController();
+			dataController.LoadGerman();
+			gameTimer = new GameTimer(remainingTimeLabel, StopGame);
 			gameScore = new GameScore(OutputScore);
-			gameGrid = new GameGridFutureNew(LetterGrid);
-			gameController = new GameController(this, LetterGrid, gameScore);
+			findableWords = new FindableWords(this, allWords);
+			gameGrid = new GameGrid(dataController, gameScore, findableWords, LetterGrid);
+			
 		}
 
 		private void NewGame(object sender, RoutedEventArgs e) {
@@ -30,10 +35,17 @@ namespace Wortfinder
 			RadioButton gameTimeButton  = radioButtons.Where(r => r.GroupName == "GameTime"  && r.IsChecked == true).Single();
 			int gameTime = int.Parse(gameTimeButton.Tag.ToString());
 
-			allWords.Children.Clear();
-			gameController.NewGame(fieldSize, gameTime);
+			findableWords.ClearAllWords();
 			gameScore.ResetScore();
-			//gameGrid.NewGrid(fieldSize);
+			gameGrid.NewGrid(fieldSize);
+			gameTimer.StartTimerInMinutes(gameTime);
+		}
+
+		public bool StopGame()
+		{
+			gameGrid.DeactivateAllLetter();
+			findableWords.ShowAllWords();
+			return true;
 		}
 
 		public void SetPoints(int points)
@@ -49,12 +61,12 @@ namespace Wortfinder
 
 		public void AddAllWordsToList(List<Word> words)
 		{
-			Dispatcher.Invoke(new System.Action(() => { AddWordsInvoke(words); }));
+			Dispatcher.Invoke(new Action(() => { AddWordsInvoke(words); }));
 		}
 
 		public void AddWordToList(Word word)
 		{
-			allWords.Children.Add(new WordDisplay(word));
+			Dispatcher.Invoke(new Action(() => { allWords.Children.Add(new WordDisplay(gameGrid, word)); }));
 		}
 
 		private void AddWordsInvoke(List<Word> words)
@@ -62,7 +74,7 @@ namespace Wortfinder
 			List<WordDisplay> wordDisplays = new List<WordDisplay>();
 			for(int i = 0; i < words.Count; i++)
 			{
-				wordDisplays.Add(new WordDisplay(words[i]));
+				wordDisplays.Add(new WordDisplay(gameGrid, words[i]));
 				foreach (WordDisplay wordAlreadyInList in allWords.Children)
 				{
 					if(words[i].Name.Equals(wordAlreadyInList.Word.Name))
@@ -75,22 +87,6 @@ namespace Wortfinder
 			foreach(WordDisplay word in wordDisplays)
 			{
 				allWords.Children.Add(word);
-			}
-		}
-
-		public void ActivateAllLetters()
-		{
-			foreach (LetterBox letter in LetterGrid.Children)
-			{
-				letter.Activated = true;
-			}
-		}
-
-		public void DeactivateAllLetters()
-		{
-			foreach(LetterBox letter in LetterGrid.Children)
-			{
-				letter.Activated = false;
 			}
 		}
 

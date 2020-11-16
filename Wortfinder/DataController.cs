@@ -10,8 +10,7 @@ namespace Wortfinder
 	public class DataController
 	{
 		public List<string> wordList = new List<string>();
-		private string[] wordArray = null;
-		private string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
+		private readonly string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
 
 		public DataController()
 		{
@@ -36,7 +35,6 @@ namespace Wortfinder
 			}
 			wordList = NormaliseList(wordList);
 			wordList.Sort();
-			wordArray = wordList.ToArray();
 		}
 
 		public List<string> NormaliseList(List<string> list)

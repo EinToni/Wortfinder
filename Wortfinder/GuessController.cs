@@ -15,16 +15,17 @@ namespace Wortfinder
 		private bool findableWordsLoaded = false;
 		private List<Word> allWords;
 		private readonly WordFinder wordFinder;
-		private readonly GameController gameController;
 		private readonly GameScore gameScore;
 		public event EventHandler<Word> FoundCorrectWordEvent;
+		private FindableWords findableWords;
+		private readonly int minWordLength = 3;
 
-		public GuessController(GameController gameCtr, DataController dataCtr, GameScore gameScore)
+		public GuessController(DataController dataCtr, FindableWords findableWords, GameScore gameScore)
 		{
 			dataController = dataCtr;
-			gameController = gameCtr;
 			this.gameScore = gameScore;
 			wordFinder = new WordFinder(dataController);
+			this.findableWords = findableWords;
 		}
 
 		public void LoadAllFindableWords(GameGrid gameGrid)
@@ -32,13 +33,17 @@ namespace Wortfinder
 			letters = gameGrid.Letters;
 			fieldSize = gameGrid.FieldSize;
 			Thread wordFinderThread = new Thread(new ThreadStart(GetAllWords));
+			wordFinderThread.Name = "Word Finder Thread";
 			wordFinderThread.Start();
 		}
 
 		private void GetAllWords()
 		{
 			allWords = wordFinder.FindAllWords(letters, fieldSize);
-			gameController.AddAllWordsToList(allWords);
+			foreach(Word word in allWords)
+			{
+				findableWords.AddNewWord(word);
+			}
 			findableWordsLoaded = true;
 		}
 
@@ -46,10 +51,20 @@ namespace Wortfinder
 		{
 			if (IsWordValid(word))
 			{
-				gameController.FoundCorrectWord(word.Name);
-				gameScore.AddPoints(word.Name.Length - 3);
+				findableWords.WordFound(word);
+				gameScore.AddPoints(getPoints(word.Name.Length));
 				FoundCorrectWordEvent?.Invoke(this, word);
 			}
+		}
+
+		public int getPoints(int wordLength)
+		{
+			int points = wordLength - minWordLength;
+			if (points < 0)
+			{
+				return 0;
+			}
+			return points;
 		}
 
 		public bool IsWordValid(Word tryWord)
@@ -69,7 +84,8 @@ namespace Wortfinder
 				bool wordValid = dataController.CheckWord(tryWord.Name, 0);
 				if (wordValid)
 				{
-					gameController.AddWordToList(tryWord);
+					findableWords.AddNewWord(tryWord);
+					findableWords.WordFound(tryWord);
 				}
 				return wordValid;
 			}

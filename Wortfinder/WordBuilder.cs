@@ -9,27 +9,22 @@ namespace Wortfinder
 	public class WordBuilder
 	{
 		private string wordName = "";
-		private int lastRow = -1;
-		private int lastColumn = -1;
-		private readonly Label outputTextBox = null;
 		private readonly Grid letterGrid = null;
 		private readonly GuessController guessController = null;
-		private List<int[]> coordinates = new List<int[]>();
+		private List<Coordinate> coordinates = new List<Coordinate>();
 
 		public WordBuilder(GuessController guessCtr, Grid grid)
 		{
 			letterGrid = grid;
 			guessController = guessCtr;
 		}
-
-		internal SolidColorBrush ClickLetter(char letter, int row, int column)
+		
+		internal SolidColorBrush ClickLetter(char letter, Coordinate coordinate)
 		{
-			if (Math.Abs(lastRow - row) <= 1 && Math.Abs(lastColumn - column) <= 1 || lastRow == -1 && lastColumn == -1)
+			if (coordinates.Count == 0 || coordinates[^1].IsNeighbour(coordinate))
 			{
 				wordName += letter.ToString();
-				lastRow = row;
-				lastColumn = column;
-				coordinates.Add(new int[] { row, column });
+				coordinates.Add(new Coordinate(coordinate));
 			}
 			else
 			{
@@ -45,11 +40,15 @@ namespace Wortfinder
 				child.MouseRelease();
 			}
 			Word word = new Word(wordName, coordinates);
+			ResetBuilder();
 			guessController.TryWord(word);
+			
+		}
+
+		private void ResetBuilder()
+		{
 			wordName = "";
 			coordinates.Clear();
-			lastRow = -1;
-			lastColumn = -1;
 		}
 	}
 }

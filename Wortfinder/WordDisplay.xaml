@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wortfinder"
-             mc:Ignorable="d" Visibility="Collapsed" >
-    <Grid Height="26">
+             mc:Ignorable="d" Visibility="Collapsed" MouseEnter="MouseHovers" MouseLeave="MouseStopHover">
+    <Grid Height="26" Margin="2,2,2,2">
         <Label x:Name="NameLabel" Content="asdf" VerticalAlignment="Center" Margin="0,0,0,0"/>
-        <Rectangle x:Name="Background" Stroke="Black" RadiusX="1" RadiusY="1" Fill="#FFA52525" Panel.ZIndex="-1" MouseEnter="MouseHovers"/>
+        <Rectangle x:Name="Background" Stroke="Black" RadiusX="1" RadiusY="1" Fill="#FFA52525" Panel.ZIndex="-1"/>
     </Grid>
 </UserControl>

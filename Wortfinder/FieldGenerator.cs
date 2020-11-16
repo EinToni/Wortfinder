@@ -30,7 +30,7 @@ namespace Wortfinder
 			letterGrid.RowDefinitions.Clear();
 			letterGrid.ColumnDefinitions.Clear();
 			//
-			for (int column = 0; column < fieldSize; column++)
+			for (int row = 0; row < fieldSize; row++)
 			{
 				var rowDefinition = new RowDefinition();
 				var columnDefinition = new ColumnDefinition();
@@ -38,7 +38,7 @@ namespace Wortfinder
 				columnDefinition.Width = new GridLength(1, GridUnitType.Star);
 				letterGrid.RowDefinitions.Add(rowDefinition);
 				letterGrid.ColumnDefinitions.Add(columnDefinition);
-				for (int row = 0; row < fieldSize; row++)
+				for (int column = 0; column < fieldSize; column++)
 				{
 					var letter = new LetterBox(wordBuilder, 100, 50, row, column, '-');
 					letterGrid.Children.Add(letter);
@@ -53,7 +53,7 @@ namespace Wortfinder
 		{
 			if(letters.Length != letterGrid.Children.Count)
 			{
-				throw new System.ArgumentException("Letter count does not match the amount of fields.");
+				throw new ArgumentException("Letter count does not match the amount of fields.");
 			}
 			else
 			{

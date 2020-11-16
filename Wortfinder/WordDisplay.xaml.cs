@@ -19,18 +19,19 @@ namespace Wortfinder
 	public partial class WordDisplay : UserControl
 	{
 		public Word Word { get; }
-		private bool WordFound { get; set; } = false;
-		private bool DisplayWord { get; set; } = false;
-		public WordDisplay(Word word)
+		public bool Found { get; private set; } = false;
+		private GameGrid gameGrid;
+		public WordDisplay(GameGrid gameGrid, Word word)
 		{
-			this.Word = word;
+			this.Word = new Word(word);
 			InitializeComponent();
 			this.NameLabel.Content = this.Word.Name;
+			this.gameGrid = gameGrid;
 		}
 
 		public void WordGotFound()
 		{
-			WordFound = true;
+			Found = true;
 			Background.Fill = new SolidColorBrush(Color.FromArgb(200, 0, 200, 0));
 			ShowWord();
 		}
@@ -42,7 +43,12 @@ namespace Wortfinder
 
 		private void MouseHovers(object sender, MouseEventArgs e)
 		{
+			gameGrid.DisplayWord(Word, Found);
+		}
 
+		private void MouseStopHover(object sender, MouseEventArgs e)
+		{
+			gameGrid.StopDisplayWord();
 		}
 	}
 }

@@ -36,9 +36,9 @@
                 <RadioButton GroupName="GameTime" Tag="5" Content="5min" HorizontalAlignment="Left" Margin="124,82,0,0" VerticalAlignment="Top" />
                 <Button Content="Start Game" Margin="0,114,0,0" Click="NewGame" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="101" />
                 <Label Content="Remaining Time:" HorizontalAlignment="Left" Height="27" Margin="21,197,0,0" VerticalAlignment="Top" Width="100"/>
-                <TextBlock x:Name="remainingTime" HorizontalAlignment="Left" Height="24" Margin="21,229,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                <TextBlock x:Name="remainingTimeLabel" HorizontalAlignment="Left" Height="24" Margin="21,229,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
             </Grid>
-            <Grid HorizontalAlignment="Left" Height="209" Margin="691,10,0,0" VerticalAlignment="Top" Width="179">
+            <Grid Margin="657,10,10,327" HorizontalAlignment="Right" VerticalAlignment="Top" Width="218">
                 <Label Content="Your Word:" Margin="0,10,54,0" HorizontalAlignment="Right" Width="115" Height="26" VerticalAlignment="Top" />
                 <Label x:Name="OutputWord" Margin="0,36,0,0" Content="" HorizontalAlignment="Center" Width="159" Height="26" VerticalAlignment="Top" />
                 <Label Content="Your Score:" Margin="0,62,54,0" Height="33" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" />
@@ -51,7 +51,7 @@
                 <Label x:Name="amountOfWords" Content="-" HorizontalAlignment="Left" Margin="122,177,0,0" VerticalAlignment="Top" Width="42" HorizontalContentAlignment="Center"/>
             </Grid>
 
-            <ScrollViewer Height="312" Margin="657,224,0,0" VerticalAlignment="Top" Width="213">
+            <ScrollViewer Margin="0,224,5,10" HorizontalAlignment="Right" Width="218">
                 <WrapPanel x:Name="allWords"/>
             </ScrollViewer>
 

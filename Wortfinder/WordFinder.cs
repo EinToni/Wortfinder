@@ -18,11 +18,11 @@ namespace Wortfinder
 		public List<Word> FindAllWords(char[] letters, int fieldSize)
 		{
 			char[,] letters2D = new char[fieldSize, fieldSize];
-			for (int i = 0; i < fieldSize; i++)
+			for (int row = 0; row < fieldSize; row++)
 			{
-				for (int j = 0; j < fieldSize; j++)
+				for (int column = 0; column < fieldSize; column++)
 				{
-					letters2D[j, i] = letters[i* fieldSize + j];
+					letters2D[row, column] = letters[row* fieldSize + column];
 				}
 			}
 			List<Word> allWords = new List<Word>();
@@ -30,7 +30,7 @@ namespace Wortfinder
 			{
 				for (int column = 0; column < fieldSize; column++)
 				{
-					List<Word> words = CheckRecusive("", (char[,])letters2D.Clone(), new List<int[]> { new int[] { row, column } }, 0);
+					List<Word> words = CheckRecusive("", (char[,])letters2D.Clone(), new List<Coordinate> { new Coordinate(row, column) }, 0);
 					foreach(Word word in words)
 					{
 						bool wordAlreadyFound = false;
@@ -52,11 +52,11 @@ namespace Wortfinder
 			return allWords;
 		}
 
-		public List<Word> CheckRecusive(string word, char[,] letters, List<int[]> coordinates, int dictStartIndex)
+		public List<Word> CheckRecusive(string word, char[,] letters, List<Coordinate> coordinates, int dictStartIndex)
 		{
 			List<Word> allWords = new List<Word>();
-			int currentRow = coordinates[coordinates.Count - 1][0];
-			int currentColumn = coordinates[coordinates.Count - 1][1];
+			int currentRow = coordinates[^1].Row;
+			int currentColumn = coordinates[^1].Column;
 			if (letters[currentRow, currentColumn] != '-')
 			{
 				int columns = letters.GetLength(0);
@@ -84,8 +84,8 @@ namespace Wortfinder
 							// If cell is in bound
 							if (nextRow < rows && nextRow >= 0 && nextColumn < columns && nextColumn >= 0)
 							{
-								List<int[]> newCoordinates = new List<int[]>(coordinates);
-								newCoordinates.Add(new int[] { nextRow, nextColumn });
+								List<Coordinate> newCoordinates = new List<Coordinate>(coordinates);
+								newCoordinates.Add(new Coordinate(nextRow, nextColumn));
 								foreach (Word foundWord in CheckRecusive(word, (char[,])letters.Clone(), newCoordinates, beginningIndex))
 								{
 									allWords.Add(foundWord);
