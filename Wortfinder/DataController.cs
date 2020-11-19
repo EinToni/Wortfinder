@@ -11,6 +11,7 @@ namespace Wortfinder
 	{
 		public List<string> wordList = new List<string>();
 		private readonly string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
+		private readonly int minimumWordLength = 3;
 
 		public DataController()
 		{
@@ -29,12 +30,20 @@ namespace Wortfinder
 				string line;
 				while ((line = file.ReadLine()) != null)
 				{
-					wordList.Add(line);
+					if (HasMinimumLength(line))
+					{
+						wordList.Add(line);
+					}
 				}
 				file.Close();
 			}
 			wordList = NormaliseList(wordList);
 			wordList.Sort();
+		}
+
+		private bool HasMinimumLength(string word)
+		{
+			return word.Length - minimumWordLength >= 0;
 		}
 
 		public List<string> NormaliseList(List<string> list)

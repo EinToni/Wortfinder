@@ -9,10 +9,13 @@ namespace Wortfinder
 	{
 		public int Score { get; private set; }
 		private readonly Label scoleLabel;
+		private readonly GameScoreCalculator scoreCalculator;
+
 		public GameScore(Label scoleLabel)
 		{
 			Score = 0;
 			this.scoleLabel = scoleLabel;
+			scoreCalculator = new GameScoreCalculator();
 		}
 
 		public void ResetScore()
@@ -27,9 +30,16 @@ namespace Wortfinder
 			UpdateScoreGui();
 		}
 
+		public void WordFound(int wordLength)
+		{
+			AddPoints(scoreCalculator.GetPoints(wordLength));
+		}
+
 		public void UpdateScoreGui()
 		{
 			scoleLabel.Content = Score;
 		}
+
+		internal void SetDifficulty(int fieldSize, int gameTime) => scoreCalculator.SetDifficulty(fieldSize, gameTime);
 	}
 }

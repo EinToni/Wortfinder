@@ -29,10 +29,13 @@ namespace Wortfinder
 
 		public void LoadAllFindableWords(GameGrid gameGrid)
 		{
+			findableWordsLoaded = false;
 			letters = gameGrid.Letters;
 			fieldSize = gameGrid.FieldSize;
-			Thread wordFinderThread = new Thread(new ThreadStart(GetAllWords));
-			wordFinderThread.Name = "Word Finder Thread";
+			Thread wordFinderThread = new Thread(new ThreadStart(GetAllWords))
+			{
+				Name = "Word Finder Thread"
+			};
 			wordFinderThread.Start();
 		}
 
@@ -51,18 +54,8 @@ namespace Wortfinder
 			if (IsWordValid(word))
 			{
 				findableWords.WordFound(word);
-				gameScore.AddPoints(getPoints(word.Name.Length));
+				gameScore.WordFound(word.Name.Length);
 			}
-		}
-
-		public int getPoints(int wordLength)
-		{
-			int points = wordLength - minWordLength;
-			if (points < 0)
-			{
-				return 0;
-			}
-			return points;
 		}
 
 		public bool IsWordValid(Word tryWord)
