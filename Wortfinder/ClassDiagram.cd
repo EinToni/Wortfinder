@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Wortfinder.DataController">
-    <Position X="13" Y="17.75" Width="1.5" />
+    <Position X="13" Y="17.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>CAEAAAAAAACAAAAgABAAAAAAAAABAAIQAgAAAAAABAE=</HashCode>
+      <HashCode>CAEAAAAAAAKAAAAgABAAAAAgAAABAAIQAgAAAAAABAE=</HashCode>
       <FileName>DataController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -41,7 +41,7 @@
     <AssociationLine Name="guessController" Type="Wortfinder.GuessController" FixedToPoint="true">
       <Path>
         <Point X="11.828" Y="14.5" />
-        <Point X="11.828" Y="12.094" />
+        <Point X="11.828" Y="11.901" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="1.837" Y="-1.924" />
@@ -75,12 +75,12 @@
     <Position X="11.5" Y="0.5" Width="6.25" />
     <AssociationLine Name="gameGrid" Type="Wortfinder.GameGrid" FixedFromPoint="true">
       <Path>
-        <Point X="11.695" Y="2.886" />
+        <Point X="11.695" Y="3.078" />
         <Point X="11.695" Y="4.75" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAAyAAAQAAAAABAAAAgAAgAAAAAAAQgA=</HashCode>
+      <HashCode>AAAAAQAAAAAAAAyAAAQAAAAgBAAAAgAAgAAAAAAAQgA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -88,6 +88,7 @@
       <Field Name="gameGrid" />
       <Field Name="gameTimer" />
       <Field Name="findableWords" />
+      <Field Name="scoreManager" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -168,7 +169,7 @@
     </AssociationLine>
     <AssociationLine Name="wordFinder" Type="Wortfinder.WordFinder" FixedToPoint="true">
       <Path>
-        <Point X="13.625" Y="12.094" />
+        <Point X="13.625" Y="11.901" />
         <Point X="13.625" Y="14.25" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
@@ -187,7 +188,7 @@
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AQAAACAAAAAAAACIgQAEAAEAAAQAABAAoAAAAAIAAAA=</HashCode>
+      <HashCode>AQAAACAAAAAAAACIgQAEAAEAAAQAABAAgAAAAAIAAAA=</HashCode>
       <FileName>GuessController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -254,6 +255,13 @@
     <TypeIdentifier>
       <HashCode>AAAAIAAAEAAAgAgAAACAAAAgAgAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>GameScoreCalculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wortfinder.ScoreManager">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAABAAAAAAAAAAAMEAAAAAAAAAABAAAAAAAAABA=</HashCode>
+      <FileName>ScoreManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -15,28 +15,30 @@ namespace Wortfinder
 		private readonly GameGrid gameGrid;
 		private readonly GameTimer gameTimer;
 		private readonly FindableWords findableWords;
+		private readonly ScoreManager scoreManager;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			DataController dataController = new DataController();
 			dataController.LoadGerman();
+			scoreManager = new ScoreManager();
 			gameTimer = new GameTimer(remainingTimeLabel, StopGame);
 			gameScore = new GameScore(OutputScore);
 			findableWords = new FindableWords(this, allWords);
 			gameGrid = new GameGrid(dataController, gameScore, findableWords, LetterGrid);
-			
+			UpdateScore();
 		}
 
 		private void NewGame(object sender, RoutedEventArgs e) {
-			List<RadioButton> radioButtons = controllGrid.Children.OfType<RadioButton>().ToList();
-			RadioButton fieldSizeButton = radioButtons.Where(r => r.GroupName == "FieldSize" && r.IsChecked == true).Single();
-			int fieldSize = int.Parse(fieldSizeButton.Tag.ToString());
-			RadioButton gameTimeButton  = radioButtons.Where(r => r.GroupName == "GameTime"  && r.IsChecked == true).Single();
+			RadioButton sizeRadioButton = FieldSizeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
+			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
+			int fieldSize = int.Parse(sizeRadioButton.Tag.ToString());
 			int gameTime = int.Parse(gameTimeButton.Tag.ToString());
 
 			findableWords.ClearAllWords();
 			gameScore.ResetScore();
+			gameScore.SetDifficulty(fieldSize, gameTime);
 			gameGrid.NewGrid(fieldSize);
 			gameTimer.StartTimerInMinutes(gameTime);
 		}
@@ -45,6 +47,12 @@ namespace Wortfinder
 		{
 			gameGrid.DeactivateAllLetter();
 			findableWords.ShowAllWords();
+			RadioButton sizeRadioButton = FieldSizeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
+			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
+			int fieldSize = int.Parse(sizeRadioButton.Tag.ToString());
+			int gameTime = int.Parse(gameTimeButton.Tag.ToString());
+			SaveScoreWindow saveScoreWindow = new SaveScoreWindow(this, scoreManager, int.Parse(OutputScore.Content.ToString()), fieldSize, gameTime);
+			saveScoreWindow.ShowDialog();
 			return true;
 		}
 
@@ -83,6 +91,11 @@ namespace Wortfinder
 			{
 				allWords.Children.Add(word);
 			}
+		}
+
+		public void UpdateScore()
+		{
+			Highscores.ItemsSource = scoreManager.GetTopScores(10);
 		}
 	}
 }

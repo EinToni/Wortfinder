@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wortfinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900"
-        MinHeight="600" MinWidth="900">
+        Title="Wordfinder" Height="720" Width="1280"
+        MinHeight="480" MinWidth="854" ResizeMode="CanResizeWithGrip" SizeToContent="Manual">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Word Missing" Click="WordMissing">
             </MenuItem>
         </Menu>
         <Grid Margin="10,10,10,10">
-            <Grid x:Name="LetterGrid" Margin="217,10,228,91"
+            <Grid x:Name="LetterGrid" Margin="335,10,222,10"
                   MinHeight="250px" MinWidth="250px">
                 <Grid.ColumnDefinitions>
                 </Grid.ColumnDefinitions>
@@ -21,39 +21,55 @@
                 </Grid.RowDefinitions>
                 <Border BorderThickness="2" BorderBrush="Black" />
             </Grid>
-
-
-
-
-            <Grid x:Name="controllGrid" HorizontalAlignment="Left" Height="283" Margin="20,16,0,0" VerticalAlignment="Top" Width="179">
-                <Label Content="Field Size:" HorizontalAlignment="Left" Height="26" VerticalAlignment="Bottom" Margin="0,0,0,257"/>
-                <RadioButton GroupName="FieldSize" Tag="4" Content="4x4" HorizontalAlignment="Right" Margin="0,0,132,237" VerticalAlignment="Bottom" IsChecked="True"/>
-                <RadioButton GroupName="FieldSize" Tag="5" Content="5x5" HorizontalAlignment="Left" Margin="67,0,0,237" VerticalAlignment="Bottom" />
-                <RadioButton GroupName="FieldSize" Tag="6" Content="6x6" HorizontalAlignment="Right" Margin="0,0,14,237" VerticalAlignment="Bottom" />
-                <Label Content="Game Time:" HorizontalAlignment="Left" Height="26" Margin="4,0,0,206" VerticalAlignment="Bottom" Width="175"/>
-                <RadioButton GroupName="GameTime" Tag="1" Content="1min" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" />
-                <RadioButton GroupName="GameTime" Tag="3" Content="3min" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                <RadioButton GroupName="GameTime" Tag="5" Content="5min" HorizontalAlignment="Left" Margin="124,82,0,0" VerticalAlignment="Top" />
-                <Button Content="Start Game" Margin="0,114,0,0" Click="NewGame" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="101" />
-                <Label Content="Remaining Time:" HorizontalAlignment="Left" Height="27" Margin="21,197,0,0" VerticalAlignment="Top" Width="100"/>
-                <TextBlock x:Name="remainingTimeLabel" HorizontalAlignment="Left" Height="24" Margin="21,229,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+            <Grid x:Name="controllGrid" HorizontalAlignment="Left" Height="185" Margin="10,10,0,0" VerticalAlignment="Top" Width="320">
+                <Label Content="Field Size:" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" />
+                <Grid x:Name="FieldSizeSelection" Margin="30,41,31,0" VerticalAlignment="Top">
+                    <RadioButton GroupName="FieldSize" Tag="4" Content="4x4" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="True"/>
+                    <RadioButton GroupName="FieldSize" Tag="5" Content="5x5" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <RadioButton GroupName="FieldSize" Tag="6" Content="6x6" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Grid>
+                <Label Content="Game Time:" Margin="0,61,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" />
+                <Grid x:Name="GameTimeSelection" Margin="30,92,31,0" VerticalAlignment="Top">
+                    <RadioButton GroupName="GameTime" Tag="1" Content="1min" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <RadioButton GroupName="GameTime" Tag="3" Content="3min" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="True"/>
+                    <RadioButton GroupName="GameTime" Tag="5" Content="5min" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Grid>
+                <Button Content="Start Game" Margin="0,120,0,0" Click="NewGame" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
             </Grid>
-            <Grid Margin="657,10,10,327" HorizontalAlignment="Right" VerticalAlignment="Top" Width="218">
-                <Label Content="Your Word:" Margin="0,10,54,0" HorizontalAlignment="Right" Width="115" Height="26" VerticalAlignment="Top" />
-                <Label x:Name="OutputWord" Margin="0,36,0,0" Content="" HorizontalAlignment="Center" Width="159" Height="26" VerticalAlignment="Top" />
-                <Label Content="Your Score:" Margin="0,62,54,0" Height="33" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" />
-                <Label x:Name="OutputScore" Margin="0,95,51,0" Content="0" HorizontalAlignment="Right" Width="114" Height="23" VerticalAlignment="Top" />
+            <Grid Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="207" Height="141">
+                <Label Content="Aktueller Score:" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Label x:Name="OutputScore" Margin="0,10,0,0" Content="0" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="90"/>
 
+                <Label Content="Gefundene Wörter:" Margin="0,42,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Label x:Name="amountOfFoundWords" Content="0" HorizontalAlignment="Right" Margin="0,42,0,0" VerticalAlignment="Top" Width="90" HorizontalContentAlignment="Center"/>
 
-                <Label Content="Gefundene Wörter:" HorizontalAlignment="Left" Margin="14,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="129"/>
-                <Label x:Name="amountOfFoundWords" Content="0" HorizontalAlignment="Left" Margin="14,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.184,0.193" Width="43" HorizontalContentAlignment="Center"/>
-                <Label Content="von" HorizontalAlignment="Left" Margin="57,177,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="60"/>
-                <Label x:Name="amountOfWords" Content="-" HorizontalAlignment="Left" Margin="122,177,0,0" VerticalAlignment="Top" Width="42" HorizontalContentAlignment="Center"/>
+                <Label Content="von:" HorizontalAlignment="Left" Margin="0,73,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
+                <Label x:Name="amountOfWords" Content="-" HorizontalAlignment="Right" Margin="0,73,0,0" VerticalAlignment="Top" Width="90" HorizontalContentAlignment="Center"/>
+
+                <Label Content="Remaining Time:" Margin="0,104,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label x:Name="remainingTimeLabel" HorizontalAlignment="Right" Height="24" Margin="0,104,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="90"/>
             </Grid>
 
-            <ScrollViewer Margin="0,224,5,10" HorizontalAlignment="Right" Width="218">
+            <ScrollViewer Margin="0,156,5,10" HorizontalAlignment="Right" Width="212" VerticalScrollBarVisibility="Auto">
                 <WrapPanel x:Name="allWords"/>
             </ScrollViewer>
+            <Grid HorizontalAlignment="Left" Height="456" Margin="10,200,0,0" VerticalAlignment="Top" Width="320">
+                <Label Content="Highscores:" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" FontWeight="Bold">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+                <ListView x:Name="Highscores" VerticalAlignment="Top" Margin="0,41,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="115" DisplayMemberBinding="{Binding PlayerName}" />
+                            <GridViewColumn Header="Score" Width="50" DisplayMemberBinding="{Binding Number}" />
+                            <GridViewColumn Header="Spielinfo" Width="85" DisplayMemberBinding="{Binding GameInfo}" />
+                            <GridViewColumn Header="Datum" Width="60" DisplayMemberBinding="{Binding Date}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
 
         </Grid>
     </DockPanel>

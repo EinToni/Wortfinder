@@ -8,12 +8,12 @@ namespace Wortfinder
 {
 	public class GameTimer
 	{
-		private readonly TextBlock remainingTimeLabel;
+		private readonly Label remainingTimeLabel;
 		private readonly DispatcherTimer timerCountingInSeconds;
 		private int timeRemaining = 0;
 		private Func<bool> timeout;
 
-		public GameTimer(TextBlock remainingTimeLabel, Func<bool> timeoutFunc)
+		public GameTimer(Label remainingTimeLabel, Func<bool> timeoutFunc)
 		{
 			timerCountingInSeconds = new DispatcherTimer();
 			timerCountingInSeconds.Tick += new EventHandler(DispatcherTimerTick);
@@ -47,7 +47,7 @@ namespace Wortfinder
 				StopTimer();
 				timeout();
 			}
-			remainingTimeLabel.Text = timeRemaining.ToString();
+			remainingTimeLabel.Content = timeRemaining.ToString() + "s";
 		}
 	}
 }

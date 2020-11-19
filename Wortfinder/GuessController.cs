@@ -17,7 +17,6 @@ namespace Wortfinder
 		private readonly WordFinder wordFinder;
 		private readonly GameScore gameScore;
 		private FindableWords findableWords;
-		private readonly int minWordLength = 3;
 
 		public GuessController(DataController dataCtr, FindableWords findableWords, GameScore gameScore)
 		{
@@ -76,7 +75,6 @@ namespace Wortfinder
 				if (wordValid)
 				{
 					findableWords.AddNewWord(tryWord);
-					findableWords.WordFound(tryWord);
 				}
 				return wordValid;
 			}
