@@ -150,7 +150,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Wortfinder.WordDisplay">
-    <Position X="8.5" Y="0.5" Width="2" />
+    <Position X="5.25" Y="4.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAEAAAAAAAAAAAAAACAAAAAAgAAAAAEAAAAAAAAgAgA=</HashCode>
       <FileName>WordDisplay.xaml.cs</FileName>
@@ -214,8 +214,8 @@
       <Path>
         <Point X="13.625" Y="7.718" />
         <Point X="13.625" Y="8.093" />
-        <Point X="15.688" Y="8.093" />
-        <Point X="15.688" Y="9" />
+        <Point X="15.917" Y="8.093" />
+        <Point X="15.917" Y="9" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -251,18 +251,41 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Wortfinder.GameScoreCalculator">
-    <Position X="15" Y="9" Width="1.5" />
+    <Position X="15" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAEAAAgAgAAACAAAAgAgAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>GameScoreCalculator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Wortfinder.ScoreManager">
-    <Position X="19.75" Y="0.5" Width="1.5" />
+    <Position X="19.75" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AQAAAAABAAAAAAAAAAAMEAAAAAAAAAABAAAAAAAAABA=</HashCode>
       <FileName>ScoreManager.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="scores" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Wortfinder.Score">
+    <Position X="23" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAIAABAAQAgEACAAAAAAAAAAABAAAACAAAAAA=</HashCode>
+      <FileName>Score.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Wortfinder.SaveScoreWindow">
+    <Position X="6.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAIAAAAAAAAAQAIAAAABAAAACAAAAAAAAAAQAA=</HashCode>
+      <FileName>SaveScoreWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="scoreManager" />
+      <Field Name="mainWindow" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

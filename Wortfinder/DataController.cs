@@ -10,7 +10,7 @@ namespace Wortfinder
 	public class DataController
 	{
 		public List<string> wordList = new List<string>();
-		private readonly string pathGerman = "E:\\Coding\\AdvangedSWMeinProjekt\\Wortfinder\\Wortfinder\\wordListGerman.txt";
+		private readonly string pathGerman = "wordListGerman.txt";
 		private readonly int minimumWordLength = 3;
 
 		public DataController()

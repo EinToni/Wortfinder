@@ -105,17 +105,6 @@ namespace Wortfinder.XUnitTests
 			Assert.Equal("Ueber", dataController.NormaliseVowels("Über"));
 		}
 
-		[Fact]
-		public void CheckBeginning_()
-		{
-			DataController dataController = new DataController
-			{
-				wordList = new List<string> { "abhjk", "bdfgh", "casdf", "dasdf", "test" }
-			};
 
-			int result = dataController.FindBeginning("te", 1);
-
-			Assert.Equal(4, result);
-		}
 	}
 }
