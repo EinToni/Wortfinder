@@ -34,7 +34,6 @@ namespace Wortfinder
 			gameScore = new GameScore(OutputScore);
 			findableWords = new FindableWords(this, allWords);
 			gameGrid = new GameGrid(dataController, gameScore, findableWords, LetterGrid);
-			UpdateScore();
 		}
 
 		public void SetGameField(int size, char[] letters)
@@ -42,7 +41,6 @@ namespace Wortfinder
 			SetField(size);
 			SetLetters(size, letters);
 		}
-
 		private void SetField(int size)
         {
 			LetterGrid.RowDefinitions.Clear();
@@ -145,34 +143,28 @@ namespace Wortfinder
 			selectedWord = "";
 		}
 
-		private void NewGame(object sender, RoutedEventArgs e) {
-			RadioButton sizeRadioButton = FieldSizeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
-			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
-			int fieldSize = int.Parse(sizeRadioButton.Tag.ToString());
-			int gameTime = int.Parse(gameTimeButton.Tag.ToString());
+        private void NewGame(object sender, RoutedEventArgs e) => mainWindowController.NewGame(GetFieldSizeSelected(), GetGameTimeSelected());
 
-			mainWindowController.NewGame(fieldSize, gameTime);
-
-			//findableWords.ClearAllWords();
-			//gameScore.ResetScore();
-			//gameScore.SetDifficulty(fieldSize, gameTime);
-			//gameGrid.NewGrid(fieldSize);
-			//gameTimer.StartTimerInMinutes(gameTime);
+        public void SetTime(string time)
+        {
+			remainingTimeLabel.Content = time;
 		}
 
 		public bool StopGame()
 		{
-			gameGrid.DeactivateAllLetter();
-			findableWords.ShowAllWords();
-			RadioButton sizeRadioButton = FieldSizeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
-			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
-			int fieldSize = int.Parse(sizeRadioButton.Tag.ToString());
-			int gameTime = int.Parse(gameTimeButton.Tag.ToString());
-			SaveScoreWindow saveScoreWindow = new SaveScoreWindow(this, scoreManager, int.Parse(OutputScore.Content.ToString()), fieldSize, gameTime);
-			saveScoreWindow.ShowDialog();
+			mainWindowController.StopGame();
 			return true;
 		}
-
+		public int GetGameTimeSelected()
+		{
+			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
+			return int.Parse(gameTimeButton.Tag.ToString());
+		}
+		public int GetFieldSizeSelected()
+        {
+			RadioButton sizeRadioButton = FieldSizeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
+			return int.Parse(sizeRadioButton.Tag.ToString());
+		}
 		private void WordMissing(object sender, RoutedEventArgs e)
 		{
 			WordMissingWindow wmw = new WordMissingWindow();
@@ -210,11 +202,9 @@ namespace Wortfinder
 			}
 		}
 
-		public void UpdateScore()
+		public void UpdateScore(List<Score> itemSource)
 		{
-			Highscores.ItemsSource = scoreManager.GetTopScores(10);
+			Highscores.ItemsSource = itemSource;
 		}
-
-        
     }
 }
