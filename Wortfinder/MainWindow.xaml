@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Wordfinder" Height="720" Width="1280"
         MinHeight="480" MinWidth="854" ResizeMode="CanResizeWithGrip" SizeToContent="Manual" WindowStartupLocation="Manual" WindowStyle="SingleBorderWindow" Background="White">
-    <DockPanel>
+    <DockPanel MouseUp="ReleaseMouse">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Word Missing" Click="WordMissing">
             </MenuItem>
