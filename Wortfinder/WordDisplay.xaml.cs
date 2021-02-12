@@ -19,7 +19,6 @@ namespace Wortfinder
 	public partial class WordDisplay : UserControl
 	{
 		public Word Word { get; }
-		public bool Found { get; private set; } = false;
 		private readonly Func<Word, bool> hover;
 		private readonly Func<bool> stopHover;
 		public WordDisplay(Word word, Func<Word,bool> hover, Func<bool> stopHover)
@@ -33,7 +32,6 @@ namespace Wortfinder
 
 		public void WordGotFound()
 		{
-			Found = true;
 			Background.Fill = new SolidColorBrush(Color.FromArgb(200, 0, 200, 0));
 			ShowWord();
 		}

@@ -20,7 +20,10 @@ namespace Wortfinder
 			Row = coordinate.Row;
 			Column = coordinate.Column;
 		}
-
+		public bool Equals(Coordinate coordinate)
+		{
+			return Row == coordinate.Row && Column == coordinate.Column;
+		}
 		public bool SameCoordinate(Coordinate coordinate)
 		{
 			return Row == coordinate.Row && Column == coordinate.Column;

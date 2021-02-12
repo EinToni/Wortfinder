@@ -17,10 +17,6 @@ namespace Wortfinder
 	public partial class MainWindow : INotifyPropertyChanged
 	{
 		private readonly MainWindowController mainWindowController;
-
-		private string selectedWord = "";
-		private List<int[]> selectedFields = new List<int[]>();
-		private bool gameRunning = false;
         #region Colors
         private readonly Brush unselectedLetter = new SolidColorBrush(Colors.Transparent);
 		private readonly Brush selectedLetter	= new SolidColorBrush(Color.FromArgb(120,   0,  50, 180));
@@ -28,9 +24,16 @@ namespace Wortfinder
 		private readonly Brush notFoundLetter	= new SolidColorBrush(Color.FromArgb(120,  50,   0,   0));
 		private readonly Brush gameInactive		= new SolidColorBrush(Color.FromArgb(180, 150, 150, 150));
 		private readonly Brush gameActive		= new SolidColorBrush(Color.FromArgb( 30, 150, 150, 150));
-        #endregion
-        #region Databindings
-        private string time = "";
+		#endregion
+		public MainWindow()
+		{
+			InitializeComponent();
+			LettersInactive();
+			DataContext = this;
+			mainWindowController = new MainWindowController(this);
+		}
+		#region Databindings
+		private string time = "";
 		public string Time
         {
             get => time;
@@ -54,21 +57,21 @@ namespace Wortfinder
             get => actualScore;
             set { actualScore = value; OnPropertyChanged(); }
         }
-        #endregion
-        public MainWindow()
+		private string mainButton = "Start Game";
+		public string MainButton
 		{
-			InitializeComponent();
-			DataContext = this;
-			mainWindowController = new MainWindowController(this);
-			LettersInactive();
+			get => mainButton;
+			set { mainButton = value; OnPropertyChanged(); }
 		}
-
+		#endregion
+		
 		public void SetGameField(int size, char[] letters)
         {
 			SetField(size);
 			SetLetters(size, letters);
 		}
-		private void SetField(int size)
+        #region BuildLetterGridUiElements
+        private void SetField(int size)
         {
 			LetterGrid.RowDefinitions.Clear();
 			LetterGrid.ColumnDefinitions.Clear();
@@ -84,100 +87,62 @@ namespace Wortfinder
         {
 			for (int i = 0; i < letters.Length; i++)
 			{
-				Viewbox mainBox = new Viewbox();
-				Grid boxGrid = new Grid();
-				Viewbox letterBox = new Viewbox() 
-				{ 
-					Name = "letterbox", 
-					Child = new TextBlock() { Text = letters[i].ToString() }
-				};
-
-				Viewbox hitBox = new Viewbox() { Name = "hitbox" };
-				Ellipse hitCircle = new Ellipse()
-				{
-					Name = (letters[i].ToString() + "_" + (i / size).ToString() + "_" + ((i % size)).ToString()).ToString(),
-					Width = 100,
-					Height = 100,
-					Stroke = unselectedLetter,
-					Fill = unselectedLetter
-				};
-				hitCircle.PreviewMouseDown += new MouseButtonEventHandler(ClickLetter);
-				hitCircle.MouseEnter += new MouseEventHandler(HoverLetter);
-
-				hitBox.Child = hitCircle;
-
-				boxGrid.Children.Add(letterBox);
-				boxGrid.Children.Add(hitBox);
-				mainBox.Child = boxGrid;
-
-				LetterGrid.Children.Add(mainBox);
-				Grid.SetRow(mainBox, i / size);
-				Grid.SetColumn(mainBox, (i % size));
+				Viewbox letter = CreateUiLetter(i, size, letters[i].ToString());
+				LetterGrid.Children.Add(letter);
+				Grid.SetRow(letter, i / size);
+				Grid.SetColumn(letter, (i % size));
 			}
 		}
-		private void ColorLetter(Ellipse ellipse)
+		private Viewbox CreateUiLetter(int position, int size, string letter)
         {
-			ellipse.Fill = selectedLetter;
+			Viewbox mainBox = new Viewbox();
+			Grid boxGrid = new Grid();
+			Viewbox letterBox = new Viewbox()
+			{
+				Name = "letterbox",
+				Child = new TextBlock() { Text = letter }
+			};
+			Viewbox hitBox = new Viewbox() { Name = "hitbox" };
+			Ellipse hitCircle = new Ellipse()
+			{
+				Name = (letter + "_" + (position / size).ToString() + "_" + ((position % size)).ToString()).ToString(),
+				Width = 100,
+				Height = 100,
+				Stroke = unselectedLetter,
+				Fill = unselectedLetter
+			};
+			hitCircle.PreviewMouseDown += new MouseButtonEventHandler(ClickLetter);
+			hitCircle.MouseEnter += new MouseEventHandler(HoverLetter);
+
+			hitBox.Child = hitCircle;
+
+			boxGrid.Children.Add(letterBox);
+			boxGrid.Children.Add(hitBox);
+			mainBox.Child = boxGrid;
+			return mainBox;
 		}
-		private void ClickLetter(object sender, MouseButtonEventArgs e)
+        #endregion BuildLetterGridUiElements
+        public void ColorLetter(Ellipse ellipse) => ellipse.Fill = selectedLetter;
+        private void ClickLetter(object sender, MouseButtonEventArgs e)
 		{
-            if (gameRunning)
+			Ellipse ellipse = sender as Ellipse;
+			string[] parts = ellipse.Name.Split('_');
+			if (mainWindowController.ClickLetter(parts[0], parts[1], parts[2]))
             {
-				Ellipse ellipse = sender as Ellipse;
 				ColorLetter(ellipse);
-				selectedWord = ellipse.Name.Split('_')[0];
-				int coordRow = int.Parse(ellipse.Name.Split('_')[1]);
-				int coordCol = int.Parse(ellipse.Name.Split('_')[2]);
-				selectedFields = new List<int[]>() { new int[] { coordRow, coordCol } };
-			}
+            }
 		}
 		private void HoverLetter(object sender, MouseEventArgs e)
 		{
-            if (gameRunning)
-            {
-				if (selectedWord != "")
-				{
-					Ellipse ellipse = sender as Ellipse;
-					string letter = ellipse.Name.Split('_')[0];
-					int coordRow = int.Parse(ellipse.Name.Split('_')[1]);
-					int coordCol = int.Parse(ellipse.Name.Split('_')[2]);
-					bool clickValid = true;
-					if (Math.Abs(selectedFields[^1][0] - coordRow) <= 1 &&
-						Math.Abs(selectedFields[^1][1] - coordCol) <= 1)
-					{
-						foreach (int[] i in selectedFields)
-						{
-							int row = i[0];
-							int col = i[1];
-							if (row == coordRow && col == coordCol)
-							{
-								EndClick();
-								clickValid = false;
-								break;
-							}
-						}
-						if (clickValid)
-						{
-							ColorLetter(ellipse);
-							selectedWord += letter;
-							selectedFields.Add(new int[] { coordRow, coordCol });
-						}
-					}
-					else
-					{
-						EndClick();
-					}
-				}
-			}
+			Ellipse ellipse = sender as Ellipse;
+			string[] parts = ellipse.Name.Split('_');
+			if (mainWindowController.HoverLetter(parts[0], parts[1], parts[2]))
+			{
+				ColorLetter(ellipse);
+            }
 		}
-		private void ReleaseMouse(object sender, MouseButtonEventArgs e)
-		{
-			if (gameRunning)
-            {
-				EndClick();
-			}
-		}
-		private void DeselectAllLetters()
+        private void ReleaseMouse(object sender, MouseButtonEventArgs e) => mainWindowController.ReleaseMouse();
+        public void DeselectAllLetters()
         {
 			foreach (Viewbox viewbox in LetterGrid.Children)
 			{
@@ -194,14 +159,6 @@ namespace Wortfinder
 				}
 			}
 		}
-		private void EndClick()
-        {
-			DeselectAllLetters();
-			mainWindowController.TryWord(selectedWord);
-			selectedFields.Clear();
-			selectedWord = "";
-		}
-
         private void NewGame(object sender, RoutedEventArgs e) => mainWindowController.NewGame(GetFieldSizeSelected(), GetTimeSelectedMinutes());
 
 		public bool StopGame()
@@ -226,6 +183,7 @@ namespace Wortfinder
 		}
 		private bool HoverWord(Word word)
         {
+			mainWindowController.ReleaseMouse();
 			int fieldSize = mainWindowController.GetFieldSize();
 			Brush brush = notFoundLetter;
 			if (word.Found)
@@ -254,30 +212,10 @@ namespace Wortfinder
 			DeselectAllLetters();
 			return true;
 		}
-		public void LettersActive()
-        {
-			gameRunning = true;
-			LetterGrid.Background = gameActive;
-        }
-		public void LettersInactive()
-		{
-			gameRunning = false;
-			LetterGrid.Background = gameInactive;
-		}
-		public void SetMaxWords(string amount)
-        {
-			amountOfWords.Content = amount;
-		}
-		public void SetFoundWordsAmount(string amount)
-        {
-			amountOfFoundWords.Content = amount;
-
-		}
-		public void ClearWords()
-		{
-			allWords.Children.Clear();
-		}
-		public void AddFoundWord(Word word)
+        public void LettersActive() => LetterGrid.Background = gameActive;
+        public void LettersInactive() => LetterGrid.Background = gameInactive;
+        public void ClearWords() => allWords.Children.Clear();
+        public void AddFoundWord(Word word)
 		{
 			WordDisplay wd = new WordDisplay(word, HoverWord, StopHoverWord);
 			wd.WordGotFound();
@@ -290,16 +228,9 @@ namespace Wortfinder
 				AddFoundWord(word);
 			}
 		}
-		public void SetBestScores(List<Score> itemSource)
-		{
-			Highscores.ItemsSource = itemSource;
-		}
-		public void SetCurrentScore(string score)
-		{
-			OutputScore.Content = score;
-		}
+        public void SetBestScores(List<Score> itemSource) => Highscores.ItemsSource = itemSource;
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
