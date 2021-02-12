@@ -50,7 +50,7 @@ namespace Wortfinder
                 {
                     if (coordinate.Equals(clickedCoord))
                     {
-                        TryWord(wordBuild);
+                        //TryWord(wordBuild);
                         return false;
                     }
                 }

@@ -41,7 +41,7 @@ namespace Wortfinder
 
 		private int ColumnDistanceTo(Coordinate coordinate)
 		{
-			return Math.Abs(coordinate.Row - Row);
+			return Math.Abs(coordinate.Column - Column);
 		}
 	}
 }
