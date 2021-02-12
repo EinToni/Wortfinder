@@ -7,39 +7,28 @@ namespace Wortfinder
 {
 	public class GameScore
 	{
-		public int Score { get; private set; }
-		private readonly Label scoleLabel;
+		public int Score { get; private set; } = 0;
 		private readonly GameScoreCalculator scoreCalculator;
 
-		public GameScore(Label scoleLabel)
+		public GameScore()
 		{
-			Score = 0;
-			this.scoleLabel = scoleLabel;
 			scoreCalculator = new GameScoreCalculator();
 		}
-
 		public void ResetScore()
 		{
 			Score = 0;
-			UpdateScoreGui();
 		}
 
 		public void AddPoints(int points)
 		{
 			Score += points;
-			UpdateScoreGui();
 		}
 
-		public void WordFound(int wordLength)
+		public void WordFound(string wordLength)
 		{
-			AddPoints(scoreCalculator.GetPoints(wordLength));
+			AddPoints(scoreCalculator.GetPoints(wordLength.Length));
 		}
 
-		public void UpdateScoreGui()
-		{
-			scoleLabel.Content = Score;
-		}
-
-		internal void SetDifficulty(int fieldSize, int gameTime) => scoreCalculator.SetDifficulty(fieldSize, gameTime);
+		public void SetDifficulty(int fieldSize, int gameTime) => scoreCalculator.SetDifficulty(fieldSize, gameTime);
 	}
 }

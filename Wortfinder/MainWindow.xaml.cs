@@ -14,26 +14,23 @@ namespace Wortfinder
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private readonly GameScore gameScore;
-		private readonly GameGrid gameGrid;
-		private readonly GameTimer gameTimer;
-		private readonly FindableWords findableWords;
-		private readonly ScoreManager scoreManager;
 		private readonly MainWindowController mainWindowController;
+
 		private string selectedWord = "";
 		private List<int[]> selectedFields = new List<int[]>();
+		private readonly Brush selectedLetter = new SolidColorBrush(Color.FromArgb(120, (byte)0, (byte)50, (byte)180));
+		private readonly Brush unselectedLetter = new SolidColorBrush(Colors.Transparent);
+		private readonly Brush foundLetter = new SolidColorBrush(Color.FromArgb(120, (byte)0, (byte)50, (byte)0));
+		private readonly Brush notFoundLetter = new SolidColorBrush(Color.FromArgb(120, (byte)50, (byte)0, (byte)0));
+		private readonly Brush gameInactive = new SolidColorBrush(Color.FromArgb(180, (byte)150, (byte)150, (byte)150));
+		private readonly Brush gameActive = new SolidColorBrush(Color.FromArgb(30, (byte)150, (byte)150, (byte)150));
+		private bool gameRunning = false;
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			mainWindowController = new MainWindowController(this);
-			DataController dataController = new DataController();
-			dataController.LoadGerman();
-			scoreManager = new ScoreManager();
-			gameTimer = new GameTimer(remainingTimeLabel, StopGame);
-			gameScore = new GameScore(OutputScore);
-			findableWords = new FindableWords(this, allWords);
-			gameGrid = new GameGrid(dataController, gameScore, findableWords, LetterGrid);
+			LettersInactive();
 		}
 
 		public void SetGameField(int size, char[] letters)
@@ -45,6 +42,7 @@ namespace Wortfinder
         {
 			LetterGrid.RowDefinitions.Clear();
 			LetterGrid.ColumnDefinitions.Clear();
+			LetterGrid.Children.Clear();
 			for (int i = 0; i < size; i++)
 			{
 				LetterGrid.RowDefinitions.Add(
@@ -65,16 +63,16 @@ namespace Wortfinder
 			{
 				Viewbox mainBox = new Viewbox();
 				Grid boxGrid = new Grid();
-				Viewbox letterBox = new Viewbox() { Name = "letter" };
-				Viewbox hitBox = new Viewbox();
+				Viewbox letterBox = new Viewbox() { Name = "letterbox" };
+				Viewbox hitBox = new Viewbox() { Name = "hitbox" };
 				TextBlock letter = new TextBlock() { Text = letters[i].ToString() };
 				Ellipse hitCircle = new Ellipse()
 				{
 					Name = (letters[i].ToString() + "_" + (i / size).ToString() + "_" + ((i % size)).ToString()).ToString(),
 					Width = 100,
 					Height = 100,
-					Stroke = new SolidColorBrush(Colors.Transparent),
-					Fill = new SolidColorBrush(Colors.Transparent)
+					Stroke = unselectedLetter,
+					Fill = unselectedLetter
 				};
 				hitCircle.PreviewMouseDown += new MouseButtonEventHandler(ClickLetter);
 				hitCircle.MouseEnter += new MouseEventHandler(HoverLetter);
@@ -91,53 +89,88 @@ namespace Wortfinder
 				Grid.SetColumn(mainBox, (i % size));
 			}
 		}
+		private void ColorLetter(Ellipse ellipse)
+        {
+			ellipse.Fill = selectedLetter;
+		}
 		private void ClickLetter(object sender, MouseButtonEventArgs e)
 		{
-			Ellipse ellipse = sender as Ellipse;
-			selectedWord = ellipse.Name.Split('_')[0];
-			int coordRow = int.Parse(ellipse.Name.Split('_')[1]);
-			int coordCol = int.Parse(ellipse.Name.Split('_')[2]);
-			selectedFields = new List<int[]>() { new int[] { coordRow, coordCol } };
+            if (gameRunning)
+            {
+				Ellipse ellipse = sender as Ellipse;
+				ColorLetter(ellipse);
+				selectedWord = ellipse.Name.Split('_')[0];
+				int coordRow = int.Parse(ellipse.Name.Split('_')[1]);
+				int coordCol = int.Parse(ellipse.Name.Split('_')[2]);
+				selectedFields = new List<int[]>() { new int[] { coordRow, coordCol } };
+			}
 		}
 		private void HoverLetter(object sender, MouseEventArgs e)
 		{
-            if (selectedWord != "") { 
-				Ellipse ellipse = sender as Ellipse;
-				string letter = ellipse.Name.Split('_')[0];
-				int coordRow = int.Parse(ellipse.Name.Split('_')[1]);
-				int coordCol = int.Parse(ellipse.Name.Split('_')[2]);
-				bool clickValid = true;
-				foreach(int[] i in selectedFields)
+            if (gameRunning)
+            {
+				if (selectedWord != "")
 				{
-					int row = i[0];
-					int col = i[1];
-					if (row == coordRow && col == coordCol)
+					Ellipse ellipse = sender as Ellipse;
+					string letter = ellipse.Name.Split('_')[0];
+					int coordRow = int.Parse(ellipse.Name.Split('_')[1]);
+					int coordCol = int.Parse(ellipse.Name.Split('_')[2]);
+					bool clickValid = true;
+					if (Math.Abs(selectedFields[^1][0] - coordRow) <= 1 &&
+						Math.Abs(selectedFields[^1][1] - coordCol) <= 1)
+					{
+						foreach (int[] i in selectedFields)
+						{
+							int row = i[0];
+							int col = i[1];
+							if (row == coordRow && col == coordCol)
+							{
+								EndClick();
+								clickValid = false;
+								break;
+							}
+						}
+						if (clickValid)
+						{
+							ColorLetter(ellipse);
+							selectedWord += letter;
+							selectedFields.Add(new int[] { coordRow, coordCol });
+						}
+					}
+					else
 					{
 						EndClick();
-						clickValid = false;
-						break;
 					}
-				}
-				if (Math.Abs(selectedFields[^1][0] - coordRow) > 1 ||
-					Math.Abs(selectedFields[^1][1] - coordCol) > 1)
-                {
-					EndClick();
-					clickValid = false;
-				}
-				if (clickValid)
-                {
-					selectedWord += letter;
-					selectedFields.Add(new int[] { coordRow, coordCol });
-					Console.WriteLine(selectedWord);
 				}
 			}
 		}
 		private void ReleaseMouse(object sender, MouseButtonEventArgs e)
 		{
-			EndClick();
+			if (gameRunning)
+            {
+				EndClick();
+			}
+		}
+		private void DeselectAllLetters()
+        {
+			foreach (Viewbox viewbox in LetterGrid.Children)
+			{
+				Grid grid = viewbox.Child as Grid;
+				foreach (Viewbox v in grid.Children)
+				{
+					if (v.Name.Equals("hitbox"))
+					{
+						Ellipse ellipse = v.Child as Ellipse;
+						ellipse.Fill = unselectedLetter;
+						ellipse.Stroke = unselectedLetter;
+						break;
+					}
+				}
+			}
 		}
 		private void EndClick()
         {
+			DeselectAllLetters();
 			mainWindowController.TryWord(selectedWord);
 			selectedFields.Clear();
 			selectedWord = "";
@@ -171,40 +204,84 @@ namespace Wortfinder
 			wmw.Show();
 		}
 
-		public void AddAllWordsToList(List<Word> words)
-		{
-			Dispatcher.Invoke(new Action(() => { AddWordsInvoke(words); }));
-		}
-
 		public void AddWordToList(Word word)
 		{
-			Dispatcher.Invoke(new Action(() => { allWords.Children.Add(new WordDisplay(gameGrid, word)); }));
+			Dispatcher.Invoke(new Action(() => { allWords.Children.Add(new WordDisplay(word, HoverWord, StopHoverWord)); }));
 		}
-
-		private void AddWordsInvoke(List<Word> words)
-		{
-			List<WordDisplay> wordDisplays = new List<WordDisplay>();
-			for(int i = 0; i < words.Count; i++)
-			{
-				wordDisplays.Add(new WordDisplay(gameGrid, words[i]));
-				foreach (WordDisplay wordAlreadyInList in allWords.Children)
-				{
-					if(words[i].Name.Equals(wordAlreadyInList.Word.Name))
-					{
-						wordDisplays[i] = wordAlreadyInList;
-					}
-				}
-			}
+		public void ClearShownWords()
+        {
 			allWords.Children.Clear();
-			foreach(WordDisplay word in wordDisplays)
-			{
-				allWords.Children.Add(word);
-			}
-		}
 
+		}
+		public void ShowWord(Word word)
+        {
+			WordDisplay wd = new WordDisplay(word, HoverWord, StopHoverWord);
+			wd.WordGotFound();
+			allWords.Children.Add(wd);
+		}
+		public void ShowWords(List<Word> words)
+        {
+			foreach(Word word in words)
+            {
+				ShowWord(word);
+			}
+        }
 		public void UpdateScore(List<Score> itemSource)
 		{
 			Highscores.ItemsSource = itemSource;
 		}
-    }
+		public void SetScore(string score)
+        {
+			OutputScore.Content = score;
+		}
+		private bool HoverWord(Word word)
+        {
+			int fieldSize = mainWindowController.GetFieldSize();
+			Brush brush = notFoundLetter;
+			if (word.Found)
+            {
+				brush = foundLetter;
+			}
+			foreach (Coordinate coordinate in word.Coordinates)
+            {
+				int value = coordinate.Row * fieldSize + coordinate.Column;
+				Grid grid = (LetterGrid.Children[value] as Viewbox).Child as Grid;
+				foreach (Viewbox v in grid.Children)
+				{
+					if (v.Name.Equals("hitbox"))
+					{
+						Ellipse ellipse = v.Child as Ellipse;
+						ellipse.Fill = brush;
+						ellipse.Stroke = brush;
+						break;
+					}
+				}
+			}
+			return true;
+        }
+		private bool StopHoverWord()
+		{
+			DeselectAllLetters();
+			return true;
+		}
+		public void LettersActive()
+        {
+			gameRunning = true;
+			LetterGrid.Background = gameActive;
+        }
+		public void LettersInactive()
+		{
+			gameRunning = false;
+			LetterGrid.Background = gameInactive;
+		}
+		public void SetMaxWords(string amount)
+        {
+			amountOfWords.Content = amount;
+		}
+		public void SetFoundWordsAmount(string amount)
+        {
+			amountOfFoundWords.Content = amount;
+
+		}
+	}
 }

@@ -6,17 +6,27 @@ using System.Windows.Documents;
 namespace Wortfinder
 {
 	// Class to controll
-	internal class WordFinder
+	internal class WordGenerator
 	{
 		private readonly DataController dataController;
-		public WordFinder(DataController dataCtr)
+		public WordGenerator(DataController dataCtr)
 		{
 			dataController = dataCtr;
 		}
+		public WordGenerator()
+		{
+			// TODO: Fabrik einbauen
+			dataController = new DataController();
+			dataController.LoadGerman();
+		}
 
 		// Finds all Words in the Grid
-		public List<Word> FindAllWords(char[] letters, int fieldSize)
+		public List<Word> GetAllWords(char[] letters, int fieldSize)
 		{
+			if (!dataController.Loaded)
+            {
+				return new List<Word>();
+            }
 			char[,] letters2D = new char[fieldSize, fieldSize];
 			for (int row = 0; row < fieldSize; row++)
 			{

@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Wortfinder
 {
@@ -12,6 +13,7 @@ namespace Wortfinder
 		public List<string> wordList = new List<string>();
 		private readonly string pathGerman = "wordListGerman.txt";
 		private readonly int minimumWordLength = 3;
+		public bool Loaded { get; private set; } = false;
 
 		public DataController()
 		{
@@ -25,6 +27,11 @@ namespace Wortfinder
 
 		private void LoadLanguage(string path)
 		{
+			Thread thread = new Thread(() => LoadThreadFunction(path));
+			thread.Start();
+		}
+		private void LoadThreadFunction(string path)
+        {
 			using (StreamReader file = new StreamReader(path))
 			{
 				string line;
@@ -39,6 +46,7 @@ namespace Wortfinder
 			}
 			wordList = NormaliseList(wordList);
 			wordList.Sort();
+			Loaded = true;
 		}
 
 		private bool HasMinimumLength(string word)

@@ -14,7 +14,7 @@ namespace Wortfinder
 		private int fieldSize;
 		private bool findableWordsLoaded = false;
 		private List<Word> allWords;
-		private readonly WordFinder wordFinder;
+		private readonly WordGenerator wordFinder;
 		private readonly GameScore gameScore;
 		private FindableWords findableWords;
 
@@ -22,7 +22,7 @@ namespace Wortfinder
 		{
 			dataController = dataCtr;
 			this.gameScore = gameScore;
-			wordFinder = new WordFinder(dataController);
+			wordFinder = new WordGenerator(dataController);
 			this.findableWords = findableWords;
 		}
 
@@ -40,7 +40,7 @@ namespace Wortfinder
 
 		private void GetAllWords()
 		{
-			allWords = wordFinder.FindAllWords(letters, fieldSize);
+			allWords = wordFinder.GetAllWords(letters, fieldSize);
 			foreach(Word word in allWords)
 			{
 				findableWords.AddNewWord(word);
@@ -53,7 +53,7 @@ namespace Wortfinder
 			if (IsWordValid(word))
 			{
 				findableWords.WordFound(word);
-				gameScore.WordFound(word.Name.Length);
+				gameScore.WordFound(word.Name);
 			}
 		}
 

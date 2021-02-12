@@ -7,8 +7,13 @@ namespace Wortfinder
     interface IMainWindowController
     {
         void SetGameField(int size, char[] letters);
-        void NewGame(int fieldSize, int gameTime);
-        void TryWord(string selectedWord);
-        void SetTimer(int timeInSeconds);
+        bool SetTimer(int timeInSeconds);
+        void SetMaxWordsFindable(int amount);
+        void ShowWord(Word word);
+        void ShowWords(List<Word> words);
+        void SetScore(int score);
+        void LettersInactive();
+        void LettersActive();
+        void SetFoundWordsAmount(int amount);
     }
 }

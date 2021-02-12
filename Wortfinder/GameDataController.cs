@@ -8,45 +8,24 @@ using System.Text;
 
 namespace Wortfinder
 {
-	public class ScoreManager
-	{
-        private List<Score> scores;
+    class GameDataController
+    {
         private readonly byte[] key = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
-        private readonly string highscoreLocation = ".\\Highscores.bin";
+        private readonly string highscoreLocation = ".\\PreLoadedGames.bin";
         private readonly Aes aes;
 
-        public ScoreManager()
-		{
+        public GameDataController()
+        {
             aes = Aes.Create();
             aes.Key = key;
             //aes.IV = yourByteArrayIV;
-            scores = new List<Score>();
-            LoadScores();
         }
 
-        public List<Score> GetTopScores(int amountOfScores)
-		{
-            if (amountOfScores > scores.Count)
+        public Dictionary<int, List<Game>> LoadGames()
+        {
+            Dictionary<int, List<Game>> Games = new Dictionary<int, List<Game>>();
+            if (File.Exists(highscoreLocation))
             {
-                amountOfScores = scores.Count;
-            }
-            Score[] scorePart = new Score[amountOfScores];
-            scores.CopyTo(0, scorePart, 0, amountOfScores);
-            List<Score> scoreList = scorePart.ToList();
-            scoreList.Sort();
-            return scoreList;
-        }
-
-		public void AddScore(int score, int fieldSize, int gameTime, string name)
-		{
-			scores.Add(new Score(score, fieldSize, gameTime, name));
-            SaveScores();
-        }
-
-        private void LoadScores()
-		{
-			if (File.Exists(highscoreLocation)) 
-            { 
                 try
                 {
                     //Create a file stream.
@@ -67,7 +46,7 @@ namespace Wortfinder
                     BinaryFormatter bf = new BinaryFormatter();
                     //using StreamReader sReader = new StreamReader(cryptStream);
 
-                    scores = (List<Score>)bf.Deserialize(cryptStream);
+                    Games = (Dictionary<int, List<Game>>)bf.Deserialize(cryptStream);
                 }
                 catch
                 {
@@ -75,26 +54,27 @@ namespace Wortfinder
                     throw;
                 }
             }
+            return Games;
         }
 
-		private void SaveScores()
-		{
+        public void SaveLoadedGames(Dictionary<int, List<Game>> games)
+        {
             try
             {
-				//Create a file stream
-				using FileStream myStream = new FileStream(highscoreLocation, FileMode.Create);
-				byte[] iv = aes.IV;
-				myStream.Write(iv, 0, iv.Length);
+                //Create a file stream
+                using FileStream myStream = new FileStream(highscoreLocation, FileMode.Create);
+                byte[] iv = aes.IV;
+                myStream.Write(iv, 0, iv.Length);
 
-				//Create a CryptoStream, pass it the FileStream, and encrypt
-				//it with the Aes class.  
-				using CryptoStream cryptStream = new CryptoStream(
-					myStream,
-					aes.CreateEncryptor(),
-					CryptoStreamMode.Write);
+                //Create a CryptoStream, pass it the FileStream, and encrypt
+                //it with the Aes class.  
+                using CryptoStream cryptStream = new CryptoStream(
+                    myStream,
+                    aes.CreateEncryptor(),
+                    CryptoStreamMode.Write);
 
-				new BinaryFormatter().Serialize(cryptStream, scores);
-			}
+                new BinaryFormatter().Serialize(cryptStream, games);
+            }
             catch
             {
                 //Inform the user that an exception was raised.  
@@ -102,5 +82,5 @@ namespace Wortfinder
                 throw;
             }
         }
-	}
+    }
 }

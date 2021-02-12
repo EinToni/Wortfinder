@@ -20,13 +20,15 @@ namespace Wortfinder
 	{
 		public Word Word { get; }
 		public bool Found { get; private set; } = false;
-		private GameGrid gameGrid;
-		public WordDisplay(GameGrid gameGrid, Word word)
+		private readonly Func<Word, bool> hover;
+		private readonly Func<bool> stopHover;
+		public WordDisplay(Word word, Func<Word,bool> hover, Func<bool> stopHover)
 		{
 			this.Word = new Word(word);
 			InitializeComponent();
 			this.NameLabel.Content = this.Word.Name;
-			this.gameGrid = gameGrid;
+			this.hover = hover;
+			this.stopHover = stopHover;
 		}
 
 		public void WordGotFound()
@@ -43,12 +45,12 @@ namespace Wortfinder
 
 		private void MouseHovers(object sender, MouseEventArgs e)
 		{
-			gameGrid.DisplayWord(Word, Found);
+			hover(Word);
 		}
 
 		private void MouseStopHover(object sender, MouseEventArgs e)
 		{
-			gameGrid.StopDisplayWord();
+			stopHover();
 		}
 	}
 }
