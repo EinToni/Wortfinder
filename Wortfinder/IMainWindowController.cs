@@ -9,8 +9,9 @@ namespace Wortfinder
         void SetGameField(int size, char[] letters);
         bool SetTimer(int timeInSeconds);
         void SetMaxWordsFindable(int amount);
-        void ShowWord(Word word);
-        void ShowWords(List<Word> words);
+        void AddWordToShow(Word word);
+        void SetWordsToShow(List<Word> words);
+        void ClearWordsToShow();
         void SetCurrentScore(int score);
         void LettersInactive();
         void LettersActive();

@@ -33,6 +33,11 @@ namespace Wortfinder
 			mainWindowController = new MainWindowController(this);
 		}
 		#region Databindings
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
 		private string time = "";
 		public string Time
         {
@@ -215,25 +220,20 @@ namespace Wortfinder
         public void LettersActive() => LetterGrid.Background = gameActive;
         public void LettersInactive() => LetterGrid.Background = gameInactive;
         public void ClearWords() => allWords.Children.Clear();
-        public void AddFoundWord(Word word)
+        public void AddWordToShow(Word word)
 		{
-			WordDisplay wd = new WordDisplay(word, HoverWord, StopHoverWord);
-			wd.WordGotFound();
-			allWords.Children.Add(wd);
+			allWords.Children.Add(new WordDisplay(word, HoverWord, StopHoverWord));
 		}
-		public void ShowWords(List<Word> words)
+		public void SetWordsToShow(List<Word> words)
 		{
+			ClearWords();
 			foreach (Word word in words)
-			{
-				AddFoundWord(word);
+            {
+				AddWordToShow(word);
 			}
 		}
         public void SetBestScores(List<Score> itemSource) => Highscores.ItemsSource = itemSource;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
 	}
 }

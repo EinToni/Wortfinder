@@ -37,10 +37,10 @@ namespace Wortfinder
             return scoreList;
         }
 
-		public void AddScore(int score, int fieldSize, int gameTime, string name)
+		public bool AddScore(int score, int fieldSize, int gameTime, string name)
 		{
 			scores.Add(new Score(score, fieldSize, gameTime, name));
-            SaveScores();
+            return true;
         }
 
         private void LoadScores()
@@ -102,5 +102,12 @@ namespace Wortfinder
                 throw;
             }
         }
-	}
+
+        internal void NewScore(int score, int size, int time)
+        {
+            SaveScoreWindow saveScoreWindow = new SaveScoreWindow(AddScore, score, size, time);
+            saveScoreWindow.ShowDialog();
+            SaveScores();
+        }
+    }
 }

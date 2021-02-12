@@ -23,8 +23,9 @@ namespace Wortfinder
             mainWindow.Time = timeInSeconds.ToString() + " s";
             return true;
         }
-        public void ShowWord(Word word) => mainWindow.AddFoundWord(word);
-        public void ShowWords(List<Word> words) => mainWindow.ShowWords(words);
+        public void AddWordToShow(Word word) => mainWindow.AddWordToShow(word);
+        public void SetWordsToShow(List<Word> words) => mainWindow.SetWordsToShow(words);
+        public void ClearWordsToShow() => mainWindow.ClearWords();
         internal void StopGame() => gameManager.StopGame();
         internal int GetFieldSize() => gameManager.GetFieldSize();
         public void LettersActive() => mainWindow.LettersActive();

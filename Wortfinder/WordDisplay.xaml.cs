@@ -28,19 +28,12 @@ namespace Wortfinder
 			this.NameLabel.Content = this.Word.Name;
 			this.hover = hover;
 			this.stopHover = stopHover;
-		}
-
-		public void WordGotFound()
-		{
-			Background.Fill = new SolidColorBrush(Color.FromArgb(200, 0, 200, 0));
-			ShowWord();
-		}
-
-		public void ShowWord()
-		{
 			Visibility = Visibility.Visible;
+			if (Word.Found)
+            {
+				Background.Fill = new SolidColorBrush(Color.FromArgb(200, 0, 200, 0));
+			}
 		}
-
 		private void MouseHovers(object sender, MouseEventArgs e)
 		{
 			hover(Word);

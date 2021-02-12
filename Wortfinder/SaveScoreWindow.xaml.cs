@@ -17,14 +17,14 @@ namespace Wortfinder
 	/// </summary>
 	public partial class SaveScoreWindow : Window
 	{
-		private readonly ScoreManager scoreManager;
 		private readonly int score;
 		private readonly int fieldSize;
 		private readonly int gameTimeInMintes;
+		private readonly Func<int, int, int, string, bool> saveFunction;
 
-		public SaveScoreWindow(ScoreManager scoreManager, int score, int fieldSize, int gameTime)
+		public SaveScoreWindow(Func<int, int, int, string, bool> saveFunction, int score, int fieldSize, int gameTime)
 		{
-			this.scoreManager = scoreManager;
+			this.saveFunction = saveFunction;
 			this.score = score;
 			this.fieldSize = fieldSize;
 			this.gameTimeInMintes = gameTime;
@@ -34,7 +34,7 @@ namespace Wortfinder
 
 		private void SaveScore(object sender, RoutedEventArgs e)
 		{
-			scoreManager.AddScore(score, fieldSize, gameTimeInMintes, NameInput.Text.ToString());
+			saveFunction(score, fieldSize, gameTimeInMintes, NameInput.Text.ToString());
 			Close();
 		}
 

@@ -34,7 +34,7 @@ namespace Wortfinder
                 gameScore.WordFound(selectedWord);
                 mainWindowController.SetFoundWordsAmount(activeGame.FoundWords);
                 mainWindowController.SetCurrentScore(gameScore.Score);
-                mainWindowController.ShowWord(activeGame.GetWord(selectedWord));
+                mainWindowController.AddWordToShow(activeGame.GetWord(selectedWord));
                 return true;
             }
             return false;
@@ -52,6 +52,7 @@ namespace Wortfinder
                 mainWindowController.SetCurrentScore(0);
                 mainWindowController.SetTimer(gameTimeSeconds);
                 mainWindowController.SetMaxWordsFindable(activeGame.findableWords.Count);
+                mainWindowController.ClearWordsToShow();
                 // Start game
                 mainWindowController.SetGameField(fieldSize, activeGame.letters);
                 gameTimer.StartTimerInSeconds(gameTimeSeconds);
@@ -61,20 +62,19 @@ namespace Wortfinder
             catch (KeyNotFoundException)
             {
                 MessageBox.Show("There are no games loaded yet.\nIf this is your first time starting the game, please wait a moment.");
-                gameLibrary.CheckLoadedGames(fieldSize, 2);
+                gameLibrary.CheckLoadedGames(fieldSize, 1);
             }
         }
         public void StopGame()
         {
             gameRunning = false;
             mainWindowController.LettersInactive();
-            
-            //mainWindowController.ShowWords()
+
+            mainWindowController.SetWordsToShow(activeGame.findableWords);
             int size = activeGame.size;
             int time = activeGame.GameTimeInSeconds;
             int score = gameScore.Score;
-            SaveScoreWindow saveScoreWindow = new SaveScoreWindow(scoreManager, score, size, time);
-            saveScoreWindow.ShowDialog();
+            scoreManager.NewScore(score, size, time);
             mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }
         private bool TimerTimeout()
