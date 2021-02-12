@@ -23,6 +23,7 @@ namespace Wortfinder
             gameLibrary = new GameLibrary();
             gameScore = new GameScore();
             gameLibrary.LoadGeneratedGames();
+            mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }
 
         public bool TryWord(string selectedWord)
@@ -31,7 +32,7 @@ namespace Wortfinder
             {
                 gameScore.WordFound(selectedWord);
                 mainWindowController.SetFoundWordsAmount(activeGame.FoundWords);
-                mainWindowController.SetScore(gameScore.Score);
+                mainWindowController.SetCurrentScore(gameScore.Score);
                 mainWindowController.ShowWord(activeGame.GetWord(selectedWord));
                 return true;
             }
@@ -40,17 +41,19 @@ namespace Wortfinder
         public void NewGame(int fieldSize, int gameTimeSeconds)
         {
             try { 
+                // Get new game
                 activeGame = gameLibrary.GetGameWithSize(fieldSize);
                 activeGame.SetTime(gameTimeSeconds);
-                gameScore.ResetScore();
                 gameScore.SetDifficulty(fieldSize, gameTimeSeconds);
-                gameTimer.StartTimerInMinutes(gameTimeSeconds);
-
+                // Reset previus data
+                gameScore.ResetScore();
                 mainWindowController.SetFoundWordsAmount(0);
-                mainWindowController.SetScore(0);
-                mainWindowController.SetTimer(0);
+                mainWindowController.SetCurrentScore(0);
+                mainWindowController.SetTimer(gameTimeSeconds);
                 mainWindowController.SetMaxWordsFindable(activeGame.findableWords.Count);
+                // Start game
                 mainWindowController.SetGameField(fieldSize, activeGame.letters);
+                gameTimer.StartTimerInSeconds(gameTimeSeconds);
                 mainWindowController.LettersActive();
             }
             catch (KeyNotFoundException)
@@ -69,6 +72,7 @@ namespace Wortfinder
             int score = gameScore.Score;
             SaveScoreWindow saveScoreWindow = new SaveScoreWindow(scoreManager, score, size, time);
             saveScoreWindow.ShowDialog();
+            mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }
         private bool TimerTimeout()
         {

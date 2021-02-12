@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,23 +14,51 @@ namespace Wortfinder
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : INotifyPropertyChanged
 	{
 		private readonly MainWindowController mainWindowController;
 
 		private string selectedWord = "";
 		private List<int[]> selectedFields = new List<int[]>();
-		private readonly Brush selectedLetter = new SolidColorBrush(Color.FromArgb(120, (byte)0, (byte)50, (byte)180));
-		private readonly Brush unselectedLetter = new SolidColorBrush(Colors.Transparent);
-		private readonly Brush foundLetter = new SolidColorBrush(Color.FromArgb(120, (byte)0, (byte)50, (byte)0));
-		private readonly Brush notFoundLetter = new SolidColorBrush(Color.FromArgb(120, (byte)50, (byte)0, (byte)0));
-		private readonly Brush gameInactive = new SolidColorBrush(Color.FromArgb(180, (byte)150, (byte)150, (byte)150));
-		private readonly Brush gameActive = new SolidColorBrush(Color.FromArgb(30, (byte)150, (byte)150, (byte)150));
 		private bool gameRunning = false;
-
-		public MainWindow()
+        #region Colors
+        private readonly Brush unselectedLetter = new SolidColorBrush(Colors.Transparent);
+		private readonly Brush selectedLetter	= new SolidColorBrush(Color.FromArgb(120,   0,  50, 180));
+		private readonly Brush foundLetter		= new SolidColorBrush(Color.FromArgb(120,   0,  50,   0));
+		private readonly Brush notFoundLetter	= new SolidColorBrush(Color.FromArgb(120,  50,   0,   0));
+		private readonly Brush gameInactive		= new SolidColorBrush(Color.FromArgb(180, 150, 150, 150));
+		private readonly Brush gameActive		= new SolidColorBrush(Color.FromArgb( 30, 150, 150, 150));
+        #endregion
+        #region Databindings
+        private string time = "";
+		public string Time
+        {
+            get => time;
+            set { time = value; OnPropertyChanged(); }
+        }
+        private string findableWordsAmount = "";
+		public string FindableWordsAmount
+        {
+            get => findableWordsAmount;
+            set { findableWordsAmount = value; OnPropertyChanged(); }
+        }
+        private string foundWordsAmount = "";
+		public string FoundWordsAmount
+        {
+            get => foundWordsAmount;
+            set { foundWordsAmount = value; OnPropertyChanged(); }
+        }
+        private string actualScore = "";
+		public string ActualScore
+        {
+            get => actualScore;
+            set { actualScore = value; OnPropertyChanged(); }
+        }
+        #endregion
+        public MainWindow()
 		{
 			InitializeComponent();
+			DataContext = this;
 			mainWindowController = new MainWindowController(this);
 			LettersInactive();
 		}
@@ -45,16 +75,9 @@ namespace Wortfinder
 			LetterGrid.Children.Clear();
 			for (int i = 0; i < size; i++)
 			{
-				LetterGrid.RowDefinitions.Add(
-					new RowDefinition()
-					{
-						Height = new GridLength(1, GridUnitType.Star)
-					});
-				LetterGrid.ColumnDefinitions.Add(
-					new ColumnDefinition()
-					{
-						Width = new GridLength(1, GridUnitType.Star)
-					});
+				GridLength format = new GridLength(1, GridUnitType.Star);
+                LetterGrid.RowDefinitions.Add(new RowDefinition() { Height = format });
+                LetterGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = format });
 			}
 		}
 		private void SetLetters(int size, char[] letters)
@@ -63,9 +86,13 @@ namespace Wortfinder
 			{
 				Viewbox mainBox = new Viewbox();
 				Grid boxGrid = new Grid();
-				Viewbox letterBox = new Viewbox() { Name = "letterbox" };
+				Viewbox letterBox = new Viewbox() 
+				{ 
+					Name = "letterbox", 
+					Child = new TextBlock() { Text = letters[i].ToString() }
+				};
+
 				Viewbox hitBox = new Viewbox() { Name = "hitbox" };
-				TextBlock letter = new TextBlock() { Text = letters[i].ToString() };
 				Ellipse hitCircle = new Ellipse()
 				{
 					Name = (letters[i].ToString() + "_" + (i / size).ToString() + "_" + ((i % size)).ToString()).ToString(),
@@ -77,7 +104,6 @@ namespace Wortfinder
 				hitCircle.PreviewMouseDown += new MouseButtonEventHandler(ClickLetter);
 				hitCircle.MouseEnter += new MouseEventHandler(HoverLetter);
 
-				letterBox.Child = letter;
 				hitBox.Child = hitCircle;
 
 				boxGrid.Children.Add(letterBox);
@@ -176,19 +202,14 @@ namespace Wortfinder
 			selectedWord = "";
 		}
 
-        private void NewGame(object sender, RoutedEventArgs e) => mainWindowController.NewGame(GetFieldSizeSelected(), GetGameTimeSelected());
-
-        public void SetTime(string time)
-        {
-			remainingTimeLabel.Content = time;
-		}
+        private void NewGame(object sender, RoutedEventArgs e) => mainWindowController.NewGame(GetFieldSizeSelected(), GetTimeSelectedMinutes());
 
 		public bool StopGame()
 		{
 			mainWindowController.StopGame();
 			return true;
 		}
-		public int GetGameTimeSelected()
+		public int GetTimeSelectedMinutes()
 		{
 			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
 			return int.Parse(gameTimeButton.Tag.ToString());
@@ -202,37 +223,6 @@ namespace Wortfinder
 		{
 			WordMissingWindow wmw = new WordMissingWindow();
 			wmw.Show();
-		}
-
-		public void AddWordToList(Word word)
-		{
-			Dispatcher.Invoke(new Action(() => { allWords.Children.Add(new WordDisplay(word, HoverWord, StopHoverWord)); }));
-		}
-		public void ClearShownWords()
-        {
-			allWords.Children.Clear();
-
-		}
-		public void ShowWord(Word word)
-        {
-			WordDisplay wd = new WordDisplay(word, HoverWord, StopHoverWord);
-			wd.WordGotFound();
-			allWords.Children.Add(wd);
-		}
-		public void ShowWords(List<Word> words)
-        {
-			foreach(Word word in words)
-            {
-				ShowWord(word);
-			}
-        }
-		public void UpdateScore(List<Score> itemSource)
-		{
-			Highscores.ItemsSource = itemSource;
-		}
-		public void SetScore(string score)
-        {
-			OutputScore.Content = score;
 		}
 		private bool HoverWord(Word word)
         {
@@ -283,5 +273,36 @@ namespace Wortfinder
 			amountOfFoundWords.Content = amount;
 
 		}
+		public void ClearWords()
+		{
+			allWords.Children.Clear();
+		}
+		public void AddFoundWord(Word word)
+		{
+			WordDisplay wd = new WordDisplay(word, HoverWord, StopHoverWord);
+			wd.WordGotFound();
+			allWords.Children.Add(wd);
+		}
+		public void ShowWords(List<Word> words)
+		{
+			foreach (Word word in words)
+			{
+				AddFoundWord(word);
+			}
+		}
+		public void SetBestScores(List<Score> itemSource)
+		{
+			Highscores.ItemsSource = itemSource;
+		}
+		public void SetCurrentScore(string score)
+		{
+			OutputScore.Content = score;
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 	}
 }

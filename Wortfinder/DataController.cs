@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows;
 
 namespace Wortfinder
 {
@@ -22,9 +23,12 @@ namespace Wortfinder
 
 		public void LoadGerman()
 		{
+            if (!File.Exists(pathGerman))
+            {
+				MessageBox.Show("File with words could not be loaded.");
+			}
 			LoadLanguage(pathGerman);
 		}
-
 		private void LoadLanguage(string path)
 		{
 			Thread thread = new Thread(() => LoadThreadFunction(path));

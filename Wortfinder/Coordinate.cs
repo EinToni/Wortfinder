@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
+	[Serializable]
 	public class Coordinate
 	{
 		public int Row { get; }

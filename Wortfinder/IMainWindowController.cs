@@ -11,9 +11,10 @@ namespace Wortfinder
         void SetMaxWordsFindable(int amount);
         void ShowWord(Word word);
         void ShowWords(List<Word> words);
-        void SetScore(int score);
+        void SetCurrentScore(int score);
         void LettersInactive();
         void LettersActive();
         void SetFoundWordsAmount(int amount);
+        void SetBestScores(List<Score> scores);
     }
 }

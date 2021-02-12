@@ -24,9 +24,9 @@ namespace Wortfinder
 			return 0;
 		}
 
-		internal void SetDifficulty(int gameFieldSize, int gameTime)
+		internal void SetDifficulty(int gameFieldSize, int gameTimeSeconds)
 		{
-			this.gameTime = gameTime;
+			this.gameTime = gameTimeSeconds;
 			this.gameFieldSize = gameFieldSize;
 		}
 
@@ -43,10 +43,10 @@ namespace Wortfinder
 		private int Bonus()
 		{
 			int bonus = 0;
-			if(gameTime == 1)
+			if(gameTime == 60)
 			{
 				bonus += 2;
-			}else if (gameTime == 3)
+			}else if (gameTime == 180)
 			{
 				bonus += 1;
 			}

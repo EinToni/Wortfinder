@@ -32,8 +32,9 @@ namespace Wortfinder
 						return true;
 					}
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
+					throw new Exception();
 					return false;
 				}
 			}

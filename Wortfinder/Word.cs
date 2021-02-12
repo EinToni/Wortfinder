@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
+	[Serializable]
 	public class Word
 	{
 		public string Name { get; }

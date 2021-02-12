@@ -29,6 +29,6 @@ namespace Wortfinder
 			AddPoints(scoreCalculator.GetPoints(wordLength.Length));
 		}
 
-		public void SetDifficulty(int fieldSize, int gameTime) => scoreCalculator.SetDifficulty(fieldSize, gameTime);
+		public void SetDifficulty(int fieldSize, int gameTimeSeconds) => scoreCalculator.SetDifficulty(fieldSize, gameTimeSeconds);
 	}
 }

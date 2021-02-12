@@ -51,7 +51,6 @@ namespace Wortfinder
                 catch
                 {
                     Console.WriteLine("The decryption failed.");
-                    throw;
                 }
             }
             return Games;

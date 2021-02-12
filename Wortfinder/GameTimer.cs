@@ -22,9 +22,9 @@ namespace Wortfinder
 			tick = tickFunction;
 		}
 
-		public void StartTimerInMinutes(int time)
+		public void StartTimerInSeconds(int seconds)
 		{
-			timeRemaining = time * 60;
+			timeRemaining = seconds;
 			timerCountingInSeconds.Start();
 		}
 

@@ -15,21 +15,24 @@ namespace Wortfinder
         }
 
         public void SetGameField(int size, char[] letters) => mainWindow.SetGameField(size, letters);
-        public void NewGame(int fieldSize, int gameTime) => gameManager.NewGame(fieldSize, gameTime);
+        public void NewGame(int fieldSize, int gameTimeInMinutes) => gameManager.NewGame(fieldSize, gameTimeInMinutes * 60);
         public void TryWord(string selectedWord) => gameManager.TryWord(selectedWord);
         public bool SetTimer(int timeInSeconds)
         {
-            mainWindow.SetTime(timeInSeconds.ToString());
+            mainWindow.Time = timeInSeconds.ToString() + " s";
+            //mainWindow.SetTime(timeInSeconds.ToString());
             return true;
         }
-        public void ShowWord(Word word) => mainWindow.ShowWord(word);
+        public void ShowWord(Word word) => mainWindow.AddFoundWord(word);
         public void ShowWords(List<Word> words) => mainWindow.ShowWords(words);
-        public void SetScore(int score) => mainWindow.SetScore(score.ToString());
+        
         internal void StopGame() => gameManager.StopGame();
         internal int GetFieldSize() => gameManager.GetFieldSize();
         public void LettersActive() => mainWindow.LettersActive();
         public void LettersInactive() => mainWindow.LettersInactive();
-        public void SetMaxWordsFindable(int amount) => mainWindow.SetMaxWords(amount.ToString());
-        public void SetFoundWordsAmount(int amount) => mainWindow.SetFoundWordsAmount(amount.ToString());
+        public void SetCurrentScore(int score) => mainWindow.ActualScore = score.ToString();
+        public void SetMaxWordsFindable(int amount) => mainWindow.FindableWordsAmount = amount.ToString();
+        public void SetFoundWordsAmount(int amount) => mainWindow.FoundWordsAmount = amount.ToString();
+        public void SetBestScores(List<Score> scores) => mainWindow.SetBestScores(scores);
     }
 }

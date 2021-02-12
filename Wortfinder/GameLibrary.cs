@@ -19,13 +19,38 @@ namespace Wortfinder
 
         public void LoadGeneratedGames()
         {
+            List<int> gameSizes = new List<int>() { 4, 5, 6 };
+            int amountOfGames = 5;
             foreach (KeyValuePair<int, List<Game>> data in gameDataController.LoadGames())
             {
                 loadedGames.Add(data.Key, data.Value);
             }
-            CheckLoadedGames(4, 5);
-            CheckLoadedGames(5, 5);
-            CheckLoadedGames(6, 5);
+            Thread thread = new Thread(() => GenerateAndSave(gameSizes, amountOfGames));
+            thread.Start();
+            foreach(int size in gameSizes)
+            {
+                CheckLoadedGames(size, amountOfGames);
+            }
+        }
+        public void GenerateAndSave(List<int> sizes, int numberOfGames)
+        {
+            Dictionary<int, List<Game>> games = new Dictionary<int, List<Game>>();
+            foreach(int size in sizes)
+            {
+                for (int i = 0; i < numberOfGames; i++)
+                {
+                    Game newGame = gameGenerator.NewGame(size);
+                    if (games.ContainsKey(size))
+                    {
+                        games[size].Add(newGame);
+                    }
+                    else
+                    {
+                        games.Add(size, new List<Game>() { newGame });
+                    }
+                }
+            }
+            gameDataController.SaveLoadedGames(games);
         }
 
         public Game GetGameWithSize(int fieldSize)

@@ -5,6 +5,7 @@ using System.Windows.Documents;
 
 namespace Wortfinder
 {
+	// TODO: Rework: unuseful class "Letter"
 	public class LetterProbalilitys
 	{
 		public List<Letter> German()
