@@ -9,16 +9,16 @@ using System.Windows;
 
 namespace Wortfinder
 {
-	public class DataController
+	public class DataController : IWordList
 	{
 		public List<string> wordList = new List<string>();
 		private readonly string pathGerman = "wordListGerman.txt";
 		private readonly int minimumWordLength = 3;
-		public bool Loaded { get; private set; } = false;
+		public bool loaded = false;
 
 		public DataController()
 		{
-			
+			LoadGerman();	
 		}
 
 		public void LoadGerman()
@@ -50,10 +50,10 @@ namespace Wortfinder
 			}
 			wordList = NormaliseList(wordList);
 			wordList.Sort();
-			Loaded = true;
+			loaded = true;
 		}
-
-		private bool HasMinimumLength(string word)
+        public bool Loaded() => loaded;
+        private bool HasMinimumLength(string word)
 		{
 			return word.Length - minimumWordLength >= 0;
 		}

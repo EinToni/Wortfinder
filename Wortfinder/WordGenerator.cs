@@ -8,22 +8,17 @@ namespace Wortfinder
 	// Class to controll
 	internal class WordGenerator
 	{
-		private readonly DataController dataController;
-		public WordGenerator(DataController dataCtr)
-		{
-			dataController = dataCtr;
-		}
+		private readonly IWordList wordList;
 		public WordGenerator()
 		{
-			// TODO: Fabrik einbauen
-			dataController = new DataController();
-			dataController.LoadGerman();
+			this.wordList = new DataController();
+
 		}
 
 		// Finds all Words in the Grid
 		public List<Word> GetAllWords(char[] letters, int fieldSize)
 		{
-			if (!dataController.Loaded)
+			if (!wordList.Loaded())
             {
 				return new List<Word>();
             }
@@ -77,10 +72,10 @@ namespace Wortfinder
 				letters[currentRow, currentColumn] = '-';
 
 				// Check if any word begins with this letter string
-				int beginningIndex = dataController.FindBeginningLinear(word, dictStartIndex);
+				int beginningIndex = wordList.FindBeginningLinear(word, dictStartIndex);
 				if (beginningIndex >= 0)
 				{
-					if (dataController.CheckWord(word, beginningIndex))
+					if (wordList.CheckWord(word, beginningIndex))
 					{
 						allWords.Add(new Word(word, coordinates));
 					}
@@ -94,9 +89,11 @@ namespace Wortfinder
 							// If cell is in bound
 							if (nextRow < rows && nextRow >= 0 && nextColumn < columns && nextColumn >= 0)
 							{
-								List<Coordinate> newCoordinates = new List<Coordinate>(coordinates);
-								newCoordinates.Add(new Coordinate(nextRow, nextColumn));
-								foreach (Word foundWord in CheckRecusive(word, (char[,])letters.Clone(), newCoordinates, beginningIndex))
+                                List<Coordinate> newCoordinates = new List<Coordinate>(coordinates)
+                                {
+                                    new Coordinate(nextRow, nextColumn)
+                                };
+                                foreach (Word foundWord in CheckRecusive(word, (char[,])letters.Clone(), newCoordinates, beginningIndex))
 								{
 									allWords.Add(foundWord);
 								}
