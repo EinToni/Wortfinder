@@ -14,9 +14,11 @@ namespace Wortfinder
         private readonly byte[] key = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
         private readonly string highscoreLocation = ".\\Highscores.bin";
         private readonly Aes aes;
+        private readonly IScoreWindowController scoreWindowController;
 
-        public ScoreManager()
+        public ScoreManager(IFactory factory)
 		{
+            scoreWindowController = factory.GetScoreWindowController();
             aes = Aes.Create();
             aes.Key = key;
             //aes.IV = yourByteArrayIV;
@@ -37,11 +39,7 @@ namespace Wortfinder
             return scoreList;
         }
 
-		public bool AddScore(int score, int fieldSize, int gameTime, string name)
-		{
-			scores.Add(new Score(score, fieldSize, gameTime, name));
-            return true;
-        }
+		
 
         private void LoadScores()
 		{
@@ -105,9 +103,17 @@ namespace Wortfinder
 
         internal void NewScore(int score, int size, int time)
         {
-            SaveScoreWindow saveScoreWindow = new SaveScoreWindow(AddScore, score, size, time);
-            saveScoreWindow.ShowDialog();
-            SaveScores();
+            scoreWindowController.NewScoreWindow(score);
+            if (scoreWindowController.SaveScore())
+            {
+                AddScore(score, size, time, scoreWindowController.PlayerName());
+                SaveScores();
+            }
+        }
+        private bool AddScore(int score, int fieldSize, int gameTime, string name)
+        {
+            scores.Add(new Score(score, fieldSize, gameTime, name));
+            return true;
         }
     }
 }

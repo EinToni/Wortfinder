@@ -19,7 +19,7 @@ namespace Wortfinder
         public GameManager(IMainWindowController mainWindowController, IFactory factory)
         {
             this.mainWindowController = mainWindowController;
-            scoreManager = new ScoreManager();
+            scoreManager = new ScoreManager(factory);
             gameTimer = new GameTimer(mainWindowController.SetTimer, TimerTimeout);
             gameLibrary = new GameLibrary(factory);
             gameScore = new GameScore();

@@ -7,5 +7,6 @@ namespace Wortfinder
     interface IFactory
     {
         IWordList GetWordList();
+        public IScoreWindowController GetScoreWindowController();
     }
 }
