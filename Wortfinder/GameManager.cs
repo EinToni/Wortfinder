@@ -29,7 +29,7 @@ namespace Wortfinder
 
         public bool TryWord(string selectedWord)
         {
-            if (activeGame.WordValid(selectedWord))
+            if (activeGame != null && activeGame.WordValid(selectedWord))
             {
                 gameScore.WordFound(selectedWord);
                 mainWindowController.SetFoundWordsAmount(activeGame.FoundWords);

@@ -12,7 +12,6 @@ namespace Wortfinder
 		public WordGenerator(IFactory factory)
 		{
 			this.wordList = factory.GetWordList();
-
 		}
 
 		// Finds all Words in the Grid

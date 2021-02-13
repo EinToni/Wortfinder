@@ -6,7 +6,7 @@ namespace Wortfinder
 {
     class Factory : IFactory
     {
-        public IWordList GetWordList() => new DataController();
+        public IWordList GetWordList() => new WordList();
         public IScoreWindowController GetScoreWindowController() => new ScoreWindowController();
     }
 }

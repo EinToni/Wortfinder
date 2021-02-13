@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Wortfinder
 {
-    interface IFactory
+    public interface IFactory
     {
-        IWordList GetWordList();
+        public IWordList GetWordList();
         public IScoreWindowController GetScoreWindowController();
     }
 }

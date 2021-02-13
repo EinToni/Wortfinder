@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-    interface IWordList
+    public interface IWordList
     {
         bool Loaded();
         int FindBeginningLinear(string word, int startIndex);

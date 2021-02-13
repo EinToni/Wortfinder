@@ -9,14 +9,14 @@ using System.Windows;
 
 namespace Wortfinder
 {
-	public class DataController : IWordList
+	public class WordList : IWordList
 	{
 		public List<string> wordList = new List<string>();
 		private readonly string pathGerman = "wordListGerman.txt";
 		private readonly int minimumWordLength = 3;
 		public bool loaded = false;
 
-		public DataController()
+		public WordList()
 		{
 			LoadGerman();	
 		}
