@@ -13,7 +13,7 @@ namespace Wortfinder
         public MainWindowController(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            this.gameManager = new GameManager(this);
+            this.gameManager = new GameManager(this, new Factory());
         }
 
         public void SetGameField(int size, char[] letters) => mainWindow.SetGameField(size, letters);

@@ -11,9 +11,9 @@ namespace Wortfinder
         private readonly GameGenerator gameGenerator;
         private readonly Dictionary<int, Thread> threads = new Dictionary<int, Thread>();
         private readonly GameDataController gameDataController;
-        public GameLibrary()
+        public GameLibrary(IFactory factory)
         {
-            gameGenerator = new GameGenerator();
+            gameGenerator = new GameGenerator(factory);
             gameDataController = new GameDataController();
         }
 

@@ -9,9 +9,9 @@ namespace Wortfinder
 	internal class WordGenerator
 	{
 		private readonly IWordList wordList;
-		public WordGenerator()
+		public WordGenerator(IFactory factory)
 		{
-			this.wordList = new DataController();
+			this.wordList = factory.GetWordList();
 
 		}
 

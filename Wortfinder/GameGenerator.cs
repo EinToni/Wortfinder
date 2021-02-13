@@ -9,10 +9,10 @@ namespace Wortfinder
     {
         private readonly LetterGenerator letterGenerator;
         private readonly WordGenerator wordGenerator;
-        public GameGenerator()
+        public GameGenerator(IFactory factory)
         {
             letterGenerator = new LetterGenerator();
-            wordGenerator = new WordGenerator();
+            wordGenerator = new WordGenerator(factory);
         }
         public Game NewGame(int fieldSize)
         {
