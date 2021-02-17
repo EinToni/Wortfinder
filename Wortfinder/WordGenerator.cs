@@ -14,19 +14,17 @@ namespace Wortfinder
 			this.wordList = factory.GetWordList();
 		}
 
-		// Finds all Words in the Grid
 		public List<Word> GetAllWords(char[] letters, int fieldSize)
 		{
 			if (wordList.Loaded())
 			{
-				char[,] letters2D = LettersAs2DArray(fieldSize, letters);
 				List<Word> allWords = new List<Word>();
 				for(int i = 0; i < letters.Length; i++)
                 {
 					int row = i / fieldSize;
 					int column = i % fieldSize;
-					Coordinate coordinate = new Coordinate(row, column);
-					List<Word> newWords = CheckRecusive("", fieldSize, (char[,])letters2D.Clone(), new List<Coordinate> { coordinate }, 0);
+					List<Coordinate> coordList = new List<Coordinate> { new Coordinate(row, column) };
+					List<Word> newWords = FindWordsRecusive("", fieldSize, (char[])letters.Clone(), coordList, 0);
 					AddWords(newWords, allWords);
 				}
 				return allWords;
@@ -54,33 +52,14 @@ namespace Wortfinder
 			}
 			return true;
 		}
-		private char[,] LettersAs2DArray(int fieldSize, char[] letters)
-		{
-			char[,] letters2D = new char[fieldSize, fieldSize];
-			for (int row = 0; row < fieldSize; row++)
-			{
-				for (int column = 0; column < fieldSize; column++)
-				{
-					letters2D[row, column] = letters[row * fieldSize + column];
-				}
-			}
-			return letters2D;
-		}
-		public List<Word> CheckRecusive(string word, int size, char[,] letters, List<Coordinate> coordinates, int dictStartIndex)
+		public List<Word> FindWordsRecusive(string word, int size, char[] letters, List<Coordinate> coordinates, int dictStartIndex)
 		{
 			List<Word> allWords = new List<Word>();
-			int currentRow = coordinates[^1].Row;
-			int currentColumn = coordinates[^1].Column;
-			if (letters[currentRow, currentColumn] != '-')
+			int position = coordinates[^1].Row * size + coordinates[^1].Column;
+			if (letters[position] != '-')
 			{
-				int columns = letters.GetLength(0);
-				int rows = letters.Length / columns;
-				
-				// Add letter to word
-				word += letters[currentRow, currentColumn];
-				letters[currentRow, currentColumn] = '-';
-
-				// Check if any word begins with this letter string
+				word += letters[position];
+				letters[position] = '-';
 				int beginningIndex = wordList.FindBeginningLinear(word, dictStartIndex);
 				if (beginningIndex >= 0)
 				{
@@ -88,24 +67,23 @@ namespace Wortfinder
 					{
 						allWords.Add(new Word(word, new List<Coordinate>(coordinates)));
 					}
-					
-					List<Coordinate> neightbourCoordinates = GetNeighbourCoordinates(currentRow, currentColumn, size);
+					List<Coordinate> neightbourCoordinates = GetNeighbourCoordinates(position, size);
 					foreach(Coordinate coordinate in neightbourCoordinates)
                     {
 						List<Coordinate> newCoordinates = new List<Coordinate>(coordinates)	{ coordinate };
-						foreach (Word foundWord in CheckRecusive(word, size, (char[,])letters.Clone(), newCoordinates, beginningIndex))
-						{
-							allWords.Add(foundWord);
-						}
+						List<Word> words = FindWordsRecusive(word, size, (char[])letters.Clone(), newCoordinates, beginningIndex);
+						AddWords(words, allWords);
 					}
 				}
 			}
 			return allWords;
 		}
 
-		private List<Coordinate> GetNeighbourCoordinates(int row, int column, int size)
+		private List<Coordinate> GetNeighbourCoordinates(int position, int size)
         {
 			List<Coordinate> coordinates = new List<Coordinate>();
+			int row = position / size;
+			int column = position % size;
 			for (int i = -1; i <= 1; i++)
 			{
 				for (int j = -1; j <= 1; j++)
