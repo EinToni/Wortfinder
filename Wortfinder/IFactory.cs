@@ -9,5 +9,6 @@ namespace Wortfinder
         public IWordList GetWordList();
         public IScoreWindowController GetScoreWindowController();
         public IGameDataController GetGameDataController();
+        public IScoreDataController GetScoreDataController();
     }
 }

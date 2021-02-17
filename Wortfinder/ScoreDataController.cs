@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-    public class ScoreDataController
+    public class ScoreDataController : IScoreDataController
     {
         private readonly Aes aes;
         private readonly string highscoreLocation = ".\\Highscores.bin";

@@ -12,12 +12,12 @@ namespace Wortfinder
 	{
         private List<Score> scores;
         private readonly IScoreWindowController scoreWindowController;
-        private readonly ScoreDataController scoreDataController;
+        private readonly IScoreDataController scoreDataController;
 
         public ScoreManager(IFactory factory)
 		{
             scoreWindowController = factory.GetScoreWindowController();
-            scoreDataController = new ScoreDataController();
+            scoreDataController = factory.GetScoreDataController();
             LoadScores();
         }
 
