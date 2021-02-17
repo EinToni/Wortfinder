@@ -17,43 +17,52 @@ namespace Wortfinder
 		// Finds all Words in the Grid
 		public List<Word> GetAllWords(char[] letters, int fieldSize)
 		{
-			if (!wordList.Loaded())
-            {
-				return new List<Word>();
-            }
+			if (wordList.Loaded())
+			{
+				char[,] letters2D = LettersAs2DArray(fieldSize, letters);
+				List<Word> allWords = new List<Word>();
+				for (int row = 0; row < fieldSize; row++)
+				{
+					for (int column = 0; column < fieldSize; column++)
+					{
+						List<Word> newWords = CheckRecusive("", (char[,])letters2D.Clone(), new List<Coordinate> { new Coordinate(row, column) }, 0);
+						AddWords(newWords, allWords);
+					}
+				}
+				return allWords;
+			}
+			return new List<Word>();
+		}
+		private char[,] LettersAs2DArray(int fieldSize, char[] letters)
+        {
 			char[,] letters2D = new char[fieldSize, fieldSize];
 			for (int row = 0; row < fieldSize; row++)
 			{
 				for (int column = 0; column < fieldSize; column++)
 				{
-					letters2D[row, column] = letters[row* fieldSize + column];
+					letters2D[row, column] = letters[row * fieldSize + column];
 				}
 			}
-			List<Word> allWords = new List<Word>();
-			for (int row = 0; row < fieldSize; row++)
+			return letters2D;
+		}
+		private void AddWords(List<Word> newWords, List<Word> allWords)
+        {
+			foreach (Word word in newWords)
 			{
-				for (int column = 0; column < fieldSize; column++)
+				bool wordAlreadyFound = false;
+				foreach (Word existingWord in allWords)
 				{
-					List<Word> words = CheckRecusive("", (char[,])letters2D.Clone(), new List<Coordinate> { new Coordinate(row, column) }, 0);
-					foreach(Word word in words)
+					if (existingWord.Name.Equals(word.Name))
 					{
-						bool wordAlreadyFound = false;
-						foreach(Word existingWord in allWords)
-						{
-							if (existingWord.Name.Equals(word.Name))
-							{
-								wordAlreadyFound = true;
-								break;
-							}
-						}
-						if (!wordAlreadyFound)
-						{
-							allWords.Add(word);
-						}
+						wordAlreadyFound = true;
+						break;
 					}
 				}
+				if (!wordAlreadyFound)
+				{
+					allWords.Add(word);
+				}
 			}
-			return allWords;
 		}
 
 		public List<Word> CheckRecusive(string word, char[,] letters, List<Coordinate> coordinates, int dictStartIndex)
