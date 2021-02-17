@@ -10,11 +10,11 @@ namespace Wortfinder
         private readonly Dictionary<int, List<Game>> loadedGames = new Dictionary<int, List<Game>>();
         private readonly GameGenerator gameGenerator;
         private readonly Dictionary<int, Thread> threads = new Dictionary<int, Thread>();
-        private readonly GameDataController gameDataController;
+        private readonly IGameDataController gameDataController;
         public GameLibrary(IFactory factory)
         {
             gameGenerator = new GameGenerator(factory);
-            gameDataController = new GameDataController();
+            gameDataController = factory.GetGameDataController();
         }
 
         public void LoadGeneratedGames()
@@ -50,7 +50,7 @@ namespace Wortfinder
                     }
                 }
             }
-            gameDataController.SaveLoadedGames(games);
+            gameDataController.SaveGames(games);
         }
 
         public Game GetGameWithSize(int fieldSize)

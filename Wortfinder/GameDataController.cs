@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-    class GameDataController
+    class GameDataController : IGameDataController
     {
         private readonly byte[] key = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
         private readonly string highscoreLocation = ".\\PreLoadedGames.bin";
@@ -56,7 +56,7 @@ namespace Wortfinder
             return Games;
         }
 
-        public void SaveLoadedGames(Dictionary<int, List<Game>> games)
+        public void SaveGames(Dictionary<int, List<Game>> games)
         {
             try
             {

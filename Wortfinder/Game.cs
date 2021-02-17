@@ -5,7 +5,7 @@ using System.Text;
 namespace Wortfinder
 {
     [Serializable]
-    class Game
+    public class Game
     {
         public readonly char[] letters;
         public readonly int size;
