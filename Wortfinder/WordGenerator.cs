@@ -21,20 +21,41 @@ namespace Wortfinder
 			{
 				char[,] letters2D = LettersAs2DArray(fieldSize, letters);
 				List<Word> allWords = new List<Word>();
-				for (int row = 0; row < fieldSize; row++)
-				{
-					for (int column = 0; column < fieldSize; column++)
-					{
-						List<Word> newWords = CheckRecusive("", (char[,])letters2D.Clone(), new List<Coordinate> { new Coordinate(row, column) }, 0);
-						AddWords(newWords, allWords);
-					}
+				for(int i = 0; i < letters.Length; i++)
+                {
+					int row = i / fieldSize;
+					int column = i % fieldSize;
+					Coordinate coordinate = new Coordinate(row, column);
+					List<Word> newWords = CheckRecusive("", (char[,])letters2D.Clone(), new List<Coordinate> { coordinate }, 0);
+					AddWords(newWords, allWords);
 				}
 				return allWords;
 			}
 			return new List<Word>();
 		}
-		private char[,] LettersAs2DArray(int fieldSize, char[] letters)
+		private void AddWords(List<Word> newWords, List<Word> allWords)
         {
+			foreach (Word word in newWords)
+			{
+				if (WordNotFound(word, allWords))
+                {
+					allWords.Add(word);
+				}
+			}
+		}
+		private bool WordNotFound(Word newWord, List<Word> allWords)
+        {
+			foreach (Word existingWord in allWords)
+			{
+				if (existingWord.Name.Equals(newWord.Name))
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+		private char[,] LettersAs2DArray(int fieldSize, char[] letters)
+		{
 			char[,] letters2D = new char[fieldSize, fieldSize];
 			for (int row = 0; row < fieldSize; row++)
 			{
@@ -45,26 +66,6 @@ namespace Wortfinder
 			}
 			return letters2D;
 		}
-		private void AddWords(List<Word> newWords, List<Word> allWords)
-        {
-			foreach (Word word in newWords)
-			{
-				bool wordAlreadyFound = false;
-				foreach (Word existingWord in allWords)
-				{
-					if (existingWord.Name.Equals(word.Name))
-					{
-						wordAlreadyFound = true;
-						break;
-					}
-				}
-				if (!wordAlreadyFound)
-				{
-					allWords.Add(word);
-				}
-			}
-		}
-
 		public List<Word> CheckRecusive(string word, char[,] letters, List<Coordinate> coordinates, int dictStartIndex)
 		{
 			List<Word> allWords = new List<Word>();
