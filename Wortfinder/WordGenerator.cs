@@ -26,7 +26,7 @@ namespace Wortfinder
 					int row = i / fieldSize;
 					int column = i % fieldSize;
 					Coordinate coordinate = new Coordinate(row, column);
-					List<Word> newWords = CheckRecusive("", (char[,])letters2D.Clone(), new List<Coordinate> { coordinate }, 0);
+					List<Word> newWords = CheckRecusive("", fieldSize, (char[,])letters2D.Clone(), new List<Coordinate> { coordinate }, 0);
 					AddWords(newWords, allWords);
 				}
 				return allWords;
@@ -66,7 +66,7 @@ namespace Wortfinder
 			}
 			return letters2D;
 		}
-		public List<Word> CheckRecusive(string word, char[,] letters, List<Coordinate> coordinates, int dictStartIndex)
+		public List<Word> CheckRecusive(string word, int size, char[,] letters, List<Coordinate> coordinates, int dictStartIndex)
 		{
 			List<Word> allWords = new List<Word>();
 			int currentRow = coordinates[^1].Row;
@@ -88,30 +88,41 @@ namespace Wortfinder
 					{
 						allWords.Add(new Word(word, new List<Coordinate>(coordinates)));
 					}
-					// Add all attached letters and repeat
-					for (int i = -1; i <= 1; i++)
-					{
-						for (int j = -1; j <= 1; j++)
+					
+					List<Coordinate> neightbourCoordinates = GetNeighbourCoordinates(currentRow, currentColumn, size);
+					foreach(Coordinate coordinate in neightbourCoordinates)
+                    {
+						List<Coordinate> newCoordinates = new List<Coordinate>(coordinates)	{ coordinate };
+						foreach (Word foundWord in CheckRecusive(word, size, (char[,])letters.Clone(), newCoordinates, beginningIndex))
 						{
-							int nextRow = currentRow + i;
-							int nextColumn = currentColumn + j;
-							// If cell is in bound
-							if (nextRow < rows && nextRow >= 0 && nextColumn < columns && nextColumn >= 0)
-							{
-                                List<Coordinate> newCoordinates = new List<Coordinate>(coordinates)
-                                {
-                                    new Coordinate(nextRow, nextColumn)
-                                };
-                                foreach (Word foundWord in CheckRecusive(word, (char[,])letters.Clone(), newCoordinates, beginningIndex))
-								{
-									allWords.Add(foundWord);
-								}
-							}
+							allWords.Add(foundWord);
 						}
 					}
 				}
 			}
 			return allWords;
+		}
+
+		private List<Coordinate> GetNeighbourCoordinates(int row, int column, int size)
+        {
+			List<Coordinate> coordinates = new List<Coordinate>();
+			for (int i = -1; i <= 1; i++)
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					int nextRow = row + i;
+					int nextColumn = column + j;
+					if (IsInBound(nextRow, nextColumn, size))
+					{
+						coordinates.Add(new Coordinate(nextRow, nextColumn));
+					}
+				}
+			}
+			return coordinates;
+		}
+		private bool IsInBound(int row, int column, int size)
+        {
+			return row < size && row >= 0 && column < size && column >= 0;
 		}
 	}
 }
