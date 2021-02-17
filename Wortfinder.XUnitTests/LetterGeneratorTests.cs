@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Wortfinder.Tests
+namespace Wortfinder.XUnitTests
 {
 	public class LetterGeneratorTests
 	{
@@ -10,7 +10,7 @@ namespace Wortfinder.Tests
 			LetterGenerator letterGenerator = new LetterGenerator();
 			int amount = 5;
 			var result = letterGenerator.GetNewLetters(amount);
-			Assert.Equal(amount, result.Length);
+			Assert.Equal(amount * amount, result.Length);
 		}
 	}
 }

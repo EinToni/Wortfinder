@@ -10,7 +10,7 @@ namespace Wortfinder
         public readonly char[] letters;
         public readonly int size;
         public readonly List<Word> findableWords;
-        public int GameTimeInSeconds { get; private set; }
+        public int GameTimeInSeconds { get; private set; } = 0;
         public int FoundWords { get; private set; } = 0;
 
         public Game(char[] letters, int size, List<Word> findableWords)
@@ -46,7 +46,10 @@ namespace Wortfinder
         }
         public void SetTime(int gameTimeSeconds)
         {
-            GameTimeInSeconds = gameTimeSeconds;
+            if (GameTimeInSeconds == 0)
+            {
+                GameTimeInSeconds = gameTimeSeconds;
+            }
         }
     }
 }

@@ -5,25 +5,29 @@ namespace Wortfinder.XUnitTests
 	public class CoordinateTests
 	{
 		[Fact]
-		public void SameCoordinate_Same()
+		public void Equals_Same()
 		{
 			int row = 5;
 			int column = 4;
 			Coordinate testCoordinate = new Coordinate(row, column);
 			Coordinate secondCoordinate = new Coordinate(row, column);
 
-			Assert.True(testCoordinate.SameCoordinate(secondCoordinate));
+			Assert.True(testCoordinate.Equals(secondCoordinate));
 		}
 
 		[Fact]
-		public void SameCoordinate_Different()
+		public void Equals_Different()
 		{
 			int row = 5;
 			int column = 4;
 			Coordinate testCoordinate = new Coordinate(row, column);
-			Coordinate secondCoordinate = new Coordinate(row + 1, column);
+			Coordinate coordinate2 = new Coordinate(row + 1, column);
+			Coordinate coordinate3 = new Coordinate(row, column - 1);
+			Coordinate coordinate4 = new Coordinate(0, 0);
 
-			Assert.False(testCoordinate.SameCoordinate(secondCoordinate));
+			Assert.False(testCoordinate.Equals(coordinate2));
+			Assert.False(testCoordinate.Equals(coordinate3));
+			Assert.False(testCoordinate.Equals(coordinate4));
 		}
 
 		[Fact]
@@ -45,7 +49,7 @@ namespace Wortfinder.XUnitTests
 			Coordinate testCoordinate = new Coordinate(row, column);
 			Coordinate secondCoordinate = new Coordinate(row + 2, column);
 
-			Assert.False(testCoordinate.SameCoordinate(secondCoordinate));
+			Assert.False(testCoordinate.IsNeighbour(secondCoordinate));
 		}
 	}
 }

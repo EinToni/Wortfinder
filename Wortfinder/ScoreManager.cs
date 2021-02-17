@@ -55,7 +55,7 @@ namespace Wortfinder
         }
         private bool AddScore(int score, int fieldSize, int gameTime, string name)
         {
-            scores.Add(new Score(score, fieldSize, gameTime, name));
+            scores.Add(new Score(score, fieldSize, gameTime, name, new DateTime()));
             return true;
         }
     }

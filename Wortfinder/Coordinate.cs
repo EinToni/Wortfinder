@@ -24,10 +24,6 @@ namespace Wortfinder
 		{
 			return Row == coordinate.Row && Column == coordinate.Column;
 		}
-		public bool SameCoordinate(Coordinate coordinate)
-		{
-			return Row == coordinate.Row && Column == coordinate.Column;
-		}
 
 		public bool IsNeighbour(Coordinate coordinate)
 		{

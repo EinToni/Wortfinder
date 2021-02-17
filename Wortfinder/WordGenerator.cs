@@ -76,7 +76,7 @@ namespace Wortfinder
 				{
 					if (wordList.CheckWord(word, beginningIndex))
 					{
-						allWords.Add(new Word(word, coordinates));
+						allWords.Add(new Word(word, new List<Coordinate>(coordinates)));
 					}
 					// Add all attached letters and repeat
 					for (int i = -1; i <= 1; i++)
