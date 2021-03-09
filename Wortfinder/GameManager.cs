@@ -14,7 +14,7 @@ namespace Wortfinder
         private readonly IMainWindowController mainWindowController;
 
         private Game activeGame;
-        private bool gameRunning = false;
+        public bool GameRunning { get; private set; } = false;
         
         public GameManager(IMainWindowController mainWindowController, IFactory factory)
         {
@@ -57,7 +57,7 @@ namespace Wortfinder
                 mainWindowController.SetGameField(fieldSize, activeGame.letters);
                 gameTimer.StartTimerInSeconds(gameTimeSeconds);
                 mainWindowController.LettersActive();
-                gameRunning = true;
+                GameRunning = true;
             }
             catch (KeyNotFoundException)
             {
@@ -67,7 +67,7 @@ namespace Wortfinder
         }
         public void StopGame()
         {
-            gameRunning = false;
+            GameRunning = false;
             mainWindowController.LettersInactive();
 
             mainWindowController.SetWordsToShow(activeGame.findableWords);
@@ -85,10 +85,6 @@ namespace Wortfinder
         internal int GetFieldSize()
         {
             return activeGame.size;
-        }
-        public bool GameRunning()
-        {
-            return gameRunning;
         }
     }
 }

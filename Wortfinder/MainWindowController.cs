@@ -43,7 +43,7 @@ namespace Wortfinder
         }
         internal bool HoverLetter(string letter, string row, string column)
         {
-            if (gameManager.GameRunning() && wordBuild != "")
+            if (gameManager.GameRunning && wordBuild != "")
             {
                 Coordinate coordinate = new Coordinate(int.Parse(row), int.Parse(column));
                 foreach(Coordinate clickedCoord in wordCoords)
@@ -68,7 +68,7 @@ namespace Wortfinder
 
         internal bool ClickLetter(string letter, string row, string column)
         {
-            if (gameManager.GameRunning())
+            if (gameManager.GameRunning)
             {
                 wordBuild = letter;
                 wordCoords.Clear();
