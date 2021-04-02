@@ -40,6 +40,14 @@ namespace Wortfinder.XUnitTests
             wordToTest.GotFound();
             Assert.True(wordToTest.Found);
         }
+        [Fact]
+        public void Word_Duplicate()
+		{
+            Word word1 = new Word("testWord", new List<Coordinate>());
+            Word word2 = new Word(word1);
 
+            Assert.Equal(word1.Name, word2.Name);
+            Assert.Equal(word1.Coordinates, word2.Coordinates);
+        }
     }
 }

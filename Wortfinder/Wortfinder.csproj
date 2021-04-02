@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Highscores.bin">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Update="wordListGerman.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
