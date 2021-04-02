@@ -10,7 +10,7 @@ namespace Wortfinder
 {
 	public class ScoreManager
 	{
-        private List<Score> scores;
+        internal List<Score> scores { private set; get; }
         private readonly IScoreWindowController scoreWindowController;
         private readonly IScoreDataController scoreDataController;
 
@@ -40,7 +40,7 @@ namespace Wortfinder
             scores.Sort();
         }
 
-		private void SaveScores()
+		internal void SaveScores()
 		{
             scoreDataController.SaveScores(scores);
         }
@@ -54,9 +54,10 @@ namespace Wortfinder
                 SaveScores();
             }
         }
-        private bool AddScore(int score, int fieldSize, int gameTime, string name)
+
+        internal bool AddScore(int score, int fieldSize, int gameTimeInMinutes, string name)
         {
-            scores.Add(new Score(score, fieldSize, gameTime, name, DateTime.Now));
+            scores.Add(new Score(score, fieldSize, gameTimeInMinutes, name, DateTime.Now));
             return true;
         }
     }

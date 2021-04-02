@@ -69,5 +69,36 @@ namespace Wortfinder.XUnitTests
 			Assert.True(result.Capacity == 1);
 			Assert.Contains(scoreLarge, result);
 		}
+		[Fact]
+		public void AddScore()
+		{
+			Mock<IScoreDataController> scoreDataCtr = new Mock<IScoreDataController>();
+			Mock<IScoreWindowController> scoreWindowCtr = new Mock<IScoreWindowController>();
+			scoreDataCtr.Setup(x => x.LoadScores()).Returns(new List<Score>());
+
+			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
+
+			scoreManager.AddScore(10, 5, 3, "testName");
+
+			Assert.Single(scoreManager.scores);
+			Assert.Equal(10, scoreManager.scores[0].Number);
+			Assert.Equal(5, scoreManager.scores[0].FieldSize);
+			Assert.Equal(3, scoreManager.scores[0].GameTimeInMinutes);
+			Assert.Equal("testName", scoreManager.scores[0].PlayerName);
+		}
+		[Fact]
+		public void SaveScores()
+		{
+			Mock<IScoreDataController> scoreDataCtr = new Mock<IScoreDataController>();
+			Mock<IScoreWindowController> scoreWindowCtr = new Mock<IScoreWindowController>();
+			scoreDataCtr.Setup(x => x.SaveScores(It.IsAny<List<Score>>())).Verifiable();
+			scoreDataCtr.Setup(x => x.LoadScores()).Returns(new List<Score>());
+
+			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
+
+			scoreManager.SaveScores();
+
+			scoreDataCtr.Verify();
+		}
 	}
 }

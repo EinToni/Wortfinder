@@ -32,6 +32,7 @@ namespace Wortfinder
                 CheckLoadedGames(size, amountOfGames);
             }
         }
+
         public void GenerateAndSave(List<int> sizes, int numberOfGames)
         {
             Dictionary<int, List<Game>> games = new Dictionary<int, List<Game>>();
@@ -63,6 +64,7 @@ namespace Wortfinder
             loadedGames[fieldSize].RemoveAt(0);
             return game;
         }
+
         public void CheckLoadedGames(int fieldSize, int minAmountLoaded)
         {
             if (!threads.ContainsKey(fieldSize))
@@ -72,6 +74,7 @@ namespace Wortfinder
                 thread.Start();
             }
         }
+
         private void CheckLoadedGamesThread(int fieldSize, int minAmountLoaded)
         {
             if (!loadedGames.ContainsKey(fieldSize))

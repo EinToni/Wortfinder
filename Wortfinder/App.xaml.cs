@@ -11,7 +11,7 @@ namespace Wortfinder
 		{
 			WordList				wordList				= new WordList();
 			WordGenerator			wordGenerator			= new WordGenerator(wordList);
-			LetterProbalilitys		letterProbalilitys		= new LetterProbalilitys();
+			ILetterProbability		letterProbalilitys		= new LettersGerman();
 			LetterGenerator			letterGenerator			= new LetterGenerator(letterProbalilitys);
 			GameGenerator			gameGenerator			= new GameGenerator(wordGenerator, letterGenerator);
 			GameDataController		gameDataController		= new GameDataController();

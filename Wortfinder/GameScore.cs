@@ -8,9 +8,9 @@ namespace Wortfinder
 	public class GameScore
 	{
 		public int Score { get; private set; } = 0;
-		private readonly GameScoreCalculator scoreCalculator;
+		private readonly IGameScoreCalculator scoreCalculator;
 
-		public GameScore(GameScoreCalculator scoreCalculator)
+		public GameScore(IGameScoreCalculator scoreCalculator)
 		{
 			this.scoreCalculator = scoreCalculator;
 		}

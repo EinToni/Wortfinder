@@ -6,9 +6,9 @@ using System.Windows.Documents;
 namespace Wortfinder
 {
 	// TODO: Rework: unuseful class "Letter"
-	public class LetterProbalilitys
+	public class LettersGerman : ILetterProbability
 	{
-		public List<Letter> German()
+		public List<Letter> GetList()
 		{
 			List<Letter> list = new List<Letter> {
 				new Letter('E', 0.1740m),

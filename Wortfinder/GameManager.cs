@@ -18,11 +18,11 @@ namespace Wortfinder
         
         public GameManager(IMainWindowController mainWindowController, ScoreManager scoreManager, GameLibrary gameLibrary, GameScore gameScore, GameTimer gameTimer)
         {
-            this.mainWindowController = mainWindowController;
-            this.scoreManager = scoreManager;
-            this.gameTimer = gameTimer;
-            this.gameLibrary = gameLibrary;
-            this.gameScore = gameScore;
+            this.mainWindowController   = mainWindowController;
+            this.scoreManager           = scoreManager;
+            this.gameTimer              = gameTimer;
+            this.gameLibrary            = gameLibrary;
+            this.gameScore              = gameScore;
 
             gameTimer.SetTickCallback(mainWindowController.SetTimer);
             gameTimer.SetTimeoutFunc(TimerTimeout);

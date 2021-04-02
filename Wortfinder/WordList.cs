@@ -29,15 +29,16 @@ namespace Wortfinder
 			}
 			LoadLanguage(pathGerman);
 		}
-		private void LoadLanguage(string path)
+
+		internal void LoadLanguage(string path)
 		{
 			Thread thread = new Thread(() => LoadThreadFunction(path));
 			thread.Start();
 		}
 
-		private void SetList(List<string> wordList) => this.wordList = wordList;
+		internal void SetList(List<string> wordList) => this.wordList = wordList;
 
-		private void LoadThreadFunction(string path)
+		internal void LoadThreadFunction(string path)
         {
 			List<string> list = new List<string>();
 			using (StreamReader file = new StreamReader(path))

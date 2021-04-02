@@ -7,9 +7,9 @@ namespace Wortfinder
 {
 	public class LetterGenerator
 	{
-		private readonly LetterProbalilitys probalilitys;
+		private readonly ILetterProbability probalilitys;
 
-		public LetterGenerator(LetterProbalilitys probalilitys)
+		public LetterGenerator(ILetterProbability probalilitys)
 		{
 			this.probalilitys = probalilitys;
 		}
@@ -28,7 +28,7 @@ namespace Wortfinder
 		private char GetSingleLetter()
 		{
 			Random random = new Random();
-			var listOfLetterProbs = probalilitys.German();
+			var listOfLetterProbs = probalilitys.GetList();
 			decimal randomNumber = (decimal)random.NextDouble();
 			decimal probability = 0m;
 			foreach (var item in listOfLetterProbs.OrderBy(p => p.Probability))

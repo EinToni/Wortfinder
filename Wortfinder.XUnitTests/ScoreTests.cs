@@ -33,6 +33,14 @@ namespace Wortfinder.XUnitTests
             Assert.Equal(equalIndicator, scoreToTest.CompareTo(score2));
         }
         [Fact]
+        public void CompareTo_Null()
+        {
+            int otherIsSmaller = 1;
+            Score scoreToTest = new Score(10, 0, 0, "test", new System.DateTime());
+
+            Assert.Equal(otherIsSmaller, scoreToTest.CompareTo(null));
+        }
+        [Fact]
         public void Date()
 		{
             Score scoreToTest = new Score(10, 0, 0, "test", new System.DateTime(2021, 10, 25));

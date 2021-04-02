@@ -9,7 +9,7 @@ namespace Wortfinder
 	public class WordGenerator
 	{
 		private readonly IWordList wordList;
-		public WordGenerator(WordList wordList)
+		public WordGenerator(IWordList wordList)
 		{
 			this.wordList = wordList;
 		}
@@ -31,7 +31,7 @@ namespace Wortfinder
 			}
 			return new List<Word>();
 		}
-		private void AddWords(List<Word> newWords, List<Word> allWords)
+		internal void AddWords(List<Word> newWords, List<Word> allWords)
         {
 			foreach (Word word in newWords)
 			{
@@ -41,7 +41,7 @@ namespace Wortfinder
 				}
 			}
 		}
-		private bool WordNotFound(Word newWord, List<Word> allWords)
+		internal bool WordNotFound(Word newWord, List<Word> allWords)
         {
 			foreach (Word existingWord in allWords)
 			{

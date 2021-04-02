@@ -27,5 +27,27 @@ namespace Wortfinder.XUnitTests
 
             Assert.Equal(points, gameScore.Score);
         }
+        [Fact]
+        public void SetDifficulty()
+		{
+            Mock<GameScoreCalculator> mock = new Mock<GameScoreCalculator>();
+
+            GameScore gameScore = new GameScore(mock.Object);
+            gameScore.SetDifficulty(1, 1);
+
+            mock.Verify();
+		}
+        [Fact]
+        public void WordFound()
+        {
+            int score = 77;
+            Mock<IGameScoreCalculator> calc = new Mock<IGameScoreCalculator>();
+            calc.Setup(x => x.GetPoints(It.IsAny<int>())).Returns(score);
+
+            GameScore gameScore = new GameScore(calc.Object);
+            gameScore.WordFound("1");
+
+            Assert.Equal(score, gameScore.Score);
+        }
     }
 }

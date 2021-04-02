@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-	public class GameScoreCalculator
+	public class GameScoreCalculator : IGameScoreCalculator
 	{
 		public int gameTime { get;  private set; }
 		public int gameFieldSize { get; private set; }
@@ -30,7 +30,7 @@ namespace Wortfinder
 			this.gameFieldSize = gameFieldSize;
 		}
 
-		private bool WordHasMinimumLength(int length)
+		internal bool WordHasMinimumLength(int length)
 		{
 			return length - minimumWordLength >= 0;
 		}
@@ -47,6 +47,7 @@ namespace Wortfinder
 
 		internal int BonusForTime(int timeInSeconds)
 		{
+			if (timeInSeconds == 0) { return 0; }
 			int maxMinsForBonus = 3;
 			int mins = (int)Math.Floor(timeInSeconds / 60.0);
 			int bonus = maxMinsForBonus - mins;
@@ -55,6 +56,7 @@ namespace Wortfinder
 
 		internal int BonusForSize(int size)
 		{
+			if (size == 0) { return 0; }
 			int maxSizeForBonus = 6;
 			int bonus = maxSizeForBonus - size;
 			return Math.Max(bonus, 0);

@@ -23,7 +23,16 @@ namespace Wortfinder.XUnitTests
 			Assert.True(result);
 		}
 		*/
+		[Fact]
+		public void SetList()
+		{
+			WordList wordList = new WordList();
 
+			wordList.SetList(new List<string>() { "test" });
+
+			Assert.Contains("test", wordList.wordList);
+			Assert.Single(wordList.wordList);
+		}
 		[Fact]
 		public void InsertWord_Empty()
 		{
