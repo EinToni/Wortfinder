@@ -57,7 +57,7 @@ namespace Wortfinder
 		{
 			int maxSizeForBonus = 6;
 			int bonus = maxSizeForBonus - size;
-			return bonus;
+			return Math.Max(bonus, 0);
 		}
 	}
 }
