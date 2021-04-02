@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-    interface IMainWindowController
+    public interface IMainWindowController
     {
         void SetGameField(int size, char[] letters);
         bool SetTimer(int timeInSeconds);

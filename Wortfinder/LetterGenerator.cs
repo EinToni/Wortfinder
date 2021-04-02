@@ -7,11 +7,11 @@ namespace Wortfinder
 {
 	public class LetterGenerator
 	{
-		readonly LetterProbalilitys probalilitys = new LetterProbalilitys();
+		private readonly LetterProbalilitys probalilitys;
 
-		public LetterGenerator()
+		public LetterGenerator(LetterProbalilitys probalilitys)
 		{
-
+			this.probalilitys = probalilitys;
 		}
 
 		public char[] GetNewLetters(int fieldSize)

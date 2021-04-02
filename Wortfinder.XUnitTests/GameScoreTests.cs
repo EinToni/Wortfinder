@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using Moq;
 
 namespace Wortfinder.XUnitTests
 {
@@ -7,7 +8,8 @@ namespace Wortfinder.XUnitTests
         [Fact]
         public void ResetScore()
         {
-            GameScore gameScore = new GameScore();
+            var scoreCalc = new Mock<GameScoreCalculator>();
+            GameScore gameScore = new GameScore(scoreCalc.Object);
 
             gameScore.ResetScore();
 
@@ -18,7 +20,8 @@ namespace Wortfinder.XUnitTests
         public void AddPoints()
         {
             int points = 10;
-            GameScore gameScore = new GameScore();
+            var scoreCalc = new Mock<GameScoreCalculator>();
+            GameScore gameScore = new GameScore(scoreCalc.Object);
 
             gameScore.AddPoints(points);
 

@@ -6,12 +6,12 @@ using System.Windows.Documents;
 namespace Wortfinder
 {
 	// Class to controll
-	internal class WordGenerator
+	public class WordGenerator
 	{
 		private readonly IWordList wordList;
-		public WordGenerator(IFactory factory)
+		public WordGenerator(WordList wordList)
 		{
-			this.wordList = factory.GetWordList();
+			this.wordList = wordList;
 		}
 
 		public List<Word> GetAllWords(char[] letters, int fieldSize)

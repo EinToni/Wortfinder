@@ -5,16 +5,16 @@ using System.Threading;
 
 namespace Wortfinder
 {
-    class GameLibrary
+    public class GameLibrary
     {
         private readonly Dictionary<int, List<Game>> loadedGames = new Dictionary<int, List<Game>>();
         private readonly GameGenerator gameGenerator;
         private readonly Dictionary<int, Thread> threads = new Dictionary<int, Thread>();
         private readonly IGameDataController gameDataController;
-        public GameLibrary(IFactory factory)
+        public GameLibrary(GameGenerator gameGenerator, IGameDataController gameDataController)
         {
-            gameGenerator = new GameGenerator(factory);
-            gameDataController = factory.GetGameDataController();
+            this.gameGenerator = gameGenerator;
+            this.gameDataController = gameDataController;
         }
 
         public void LoadGeneratedGames()

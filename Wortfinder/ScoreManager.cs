@@ -14,10 +14,10 @@ namespace Wortfinder
         private readonly IScoreWindowController scoreWindowController;
         private readonly IScoreDataController scoreDataController;
 
-        public ScoreManager(IFactory factory)
+        public ScoreManager(IScoreWindowController scoreWindowController, IScoreDataController scoreDataController)
 		{
-            scoreWindowController = factory.GetScoreWindowController();
-            scoreDataController = factory.GetScoreDataController();
+            this.scoreWindowController = scoreWindowController;
+            this.scoreDataController = scoreDataController;
             LoadScores();
         }
 

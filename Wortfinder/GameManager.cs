@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Wortfinder
 {
-    class GameManager
+    public class GameManager
     {
         private readonly GameLibrary gameLibrary;
         private readonly GameScore gameScore;
@@ -16,13 +16,14 @@ namespace Wortfinder
         private Game activeGame;
         public bool GameRunning { get; private set; } = false;
         
-        public GameManager(IMainWindowController mainWindowController, IFactory factory)
+        public GameManager(IMainWindowController mainWindowController, ScoreManager scoreManager, GameLibrary gameLibrary, GameScore gameScore)
         {
             this.mainWindowController = mainWindowController;
-            scoreManager = new ScoreManager(factory);
+            this.scoreManager = scoreManager;
             gameTimer = new GameTimer(mainWindowController.SetTimer, TimerTimeout);
-            gameLibrary = new GameLibrary(factory);
-            gameScore = new GameScore();
+            this.gameLibrary = gameLibrary;
+            this.gameScore = gameScore;
+
             gameLibrary.LoadGeneratedGames();
             mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }

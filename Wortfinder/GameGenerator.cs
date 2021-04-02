@@ -5,14 +5,14 @@ using System.Threading;
 
 namespace Wortfinder
 {
-    class GameGenerator
+    public class GameGenerator
     {
         private readonly LetterGenerator letterGenerator;
         private readonly WordGenerator wordGenerator;
-        public GameGenerator(IFactory factory)
+        public GameGenerator(WordGenerator wordGenerator, LetterGenerator letterGenerator)
         {
-            letterGenerator = new LetterGenerator();
-            wordGenerator = new WordGenerator(factory);
+            this.letterGenerator = letterGenerator;
+            this.wordGenerator = wordGenerator;
         }
         public Game NewGame(int fieldSize)
         {

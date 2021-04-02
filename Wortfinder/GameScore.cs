@@ -10,9 +10,9 @@ namespace Wortfinder
 		public int Score { get; private set; } = 0;
 		private readonly GameScoreCalculator scoreCalculator;
 
-		public GameScore()
+		public GameScore(GameScoreCalculator scoreCalculator)
 		{
-			scoreCalculator = new GameScoreCalculator();
+			this.scoreCalculator = scoreCalculator;
 		}
 		public void ResetScore()
 		{

@@ -14,9 +14,9 @@ namespace Wortfinder
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : INotifyPropertyChanged
+	public partial class MainWindow : INotifyPropertyChanged, IMainWindow
 	{
-		private readonly MainWindowController mainWindowController;
+		private MainWindowController mainWindowController;
         #region Colors
         private readonly Brush unselectedLetter = new SolidColorBrush(Colors.Transparent);
 		private readonly Brush selectedLetter	= new SolidColorBrush(Color.FromArgb(120,   0,  50, 180));
@@ -30,7 +30,10 @@ namespace Wortfinder
 			InitializeComponent();
 			LettersInactive();
 			DataContext = this;
-			mainWindowController = new MainWindowController(this);
+		}
+		public void SetController(MainWindowController mainWindowController)
+		{
+			this.mainWindowController = mainWindowController;
 		}
 		#region Databindings
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -69,7 +72,7 @@ namespace Wortfinder
 			set { mainButton = value; OnPropertyChanged(); }
 		}
 		#endregion
-		
+
 		public void SetGameField(int size, char[] letters)
         {
 			SetField(size);

@@ -4,16 +4,20 @@ using System.Text;
 
 namespace Wortfinder
 {
-    class MainWindowController : IMainWindowController
+    public class MainWindowController : IMainWindowController
     {
-        private readonly MainWindow mainWindow;
-        private readonly GameManager gameManager;
+        private readonly IMainWindow mainWindow;
+        private GameManager gameManager;
         private string wordBuild = "";
         private List<Coordinate> wordCoords = new List<Coordinate>();
-        public MainWindowController(MainWindow mainWindow)
+        public MainWindowController(IMainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
-            this.gameManager = new GameManager(this, new Factory());
+        }
+
+        internal void SetGameManager(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
         }
 
         public void SetGameField(int size, char[] letters) => mainWindow.SetGameField(size, letters);
