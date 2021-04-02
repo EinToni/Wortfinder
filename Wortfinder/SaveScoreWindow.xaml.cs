@@ -15,26 +15,40 @@ namespace Wortfinder
 	/// <summary>
 	/// Interaktionslogik für SaveScoreWindow.xaml
 	/// </summary>
-	public partial class SaveScoreWindow : Window
+	public partial class SaveScoreWindow : Window, IScoreWindow
 	{
-		private readonly Func<bool, string, bool> saveScore;
-		public SaveScoreWindow(Func<bool, string, bool> saveScore, string score)
+		private Func<bool, string, bool> saveScore;
+		public SaveScoreWindow()
 		{
 			InitializeComponent();
-			ScoreDisplay.Content = score;
-			this.saveScore = saveScore;
 		}
 
+		public void SetCallback(Func<bool, string, bool> saveScore)
+		{
+			this.saveScore = saveScore;
+		}
+		public void SetScore(int score)
+		{
+			ScoreDisplay.Content = score;
+		}
+		public void ShowWindow()
+		{
+			ShowDialog();
+		}
+		public void HideDialog()
+		{
+			Hide();
+		}
 		private void SaveScore(object sender, RoutedEventArgs e)
 		{
 			saveScore(true, NameInput.Text);
-			Close();
+			Hide();
 		}
 
 		private void CloseWindow(object sender, RoutedEventArgs e)
 		{
 			saveScore(false, NameInput.Text);
-			Close();
+			Hide();
 		}
 	}
 }

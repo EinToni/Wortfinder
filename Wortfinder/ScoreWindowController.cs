@@ -8,10 +8,16 @@ namespace Wortfinder
     {
         private bool saveScore = false;
         private string playerName = "";
+        private readonly IScoreWindow saveScoreWindow;
+        public ScoreWindowController(IScoreWindow saveScoreWindow)
+		{
+            this.saveScoreWindow = saveScoreWindow;
+            saveScoreWindow.SetCallback(SetReturn);
+        }
         public void NewScoreWindow(int score)
         {
-            SaveScoreWindow saveScoreWindow = new SaveScoreWindow(SetReturn, score.ToString());
-            saveScoreWindow.ShowDialog();
+            saveScoreWindow.SetScore(score);
+            saveScoreWindow.ShowWindow();
         }
         public string PlayerName()
         {

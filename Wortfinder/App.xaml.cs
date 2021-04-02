@@ -19,7 +19,8 @@ namespace Wortfinder
 			GameScoreCalculator		gameScoreCalculator		= new GameScoreCalculator();
 			GameScore				gameScore				= new GameScore(gameScoreCalculator);
 			ScoreDataController		scoreDataController		= new ScoreDataController();
-			ScoreWindowController	scoreWindowController	= new ScoreWindowController();
+			SaveScoreWindow			saveScoreWindow			= new SaveScoreWindow();
+			ScoreWindowController	scoreWindowController	= new ScoreWindowController(saveScoreWindow);
 			ScoreManager			scoreManager			= new ScoreManager(scoreWindowController, scoreDataController);
 			MainWindow				mainWindow				= new MainWindow();
 			MainWindowController	mainWindowController	= new MainWindowController(mainWindow);
