@@ -35,29 +35,28 @@ namespace Wortfinder
 			return length - minimumWordLength >= 0;
 		}
 
-		private int Points(int wordLength)
+		internal int Points(int wordLength)
 		{
 			return wordLength - (minimumWordLength - 1);
 		}
 
-		private int Bonus()
+		internal int Bonus()
 		{
-			int bonus = 0;
-			if(gameTime == 60)
-			{
-				bonus += 2;
-			}else if (gameTime == 180)
-			{
-				bonus += 1;
-			}
-			if (gameFieldSize == 4)
-			{
-				bonus += 2;
-			}
-			else if (gameFieldSize == 5)
-			{
-				bonus += 1;
-			}
+			return BonusForTime(gameTime) + BonusForSize(gameFieldSize);
+		}
+
+		internal int BonusForTime(int timeInSeconds)
+		{
+			int maxMinsForBonus = 3;
+			int mins = (int)Math.Floor(timeInSeconds / 60.0);
+			int bonus = maxMinsForBonus - mins;
+			return Math.Max(bonus, 0);
+		}
+
+		internal int BonusForSize(int size)
+		{
+			int maxSizeForBonus = 6;
+			int bonus = maxSizeForBonus - size;
 			return bonus;
 		}
 	}
