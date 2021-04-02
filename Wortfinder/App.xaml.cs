@@ -13,7 +13,7 @@ namespace Wortfinder
 			WordGenerator			wordGenerator			= new WordGenerator(wordList);
 			ILetterProbability		letterProbalilitys		= new LettersGerman();
 			LetterGenerator			letterGenerator			= new LetterGenerator(letterProbalilitys);
-			GameGenerator			gameGenerator			= new GameGenerator(wordGenerator, letterGenerator);
+			IGameGenerator			gameGenerator			= new GameGenerator(wordGenerator, letterGenerator);
 			GameDataController		gameDataController		= new GameDataController();
 			GameLibrary				gameLibrary				= new GameLibrary(gameGenerator, gameDataController);
 			GameScoreCalculator		gameScoreCalculator		= new GameScoreCalculator();

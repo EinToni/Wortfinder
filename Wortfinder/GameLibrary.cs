@@ -7,11 +7,11 @@ namespace Wortfinder
 {
     public class GameLibrary
     {
-        private readonly Dictionary<int, List<Game>> loadedGames = new Dictionary<int, List<Game>>();
-        private readonly GameGenerator gameGenerator;
+        internal Dictionary<int, List<Game>> loadedGames { get; private set; } = new Dictionary<int, List<Game>>();
+        private readonly IGameGenerator gameGenerator;
         private readonly Dictionary<int, Thread> threads = new Dictionary<int, Thread>();
         private readonly IGameDataController gameDataController;
-        public GameLibrary(GameGenerator gameGenerator, IGameDataController gameDataController)
+        public GameLibrary(IGameGenerator gameGenerator, IGameDataController gameDataController)
         {
             this.gameGenerator = gameGenerator;
             this.gameDataController = gameDataController;
@@ -21,18 +21,29 @@ namespace Wortfinder
         {
             List<int> gameSizes = new List<int>() { 4, 5, 6 };
             int amountOfGames = 5;
+            LoadGames();
+            GenerateNewGames(gameSizes, amountOfGames);
+            CheckGames(gameSizes, amountOfGames);
+        }
+        internal void LoadGames()
+		{
             foreach (KeyValuePair<int, List<Game>> data in gameDataController.LoadGames())
             {
                 loadedGames.Add(data.Key, data.Value);
             }
+        }
+        internal void GenerateNewGames(List<int> gameSizes, int amountOfGames)
+		{
             Thread thread = new Thread(() => GenerateAndSave(gameSizes, amountOfGames));
             thread.Start();
-            foreach(int size in gameSizes)
+        }
+        internal void CheckGames(List<int> gameSizes, int amountOfGames)
+		{
+            foreach (int size in gameSizes)
             {
                 CheckLoadedGames(size, amountOfGames);
             }
         }
-
         public void GenerateAndSave(List<int> sizes, int numberOfGames)
         {
             Dictionary<int, List<Game>> games = new Dictionary<int, List<Game>>();

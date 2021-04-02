@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Wortfinder
 {
-    public class GameGenerator
+    public class GameGenerator : IGameGenerator
     {
         private readonly LetterGenerator letterGenerator;
         private readonly WordGenerator wordGenerator;

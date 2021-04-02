@@ -42,6 +42,7 @@ namespace Wortfinder
             }
             return false;
         }
+
         public void NewGame(int fieldSize, int gameTimeSeconds)
         {
             try { 
@@ -68,6 +69,7 @@ namespace Wortfinder
                 gameLibrary.CheckLoadedGames(fieldSize, 1);
             }
         }
+
         public void StopGame()
         {
             GameRunning = false;
