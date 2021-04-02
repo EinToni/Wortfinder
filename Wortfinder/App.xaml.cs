@@ -24,7 +24,8 @@ namespace Wortfinder
 			ScoreManager			scoreManager			= new ScoreManager(scoreWindowController, scoreDataController);
 			MainWindow				mainWindow				= new MainWindow();
 			MainWindowController	mainWindowController	= new MainWindowController(mainWindow);
-			GameManager				gameManager				= new GameManager(mainWindowController, scoreManager, gameLibrary, gameScore);
+			GameTimer				gameTimer				= new GameTimer(new System.Windows.Threading.DispatcherTimer());
+			GameManager				gameManager				= new GameManager(mainWindowController, scoreManager, gameLibrary, gameScore, gameTimer);
 
 
 			

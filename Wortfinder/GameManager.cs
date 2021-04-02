@@ -16,14 +16,16 @@ namespace Wortfinder
         private Game activeGame;
         public bool GameRunning { get; private set; } = false;
         
-        public GameManager(IMainWindowController mainWindowController, ScoreManager scoreManager, GameLibrary gameLibrary, GameScore gameScore)
+        public GameManager(IMainWindowController mainWindowController, ScoreManager scoreManager, GameLibrary gameLibrary, GameScore gameScore, GameTimer gameTimer)
         {
             this.mainWindowController = mainWindowController;
             this.scoreManager = scoreManager;
-            gameTimer = new GameTimer(mainWindowController.SetTimer, TimerTimeout);
+            this.gameTimer = gameTimer;
             this.gameLibrary = gameLibrary;
             this.gameScore = gameScore;
 
+            gameTimer.SetTickCallback(mainWindowController.SetTimer);
+            gameTimer.SetTimeoutFunc(TimerTimeout);
             gameLibrary.LoadGeneratedGames();
             mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }

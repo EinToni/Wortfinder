@@ -14,7 +14,7 @@ namespace Wortfinder
 		public List<string> wordList = new List<string>();
 		private readonly string pathGerman = "wordListGerman.txt";
 		private readonly int minimumWordLength = 3;
-		public bool loaded = false;
+		private bool loaded = false;
 
 		public WordList()
 		{
@@ -34,8 +34,12 @@ namespace Wortfinder
 			Thread thread = new Thread(() => LoadThreadFunction(path));
 			thread.Start();
 		}
+
+		private void SetList(List<string> wordList) => this.wordList = wordList;
+
 		private void LoadThreadFunction(string path)
         {
+			List<string> list = new List<string>();
 			using (StreamReader file = new StreamReader(path))
 			{
 				string line;
@@ -43,16 +47,19 @@ namespace Wortfinder
 				{
 					if (HasMinimumLength(line))
 					{
-						wordList.Add(line);
+						list.Add(line);
 					}
 				}
 				file.Close();
 			}
-			wordList = NormaliseList(wordList);
-			wordList.Sort();
+			list = NormaliseList(list);
+			list.Sort();
+			SetList(list);
 			loaded = true;
 		}
+
         public bool Loaded() => loaded;
+
         private bool HasMinimumLength(string word)
 		{
 			return word.Length - minimumWordLength >= 0;

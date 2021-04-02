@@ -6,8 +6,8 @@ namespace Wortfinder
 {
 	public class GameScoreCalculator
 	{
-		private int gameTime;
-		private int gameFieldSize;
+		public int gameTime { get;  private set; }
+		public int gameFieldSize { get; private set; }
 		private int minimumWordLength = 3;
 
 		public GameScoreCalculator()
@@ -24,7 +24,7 @@ namespace Wortfinder
 			return 0;
 		}
 
-		internal void SetDifficulty(int gameFieldSize, int gameTimeSeconds)
+		public void SetDifficulty(int gameFieldSize, int gameTimeSeconds)
 		{
 			this.gameTime = gameTimeSeconds;
 			this.gameFieldSize = gameFieldSize;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Xunit;
+using Moq;
 
 namespace Wortfinder.XUnitTests
 {
@@ -20,5 +21,19 @@ namespace Wortfinder.XUnitTests
             Assert.True(wordGenerator.WordNotFound(testWord2, words));
         }
         */
+        [Fact]
+        public void GetAllWords_EmptyList()
+		{
+            Mock<WordList> wordList = new Mock<WordList>();
+            WordGenerator wordGenerator = new WordGenerator(wordList.Object);
+            
+            char[] letters = new char[4];
+            int size = 2;
+
+            List<Word> result = wordGenerator.GetAllWords(letters, size);
+
+            Assert.Empty(result);
+        }
+
     }
 }

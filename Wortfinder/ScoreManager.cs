@@ -37,6 +37,7 @@ namespace Wortfinder
         private void LoadScores()
 		{
             scores = scoreDataController.LoadScores();
+            scores.Sort();
         }
 
 		private void SaveScores()
@@ -55,7 +56,7 @@ namespace Wortfinder
         }
         private bool AddScore(int score, int fieldSize, int gameTime, string name)
         {
-            scores.Add(new Score(score, fieldSize, gameTime, name, new DateTime()));
+            scores.Add(new Score(score, fieldSize, gameTime, name, DateTime.Now));
             return true;
         }
     }

@@ -105,6 +105,15 @@ namespace Wortfinder.XUnitTests
 			Assert.Equal("Ueber", wordList.NormaliseVowels("Über"));
 		}
 
+		[Fact] 
+		public void Loaded_Initial()
+		{
+			WordList wordList = new WordList();
+
+			bool loaded = wordList.Loaded();
+
+			Assert.False(loaded);
+		}
 
 	}
 }

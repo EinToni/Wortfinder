@@ -11,17 +11,15 @@ namespace Wortfinder
 		private readonly DispatcherTimer timerCountingInSeconds;
 		private int timeRemaining = 0;
 		private Func<bool> timeout;
-		private readonly Func<int, bool> tick;
+		private Func<int, bool> tick;
 
-		public GameTimer(Func<int, bool> tickFunction, Func<bool> timeoutFunc)
+		public GameTimer(DispatcherTimer dispatcher)
 		{
-			timerCountingInSeconds = new DispatcherTimer();
+			timerCountingInSeconds = dispatcher;
 			timerCountingInSeconds.Tick += new EventHandler(DispatcherTimerTick);
 			timerCountingInSeconds.Interval = new TimeSpan(0, 0, 1);
-			timeout = timeoutFunc;
-			tick = tickFunction;
 		}
-
+		
 		public void StartTimerInSeconds(int seconds)
 		{
 			timeRemaining = seconds;
@@ -31,6 +29,11 @@ namespace Wortfinder
 		public void StopTimer()
 		{
 			timerCountingInSeconds.Stop();
+		}
+
+		public void SetTickCallback(Func<int, bool> tickFunction)
+		{
+			tick = tickFunction;
 		}
 
 		public void SetTimeoutFunc(Func<bool> timeoutFunc)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Wortfinder
 {
-    class ScoreWindowController : IScoreWindowController
+    public class ScoreWindowController : IScoreWindowController
     {
         private bool saveScore = false;
         private string playerName = "";
