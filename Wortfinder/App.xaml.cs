@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
@@ -23,12 +24,13 @@ namespace Wortfinder
 			ScoreWindowController	scoreWindowController	= new ScoreWindowController(saveScoreWindow);
 			ScoreManager			scoreManager			= new ScoreManager(scoreWindowController, scoreDataController);
 			MainWindow				mainWindow				= new MainWindow();
-			MainWindowController	mainWindowController	= new MainWindowController(mainWindow);
+			WebScraper				webScraper				= new WebScraper();
+			IWordMissingWindow		wordMissingWindow		= new WordMissingWindow(webScraper);
+			IWordMissingController	wordMissingController	= new WordMissingController(wordMissingWindow);
+			MainWindowController	mainWindowController	= new MainWindowController(mainWindow, wordMissingController);
 			GameTimer				gameTimer				= new GameTimer(new System.Windows.Threading.DispatcherTimer());
 			GameManager				gameManager				= new GameManager(mainWindowController, scoreManager, gameLibrary, gameScore, gameTimer);
 
-
-			
 			mainWindowController.SetGameManager(gameManager);
 			mainWindow.SetController(mainWindowController);
 			mainWindow.Show();

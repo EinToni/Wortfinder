@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
-    public class GameManager
+    public class GameManager : IGameManager
     {
-        private readonly GameLibrary gameLibrary;
-        private readonly GameScore gameScore;
-        private readonly GameTimer gameTimer;
-        private readonly ScoreManager scoreManager;
+        private readonly IGameLibrary gameLibrary;
+        private readonly IGameScore gameScore;
+        private readonly IGameTimer gameTimer;
+        private readonly IScoreManager scoreManager;
         private readonly IMainWindowController mainWindowController;
 
         private Game activeGame;
         public bool GameRunning { get; private set; } = false;
         
-        public GameManager(IMainWindowController mainWindowController, ScoreManager scoreManager, GameLibrary gameLibrary, GameScore gameScore, GameTimer gameTimer)
+        public GameManager(IMainWindowController mainWindowController, IScoreManager scoreManager, IGameLibrary gameLibrary, IGameScore gameScore, IGameTimer gameTimer)
         {
             this.mainWindowController   = mainWindowController;
             this.scoreManager           = scoreManager;
@@ -36,7 +37,7 @@ namespace Wortfinder
             {
                 gameScore.WordFound(selectedWord);
                 mainWindowController.SetFoundWordsAmount(activeGame.FoundWords);
-                mainWindowController.SetCurrentScore(gameScore.Score);
+                mainWindowController.SetCurrentScore(gameScore.GetScore());
                 mainWindowController.AddWordToShow(activeGame.GetWord(selectedWord));
                 return true;
             }
@@ -45,23 +46,10 @@ namespace Wortfinder
 
         public void NewGame(int fieldSize, int gameTimeSeconds)
         {
-            try { 
-                // Get new game
-                activeGame = gameLibrary.GetGameWithSize(fieldSize);
-                activeGame.SetTime(gameTimeSeconds);
-                gameScore.SetDifficulty(fieldSize, gameTimeSeconds);
-                // Reset previus data
-                gameScore.ResetScore();
-                mainWindowController.SetFoundWordsAmount(0);
-                mainWindowController.SetCurrentScore(0);
-                mainWindowController.SetTimer(gameTimeSeconds);
-                mainWindowController.SetMaxWordsFindable(activeGame.findableWords.Count);
-                mainWindowController.ClearWordsToShow();
-                // Start game
-                mainWindowController.SetGameField(fieldSize, activeGame.letters);
-                gameTimer.StartTimerInSeconds(gameTimeSeconds);
-                mainWindowController.LettersActive();
-                GameRunning = true;
+            try {
+                LoadNewGame(fieldSize, gameTimeSeconds);
+                ResetPreviusData(gameTimeSeconds);
+                StartNewGame(fieldSize, gameTimeSeconds);
             }
             catch (KeyNotFoundException)
             {
@@ -70,26 +58,49 @@ namespace Wortfinder
             }
         }
 
+        internal void LoadNewGame(int fieldSize, int gameTimeSeconds)
+		{
+            activeGame = gameLibrary.GetGameWithSize(fieldSize);
+            activeGame.SetTime(gameTimeSeconds);
+            gameScore.SetDifficulty(fieldSize, gameTimeSeconds);
+        }
+
+        internal void ResetPreviusData(int gameTimeSeconds)
+		{
+            gameScore.ResetScore();
+            mainWindowController.SetFoundWordsAmount(0);
+            mainWindowController.SetCurrentScore(0);
+            mainWindowController.SetTimer(gameTimeSeconds);
+            mainWindowController.SetMaxWordsFindable(activeGame.findableWords.Count);
+            mainWindowController.ClearWordsToShow();
+        }
+
+        internal void StartNewGame(int fieldSize, int gameTimeSeconds)
+		{
+            mainWindowController.SetGameField(fieldSize, activeGame.letters);
+            gameTimer.StartTimerInSeconds(gameTimeSeconds);
+            mainWindowController.LettersActive();
+            GameRunning = true;
+        }
+
         public void StopGame()
         {
             GameRunning = false;
             mainWindowController.LettersInactive();
-
-            mainWindowController.SetWordsToShow(activeGame.findableWords);
-            int size = activeGame.size;
-            int time = activeGame.GameTimeInSeconds;
-            int score = gameScore.Score;
-            scoreManager.NewScore(score, size, time);
+            if (activeGame != null) {
+                mainWindowController.SetWordsToShow(activeGame.findableWords);
+                int size = activeGame.size;
+                int time = activeGame.GameTimeInSeconds;
+                int score = gameScore.GetScore();
+                scoreManager.NewScore(score, size, time);
+            }
             mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }
-        private bool TimerTimeout()
+        internal bool TimerTimeout()
         {
             StopGame();
             return true;
         }
-        internal int GetFieldSize()
-        {
-            return activeGame.size;
-        }
-    }
+		public int GetFieldSize() => activeGame.size;
+	}
 }

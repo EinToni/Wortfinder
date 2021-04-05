@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wortfinder.XUnitTests
+namespace Wortfinder.Interfaces
 {
-	class GameControllerTests
+	interface IWord
 	{
 	}
 }

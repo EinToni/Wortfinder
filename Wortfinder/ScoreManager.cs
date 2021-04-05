@@ -8,8 +8,8 @@ using System.Text;
 
 namespace Wortfinder
 {
-	public class ScoreManager
-	{
+	public class ScoreManager : IScoreManager
+    {
         internal List<Score> scores { private set; get; }
         private readonly IScoreWindowController scoreWindowController;
         private readonly IScoreDataController scoreDataController;
@@ -45,7 +45,7 @@ namespace Wortfinder
             scoreDataController.SaveScores(scores);
         }
 
-        internal void NewScore(int score, int size, int time)
+        public void NewScore(int score, int size, int time)
         {
             scoreWindowController.NewScoreWindow(score);
             if (scoreWindowController.SaveScore())

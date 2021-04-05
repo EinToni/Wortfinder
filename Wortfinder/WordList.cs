@@ -116,9 +116,11 @@ namespace Wortfinder
 
 		public int FindBeginningLinear(string word, int startIndex)
 		{
+			int begin = 0;
+			int notFound = -1;
 			if (word == "")
 			{
-				return 0;
+				return begin;
 			}
 			for (int i = startIndex; i < wordList.Count; i++)
 			{
@@ -128,10 +130,10 @@ namespace Wortfinder
 					return i;
 				}else if (wordFromList[0] > word[0])
 				{
-					return -1;
+					return notFound;
 				}
 			}
-			return -1;
+			return notFound;
 		}
 	}
 }

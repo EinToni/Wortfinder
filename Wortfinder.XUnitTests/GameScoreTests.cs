@@ -13,7 +13,7 @@ namespace Wortfinder.XUnitTests
 
             gameScore.ResetScore();
 
-            Assert.Equal(0, gameScore.Score);
+            Assert.Equal(0, gameScore.GetScore());
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Wortfinder.XUnitTests
 
             gameScore.AddPoints(points);
 
-            Assert.Equal(points, gameScore.Score);
+            Assert.Equal(points, gameScore.GetScore());
         }
         [Fact]
         public void SetDifficulty()
@@ -47,7 +47,7 @@ namespace Wortfinder.XUnitTests
             GameScore gameScore = new GameScore(calc.Object);
             gameScore.WordFound("1");
 
-            Assert.Equal(score, gameScore.Score);
+            Assert.Equal(score, gameScore.GetScore());
         }
     }
 }

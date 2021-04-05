@@ -6,11 +6,10 @@ namespace Wortfinder
 {
 	public interface IMainWindow
 	{
-		string Time { get; set; }
-		string ActualScore { get; set; }
-		string FindableWordsAmount { get; set; }
-		string FoundWordsAmount { get; set; }
-
+		void SetCurrentScore(string value);
+		void SetFoundWordsAmount(string value);
+		void SetFindableWordsAmount(string value);
+		void SetTime(string value);
 		void DeselectAllLetters();
 		void SetGameField(int size, char[] letters);
 		void AddWordToShow(Word word);

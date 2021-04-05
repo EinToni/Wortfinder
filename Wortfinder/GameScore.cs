@@ -2,31 +2,38 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
-	public class GameScore
+	public class GameScore : IGameScore
 	{
-		public int Score { get; private set; } = 0;
+		private int score = 0;
 		private readonly IGameScoreCalculator scoreCalculator;
 
 		public GameScore(IGameScoreCalculator scoreCalculator)
 		{
 			this.scoreCalculator = scoreCalculator;
 		}
+
+		public int GetScore()
+		{
+			return score;
+		}
+
 		public void ResetScore()
 		{
-			Score = 0;
+			score = 0;
 		}
 
 		public void AddPoints(int points)
 		{
-			Score += points;
+			score += points;
 		}
 
-		public void WordFound(string wordLength)
+		public void WordFound(string selectedWord)
 		{
-			AddPoints(scoreCalculator.GetPoints(wordLength.Length));
+			AddPoints(scoreCalculator.GetPoints(selectedWord.Length));
 		}
 
 		public void SetDifficulty(int fieldSize, int gameTimeSeconds) => scoreCalculator.SetDifficulty(fieldSize, gameTimeSeconds);

@@ -39,5 +39,9 @@ namespace Wortfinder
 		{
 			return Math.Abs(coordinate.Column - Column);
 		}
+		public int PositionInGrid(int fieldSize)
+		{
+			return Row * fieldSize + Column;
+		}
 	}
 }

@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace Wortfinder
 {
-	internal class WebScraper
+	public class WebScraper
 	{
 		public WebScraper()
 		{
@@ -35,7 +35,6 @@ namespace Wortfinder
 				catch (Exception)
 				{
 					throw new Exception();
-					return false;
 				}
 			}
 		}

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
 	[Serializable]
-	public class Word
+	public class Word : IWord
 	{
 		public string Name { get; }
 		public List<Coordinate> Coordinates { get; }
@@ -23,12 +24,12 @@ namespace Wortfinder
 			Coordinates = new List<Coordinate>(word.Coordinates);
 		}
 		public bool Equals(string word)
-        {
+		{
 			return Name.Equals(word);
-        }
+		}
 		public void GotFound()
-        {
+		{
 			Found = true;
-        }
+		}
 	}
 }

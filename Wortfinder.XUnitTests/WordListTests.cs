@@ -124,5 +124,47 @@ namespace Wortfinder.XUnitTests
 			Assert.False(loaded);
 		}
 
+		[Fact]
+		public void FindBeginningLinear_emptyList()
+		{
+			WordList wordList = new WordList();
+			List<string> list = new List<string>();
+			int result = wordList.FindBeginningLinear("test", 0);
+
+			Assert.Equal(-1, result);
+		}
+
+		[Fact]
+		public void FindBeginningLinear_notInList()
+		{
+			WordList wordList = new WordList();
+			List<string> list = new List<string>() { "hello", "world" };
+			wordList.SetList(list);
+			int result = wordList.FindBeginningLinear("test", 0);
+
+			Assert.Equal(-1, result);
+		}
+
+		[Fact]
+		public void FindBeginningLinear_emptyWord()
+		{
+			WordList wordList = new WordList();
+			List<string> list = new List<string>() { "hello", "world" };
+			wordList.SetList(list);
+			int result = wordList.FindBeginningLinear("", 0);
+
+			Assert.Equal(0, result);
+		}
+
+		[Fact]
+		public void FindBeginningLinear_InList()
+		{
+			WordList wordList = new WordList();
+			List<string> list = new List<string>() { "hello", "world" };
+			wordList.SetList(list);
+			int result = wordList.FindBeginningLinear("wo", 0);
+
+			Assert.Equal(1, result);
+		}
 	}
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
-    public class GameLibrary
+    public class GameLibrary : IGameLibrary
     {
         internal Dictionary<int, List<Game>> loadedGames { get; private set; } = new Dictionary<int, List<Game>>();
         private readonly IGameGenerator gameGenerator;
@@ -86,14 +87,14 @@ namespace Wortfinder
             }
         }
 
-        private void CheckLoadedGamesThread(int fieldSize, int minAmountLoaded)
+        internal void CheckLoadedGamesThread(int fieldSize, int minAmountLoaded)
         {
             if (!loadedGames.ContainsKey(fieldSize))
             {
                 Game game = gameGenerator.NewGame(fieldSize);
                 if (!loadedGames.ContainsKey(fieldSize))
                 {
-                    loadedGames.Add(fieldSize, new List<Game>() { game });
+                    loadedGames.Add(fieldSize, new List<Game>());
                 }
                 loadedGames[fieldSize].Add(game);
             }

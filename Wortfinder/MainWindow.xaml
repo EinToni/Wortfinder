@@ -37,16 +37,16 @@
             </Grid>
             <Grid Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="207" Height="141">
                 <Label Content="Aktueller Score:" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Label x:Name="OutputScore" Margin="0,10,0,0"  Content="{Binding Path=ActualScore, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="90"/>
+                <Label x:Name="OutputScore" Margin="0,10,0,0"  Content="" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="90"/>
 
                 <Label Content="Gefundene Wörter:" Margin="0,42,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Label x:Name="amountOfFoundWords" Content="{Binding Path=FoundWordsAmount, Mode=OneWay}" HorizontalAlignment="Right" Margin="0,42,0,0" VerticalAlignment="Top" Width="90" HorizontalContentAlignment="Center"/>
+                <Label x:Name="amountOfFoundWords" Content="" HorizontalAlignment="Right" Margin="0,42,0,0" VerticalAlignment="Top" Width="90" HorizontalContentAlignment="Center"/>
 
                 <Label Content="von:" HorizontalAlignment="Left" Margin="0,73,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right"/>
-                <Label x:Name="amountOfWords" Content="{Binding Path=FindableWordsAmount, Mode=OneWay}" HorizontalAlignment="Right" Margin="0,73,0,0" VerticalAlignment="Top" Width="90" HorizontalContentAlignment="Center"/>
+                <Label x:Name="amountOfWords" Content="" HorizontalAlignment="Right" Margin="0,73,0,0" VerticalAlignment="Top" Width="90" HorizontalContentAlignment="Center"/>
 
                 <Label Content="Remaining Time:" Margin="0,104,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label x:Name="remainingTimeLabel" Content="{Binding Path=Time, Mode=OneWay}" HorizontalAlignment="Right" Height="24" Margin="0,104,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="90"/>
+                <Label x:Name="remainingTimeLabel" Content="" HorizontalAlignment="Right" Height="24" Margin="0,104,0,0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="90"/>
             </Grid>
 
             <ScrollViewer Margin="0,156,5,10" HorizontalAlignment="Right" Width="212" VerticalScrollBarVisibility="Auto">

@@ -1,17 +1,18 @@
 ﻿using System.Windows;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
 	/// <summary>
 	/// Interaktionslogik für WordMissingWindow.xaml
 	/// </summary>
-	public partial class WordMissingWindow : Window
+	public partial class WordMissingWindow : Window, IWordMissingWindow
 	{
 		private readonly WebScraper scraper;
-		public WordMissingWindow()
+		public WordMissingWindow(WebScraper webScraper)
 		{
 			InitializeComponent();
-			scraper = new WebScraper();
+			scraper = webScraper;
 		}
 
 		private async void ReportMissingWord(object sender, RoutedEventArgs e)
@@ -29,6 +30,14 @@ namespace Wortfinder
 				SuccessMessage.Content = "Your word could not be found.";
 				ReportButton.IsEnabled = true;
 			}
+		}
+		public void ShowWindow()
+		{
+			ShowDialog();
+		}
+		public void HideWindow()
+		{
+			Hide();
 		}
 	}
 }

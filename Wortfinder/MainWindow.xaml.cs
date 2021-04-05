@@ -41,30 +41,11 @@ namespace Wortfinder
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
-		private string time = "";
-		public string Time
-        {
-            get => time;
-            set { time = value; OnPropertyChanged(); }
-        }
-        private string findableWordsAmount = "";
-		public string FindableWordsAmount
-        {
-            get => findableWordsAmount;
-            set { findableWordsAmount = value; OnPropertyChanged(); }
-        }
-        private string foundWordsAmount = "";
-		public string FoundWordsAmount
-        {
-            get => foundWordsAmount;
-            set { foundWordsAmount = value; OnPropertyChanged(); }
-        }
-        private string actualScore = "";
-		public string ActualScore
-        {
-            get => actualScore;
-            set { actualScore = value; OnPropertyChanged(); }
-        }
+		public void SetTime(string value) => remainingTimeLabel.Content = value;
+		public void SetFindableWordsAmount(string value) => amountOfWords.Content = value;
+		public void SetFoundWordsAmount(string value) => amountOfFoundWords.Content = value;
+		public void SetCurrentScore(string value) => OutputScore.Content = value;
+
 		private string mainButton = "Start Game";
 		public string MainButton
 		{
@@ -154,8 +135,7 @@ namespace Wortfinder
         {
 			foreach (Viewbox viewbox in LetterGrid.Children)
 			{
-				Grid grid = viewbox.Child as Grid;
-				foreach (Viewbox v in grid.Children)
+				foreach (Viewbox v in (viewbox.Child as Grid).Children)
 				{
 					if (v.Name.Equals("hitbox"))
 					{
@@ -174,20 +154,19 @@ namespace Wortfinder
 			mainWindowController.StopGame();
 			return true;
 		}
-		public int GetTimeSelectedMinutes()
+		public string GetTimeSelectedMinutes()
 		{
 			RadioButton gameTimeButton = GameTimeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
-			return int.Parse(gameTimeButton.Tag.ToString());
+			return gameTimeButton.Tag.ToString();
 		}
-		public int GetFieldSizeSelected()
+		public string GetFieldSizeSelected()
         {
 			RadioButton sizeRadioButton = FieldSizeSelection.Children.OfType<RadioButton>().ToList().Where(r => r.IsChecked == true).Single();
-			return int.Parse(sizeRadioButton.Tag.ToString());
+			return sizeRadioButton.Tag.ToString();
 		}
 		private void WordMissing(object sender, RoutedEventArgs e)
 		{
-			WordMissingWindow wmw = new WordMissingWindow();
-			wmw.Show();
+			mainWindowController.WordMissing();
 		}
 		private bool HoverWord(Word word)
         {
@@ -200,7 +179,7 @@ namespace Wortfinder
 			}
 			foreach (Coordinate coordinate in word.Coordinates)
             {
-				int value = coordinate.Row * fieldSize + coordinate.Column;
+				int value = coordinate.PositionInGrid(fieldSize);
 				Grid grid = (LetterGrid.Children[value] as Viewbox).Child as Grid;
 				foreach (Viewbox v in grid.Children)
 				{
@@ -236,7 +215,5 @@ namespace Wortfinder
 			}
 		}
         public void SetBestScores(List<Score> itemSource) => Highscores.ItemsSource = itemSource;
-
-        
 	}
 }

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows.Threading;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
-	public class GameTimer
+	public class GameTimer : IGameTimer
 	{
 		private readonly DispatcherTimer timerCountingInSeconds;
 		private int timeRemaining = 0;
