@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 
@@ -27,7 +28,12 @@ namespace Wortfinder
                 using FileStream myStream = new FileStream(highscoreLocation, FileMode.Open);
                 using Stream file = enDecrypter.Decrypt(myStream, aes, key);
                 BinaryFormatter bf = new BinaryFormatter();
-                Games = (Dictionary<int, List<Game>>)bf.Deserialize(file);
+				try
+				{
+					Games = (Dictionary<int, List<Game>>)bf.Deserialize(file);
+                }
+				catch (SerializationException)
+				{}
 
             }
             return Games;

@@ -23,7 +23,7 @@ namespace Wortfinder
             List<int> gameSizes = new List<int>() { 4, 5, 6 };
             int amountOfGames = 5;
             LoadGames();
-            GenerateNewGames(gameSizes, amountOfGames);
+            //GenerateNewGames(gameSizes, amountOfGames);
             CheckGames(gameSizes, amountOfGames);
         }
         internal void LoadGames()
@@ -74,6 +74,7 @@ namespace Wortfinder
             }
             Game game = loadedGames[fieldSize][0];
             loadedGames[fieldSize].RemoveAt(0);
+            gameDataController.SaveGames(loadedGames);
             return game;
         }
 
@@ -102,6 +103,7 @@ namespace Wortfinder
             {
                 loadedGames[fieldSize].Add(gameGenerator.NewGame(fieldSize));
             }
+            gameDataController.SaveGames(loadedGames);
             threads.Remove(fieldSize);
         }
     }
