@@ -71,20 +71,22 @@ namespace Wortfinder.XUnitTests
         [Fact]
         public void GameTimeInMinutes()
         {
-            Score scoreToTest = new Score(10, 4, 17, "test", new System.DateTime(2021, 10, 25));
+            int testTime = 17;
+            Score scoreToTest = new Score(10, 4, testTime, "test", new System.DateTime(2021, 10, 25));
 
             int result = scoreToTest.GameTimeInMinutes;
 
-            Assert.Equal(17, result);
+            Assert.Equal(testTime, result);
         }
         [Fact]
         public void Playername()
         {
-            Score scoreToTest = new Score(10, 4, 17, "test", new System.DateTime(2021, 10, 25));
+            string testName = "test";
+            Score scoreToTest = new Score(10, 4, 17, testName, new System.DateTime(2021, 10, 25));
 
             string result = scoreToTest.PlayerName;
 
-            Assert.Equal("test", result);
+            Assert.Equal(testName, result);
         }
     }
 }

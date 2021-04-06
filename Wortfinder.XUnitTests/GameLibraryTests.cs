@@ -22,34 +22,37 @@ namespace Wortfinder.XUnitTests
 		[Fact]
 		public void LoadGames()
 		{
+			int size1 = 5;
+			int size2 = 7;
 			Mock<IGameGenerator> gameGenerator = new Mock<IGameGenerator>();
 			Mock<IGameDataController> gameDataController = new Mock<IGameDataController>();
 			var dict = new Dictionary<int, List<Game>>
 			{
-				{ 5, new List<Game>() },
-				{ 7, new List<Game>() }
+				{ size1, new List<Game>() },
+				{ size2, new List<Game>() }
 			};
 			gameDataController.Setup(x => x.LoadGames()).Returns(dict);
 
 			GameLibrary gamelibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
 			gamelibrary.LoadGames();
 
-			Assert.True(gamelibrary.loadedGames.ContainsKey(5));
-			Assert.True(gamelibrary.loadedGames.ContainsKey(7));
+			Assert.True(gamelibrary.loadedGames.ContainsKey(size1));
+			Assert.True(gamelibrary.loadedGames.ContainsKey(size2));
 		}
 
 		[Fact]
 		public void GenerateAndSaveTest()
 		{
+			int test = 5;
 			Mock<IGameDataController> gameDataController	= new Mock<IGameDataController>();
 			Mock<IGameGenerator> gameGenerator				= new Mock<IGameGenerator>();
-			Game game										= new Game(new char[0], 5, new List<Word>());
-			gameGenerator.Setup(x => x.NewGame(5)).Returns(game).Verifiable();
+			Game game										= new Game(new char[0], test, new List<Word>());
+			gameGenerator.Setup(x => x.NewGame(test)).Returns(game).Verifiable();
 			gameDataController.Setup(x => x.SaveGames(It.IsAny<Dictionary<int, List<Game>>>())).Verifiable();
 
 
-			List<int> sizes = new List<int>() { 5 };
-			int numberOfGames = 5;
+			List<int> sizes = new List<int>() { test };
+			int numberOfGames = test;
 			GameLibrary gameLibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
 
 			gameLibrary.GenerateAndSave(sizes, numberOfGames);

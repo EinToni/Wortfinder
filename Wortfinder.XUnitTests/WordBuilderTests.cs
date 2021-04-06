@@ -32,10 +32,11 @@ namespace Wortfinder.XUnitTests
 		[Fact]
 		public void ClickLetter()
 		{
+			string testLetter = "A";
 			WordBuilder wordBuilder = new WordBuilder();
-			bool result = wordBuilder.ClickLetter("A", new Coordinate(0, 0), true);
+			bool result = wordBuilder.ClickLetter(testLetter, new Coordinate(0, 0), true);
 			Assert.True(result);
-			Assert.Equal("A", wordBuilder.Word);
+			Assert.Equal(testLetter, wordBuilder.Word);
 		}
 	}
 }

@@ -13,10 +13,11 @@ namespace Wortfinder.XUnitTests
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
 			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
-			mainWindow.Setup(x => x.SetCurrentScore("10")).Verifiable();
+			int testScore = 10;
+			mainWindow.Setup(x => x.SetCurrentScore(testScore.ToString())).Verifiable();
 			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
 
-			mainWindowController.SetCurrentScore(10);
+			mainWindowController.SetCurrentScore(testScore);
 
 			mainWindow.Verify();
 		}
@@ -27,10 +28,11 @@ namespace Wortfinder.XUnitTests
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
 			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
-			mainWindow.Setup(x => x.SetFindableWordsAmount("10")).Verifiable();
+			int testScore = 10;
+			mainWindow.Setup(x => x.SetFindableWordsAmount(testScore.ToString())).Verifiable();
 			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
 
-			mainWindowController.SetMaxWordsFindable(10);
+			mainWindowController.SetMaxWordsFindable(testScore);
 
 			mainWindow.Verify();
 		}
@@ -41,10 +43,11 @@ namespace Wortfinder.XUnitTests
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
 			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
-			mainWindow.Setup(x => x.SetFoundWordsAmount("10")).Verifiable();
+			int testScore = 10;
+			mainWindow.Setup(x => x.SetFoundWordsAmount(testScore.ToString())).Verifiable();
 			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
 
-			mainWindowController.SetFoundWordsAmount(10);
+			mainWindowController.SetFoundWordsAmount(testScore);
 
 			mainWindow.Verify();
 		}

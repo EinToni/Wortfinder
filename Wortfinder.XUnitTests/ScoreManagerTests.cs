@@ -75,16 +75,19 @@ namespace Wortfinder.XUnitTests
 			Mock<IScoreDataController> scoreDataCtr = new Mock<IScoreDataController>();
 			Mock<IScoreWindowController> scoreWindowCtr = new Mock<IScoreWindowController>();
 			scoreDataCtr.Setup(x => x.LoadScores()).Returns(new List<Score>());
-
+			int testNumber = 10;
+			int testSize = 5;
+			int testTime = 3;
+			string testName = "helloWorld";
 			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
 
-			scoreManager.AddScore(10, 5, 3, "testName");
+			scoreManager.AddScore(testNumber, testSize, testTime, testName);
 
 			Assert.Single(scoreManager.scores);
-			Assert.Equal(10, scoreManager.scores[0].Number);
-			Assert.Equal(5, scoreManager.scores[0].FieldSize);
-			Assert.Equal(3, scoreManager.scores[0].GameTimeInMinutes);
-			Assert.Equal("testName", scoreManager.scores[0].PlayerName);
+			Assert.Equal(testNumber, scoreManager.scores[0].Number);
+			Assert.Equal(testSize, scoreManager.scores[0].FieldSize);
+			Assert.Equal(testTime, scoreManager.scores[0].GameTimeInMinutes);
+			Assert.Equal(testName, scoreManager.scores[0].PlayerName);
 		}
 		[Fact]
 		public void SaveScores()

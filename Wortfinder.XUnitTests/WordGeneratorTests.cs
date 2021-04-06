@@ -34,11 +34,6 @@ namespace Wortfinder.XUnitTests
             Assert.Contains(word, words2);
             Assert.Single(words2);
         }
-        [Fact]
-        public void WordNotFound()
-        {
-            
-        }
         
         [Fact]
         public void GetAllWords_EmptyList()

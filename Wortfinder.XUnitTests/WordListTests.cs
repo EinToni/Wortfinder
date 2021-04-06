@@ -6,23 +6,7 @@ using Xunit;
 namespace Wortfinder.XUnitTests
 {
 	public class WordListTests
-	{/*
-		[Fact]
-		public void CheckBeginningTest()
-		{
-			wordList wordList = new wordList();
-			var result = wordList.CheckWord("AALGLATT", 0);
-			Assert.True(result);
-		}
-
-		[Fact]
-		public void CheckBeginnTest()
-		{
-			wordList wordList = new wordList();
-			var result = wordList.CheckBeginning("ABAENDERUNGSVEREINBARUM", 0);
-			Assert.True(result);
-		}
-		*/
+	{
 		[Fact]
 		public void SetList()
 		{

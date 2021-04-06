@@ -34,12 +34,14 @@ namespace Wortfinder.XUnitTests
 			Mock<IGameLibrary> gameLibrary = new Mock<IGameLibrary>();
 			Mock<IGameScore> gameScore = new Mock<IGameScore>();
 			Mock<IGameTimer> gameTimer = new Mock<IGameTimer>();
-			gameLibrary.Setup(x => x.GetGameWithSize(5)).Returns(new Game(new char[0], 5, new List<Word>())).Verifiable();
-			gameScore.Setup(x => x.SetDifficulty(5, 60)).Verifiable();
+			int size = 5;
+			int time = 60;
+			gameLibrary.Setup(x => x.GetGameWithSize(size)).Returns(new Game(new char[0], size, new List<Word>())).Verifiable();
+			gameScore.Setup(x => x.SetDifficulty(size, time)).Verifiable();
 			GameManager gameManager = new GameManager(mainWindowController.Object,
 				scoreManager.Object, gameLibrary.Object, gameScore.Object, gameTimer.Object);
 
-			gameManager.LoadNewGame(5, 60);
+			gameManager.LoadNewGame(size, time);
 
 			gameLibrary.Verify();
 			gameScore.Verify();
