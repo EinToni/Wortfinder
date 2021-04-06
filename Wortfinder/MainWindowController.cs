@@ -9,12 +9,12 @@ namespace Wortfinder
     {
         private readonly IMainWindow mainWindow;
         private readonly IWordMissingController wordMissingController;
-        private readonly WordBuilder wordBuilder;
+        private readonly IWordBuilder wordBuilder;
         private IGameManager gameManager;
         private string wordBuild = "";
         private readonly List<Coordinate> wordCoords = new List<Coordinate>();
 
-        public MainWindowController(IMainWindow mainWindow, IWordMissingController wordMissingController, WordBuilder wordBuilder) 
+        public MainWindowController(IMainWindow mainWindow, IWordMissingController wordMissingController, IWordBuilder wordBuilder) 
         {
             this.mainWindow = mainWindow;
             this.wordMissingController = wordMissingController;
@@ -48,11 +48,6 @@ namespace Wortfinder
             return wordBuilder.HoverLetter(letter, new Coordinate(int.Parse(row), int.Parse(column)), gameManager.GameRunning);
         }
 
-        internal bool AlreadyClicked(Coordinate coordinate, List<Coordinate> coordinates)
-		{
-            return wordBuilder.AlreadyClicked(coordinate, coordinates);
-        }
-
         internal bool ClickLetter(string letter, string row, string column)
         {
             return wordBuilder.ClickLetter(letter, new Coordinate(int.Parse(row), int.Parse(column)), gameManager.GameRunning);
@@ -60,7 +55,7 @@ namespace Wortfinder
 
         internal void ReleaseMouse()
         {
-            gameManager.TryWord(wordBuilder.Word);
+            gameManager.TryWord(wordBuilder.GetWord());
             wordBuilder.Clear();
             mainWindow.DeselectAllLetters();
         }

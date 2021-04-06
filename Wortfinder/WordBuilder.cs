@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
-	public class WordBuilder
-	{
+	public class WordBuilder : IWordBuilder
+    {
         public string Word { get; private set; } = "";
         private readonly List<Coordinate> wordCoords = new List<Coordinate>();
 
@@ -15,7 +16,7 @@ namespace Wortfinder
             wordCoords.Clear();
         }
 
-        internal bool HoverLetter(string letter, Coordinate coordinate, bool gameRunning)
+        public bool HoverLetter(string letter, Coordinate coordinate, bool gameRunning)
         {
             if (gameRunning && Word != "" && !AlreadyClicked(coordinate, wordCoords))
             {
@@ -43,7 +44,7 @@ namespace Wortfinder
             return false;
         }
 
-        internal bool ClickLetter(string letter, Coordinate coordinate, bool gameRunning)
+        public bool ClickLetter(string letter, Coordinate coordinate, bool gameRunning)
         {
             if (gameRunning)
             {
@@ -54,5 +55,10 @@ namespace Wortfinder
             }
             return false;
         }
+
+        public string GetWord()
+		{
+            return Word;
+		}
     }
 }
