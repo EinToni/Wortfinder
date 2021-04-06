@@ -27,7 +27,8 @@ namespace Wortfinder
 			WebScraper				webScraper				= new WebScraper();
 			IWordMissingWindow		wordMissingWindow		= new WordMissingWindow(webScraper);
 			IWordMissingController	wordMissingController	= new WordMissingController(wordMissingWindow);
-			MainWindowController	mainWindowController	= new MainWindowController(mainWindow, wordMissingController);
+			WordBuilder				wordBuilder				= new WordBuilder();
+			MainWindowController	mainWindowController	= new MainWindowController(mainWindow, wordMissingController, wordBuilder);
 			GameTimer				gameTimer				= new GameTimer(new System.Windows.Threading.DispatcherTimer());
 			GameManager				gameManager				= new GameManager(mainWindowController, scoreManager, gameLibrary, gameScore, gameTimer);
 

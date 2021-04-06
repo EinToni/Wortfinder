@@ -9,14 +9,16 @@ namespace Wortfinder
     {
         private readonly IMainWindow mainWindow;
         private readonly IWordMissingController wordMissingController;
+        private readonly WordBuilder wordBuilder;
         private IGameManager gameManager;
         private string wordBuild = "";
         private readonly List<Coordinate> wordCoords = new List<Coordinate>();
 
-        public MainWindowController(IMainWindow mainWindow, IWordMissingController wordMissingController) 
+        public MainWindowController(IMainWindow mainWindow, IWordMissingController wordMissingController, WordBuilder wordBuilder) 
         {
             this.mainWindow = mainWindow;
             this.wordMissingController = wordMissingController;
+            this.wordBuilder = wordBuilder;
         }
 		internal void SetGameManager(IGameManager gameManager)   => this.gameManager = gameManager;
 
@@ -41,65 +43,31 @@ namespace Wortfinder
         internal void StopGame()                        => gameManager.StopGame();
         internal int GetFieldSize()                     => gameManager.GetFieldSize();
 
-        public void TryWord(string word)
-        {
-            gameManager.TryWord(word);
-            wordBuild = "";
-            wordCoords.Clear();
-            mainWindow.DeselectAllLetters();
-        }
-
         internal bool HoverLetter(string letter, string row, string column)
         {
-            if (gameManager.GameRunning && wordBuild != "")
-            {
-                Coordinate coordinate = new Coordinate(int.Parse(row), int.Parse(column));
-                if (!AlreadyClicked(coordinate, wordCoords))
-				{
-                    if (wordCoords.Count > 0 && !coordinate.IsNeighbour(wordCoords[^1]))
-                    {
-                        TryWord(wordBuild);
-                    } else { 
-                        wordBuild += letter;
-                        wordCoords.Add(coordinate);
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return wordBuilder.HoverLetter(letter, new Coordinate(int.Parse(row), int.Parse(column)), gameManager.GameRunning);
         }
 
         internal bool AlreadyClicked(Coordinate coordinate, List<Coordinate> coordinates)
 		{
-            foreach (Coordinate clickedCoord in coordinates)
-            {
-                if (coordinate.Equals(clickedCoord))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return wordBuilder.AlreadyClicked(coordinate, coordinates);
         }
+
         internal bool ClickLetter(string letter, string row, string column)
         {
-            if (gameManager.GameRunning)
-            {
-                wordBuild = letter;
-                wordCoords.Clear();
-                wordCoords.Add(new Coordinate(int.Parse(row), int.Parse(column)));
-                return true;
-            }
-            return false;
+            return wordBuilder.ClickLetter(letter, new Coordinate(int.Parse(row), int.Parse(column)), gameManager.GameRunning);
         }
+
         internal void ReleaseMouse()
         {
-            TryWord(wordBuild);
+            gameManager.TryWord(wordBuilder.Word);
+            wordBuilder.Clear();
+            mainWindow.DeselectAllLetters();
         }
 
 		internal void WordMissing()
 		{
             wordMissingController.Open();
-            
         }
 	}
 }
