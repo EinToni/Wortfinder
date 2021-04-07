@@ -10,6 +10,7 @@ namespace Wortfinder
 	{
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
+			MainWindow				mainWindow				= new MainWindow();
 			WordList				wordList				= new WordList();
 			WordGenerator			wordGenerator			= new WordGenerator(wordList);
 			ILetterProbability		letterProbalilitys		= new LettersGerman();
@@ -23,7 +24,6 @@ namespace Wortfinder
 			SaveScoreWindow			saveScoreWindow			= new SaveScoreWindow();
 			ScoreWindowController	scoreWindowController	= new ScoreWindowController(saveScoreWindow);
 			ScoreManager			scoreManager			= new ScoreManager(scoreWindowController, scoreDataController);
-			MainWindow				mainWindow				= new MainWindow();
 			WebScraper				webScraper				= new WebScraper();
 			IWordMissingWindow		wordMissingWindow		= new WordMissingWindow(webScraper);
 			IWordMissingController	wordMissingController	= new WordMissingController(wordMissingWindow);

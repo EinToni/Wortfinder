@@ -33,6 +33,7 @@ namespace Wortfinder
                 loadedGames.Add(data.Key, data.Value);
             }
         }
+        // Deprecated
         internal void GenerateNewGames(List<int> gameSizes, int amountOfGames)
 		{
             Thread thread = new Thread(() => GenerateAndSave(gameSizes, amountOfGames));
@@ -45,6 +46,7 @@ namespace Wortfinder
                 CheckLoadedGames(size, amountOfGames);
             }
         }
+        // Deprecated
         public void GenerateAndSave(List<int> sizes, int numberOfGames)
         {
             Dictionary<int, List<Game>> games = new Dictionary<int, List<Game>>();
@@ -92,12 +94,7 @@ namespace Wortfinder
         {
             if (!loadedGames.ContainsKey(fieldSize))
             {
-                Game game = gameGenerator.NewGame(fieldSize);
-                if (!loadedGames.ContainsKey(fieldSize))
-                {
-                    loadedGames.Add(fieldSize, new List<Game>());
-                }
-                loadedGames[fieldSize].Add(game);
+                loadedGames.Add(fieldSize, new List<Game>());
             }
             for (int i = loadedGames[fieldSize].Count; i < minAmountLoaded; i++)
             {

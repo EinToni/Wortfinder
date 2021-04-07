@@ -12,6 +12,7 @@ namespace Wortfinder
         private readonly string highscoreLocation = ".\\PreLoadedGames.bin";
         private readonly Aes aes;
         private readonly EnDecrypter enDecrypter;
+        private readonly object mylock = new object();
 
         public GameDataController()
         {
@@ -41,9 +42,12 @@ namespace Wortfinder
 
         public void SaveGames(Dictionary<int, List<Game>> games)
         {
-            using FileStream myStream = new FileStream(highscoreLocation, FileMode.Create);
-            using Stream file = enDecrypter.Encrypt(myStream, aes);
-            new BinaryFormatter().Serialize(file, games);
+			lock (mylock)
+			{
+                using FileStream myStream = new FileStream(highscoreLocation, FileMode.Create);
+                using Stream file = enDecrypter.Encrypt(myStream, aes);
+                new BinaryFormatter().Serialize(file, games);
+            }
         }
     }
 }

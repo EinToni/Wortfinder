@@ -11,8 +11,6 @@ namespace Wortfinder
         private readonly IWordMissingController wordMissingController;
         private readonly IWordBuilder wordBuilder;
         private IGameManager gameManager;
-        private string wordBuild = "";
-        private readonly List<Coordinate> wordCoords = new List<Coordinate>();
 
         public MainWindowController(IMainWindow mainWindow, IWordMissingController wordMissingController, IWordBuilder wordBuilder) 
         {

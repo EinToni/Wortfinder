@@ -28,7 +28,7 @@ namespace Wortfinder
             gameTimer.SetTickCallback(mainWindowController.SetTimer);
             gameTimer.SetTimeoutFunc(TimerTimeout);
             gameLibrary.LoadGeneratedGames();
-            mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
+            //mainWindowController.SetBestScores(scoreManager.GetTopScores(10));
         }
 
         public bool TryWord(string selectedWord)
