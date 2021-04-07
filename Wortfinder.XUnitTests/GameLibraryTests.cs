@@ -17,7 +17,7 @@ namespace Wortfinder.XUnitTests
 			GameLibrary gamelibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
 			gamelibrary.LoadGames();
 
-			Assert.Empty(gamelibrary.loadedGames);
+			Assert.Empty(gamelibrary.LoadedGames);
 		}
 		[Fact]
 		public void LoadGames()
@@ -36,29 +36,10 @@ namespace Wortfinder.XUnitTests
 			GameLibrary gamelibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
 			gamelibrary.LoadGames();
 
-			Assert.True(gamelibrary.loadedGames.ContainsKey(size1));
-			Assert.True(gamelibrary.loadedGames.ContainsKey(size2));
+			Assert.True(gamelibrary.LoadedGames.ContainsKey(size1));
+			Assert.True(gamelibrary.LoadedGames.ContainsKey(size2));
 		}
 
-		[Fact]
-		public void GenerateAndSaveTest()
-		{
-			int test = 5;
-			Mock<IGameDataController> gameDataController	= new Mock<IGameDataController>();
-			Mock<IGameGenerator> gameGenerator				= new Mock<IGameGenerator>();
-			Game game										= new Game(new char[0], test, new List<Word>());
-			gameGenerator.Setup(x => x.NewGame(test)).Returns(game).Verifiable();
-			gameDataController.Setup(x => x.SaveGames(It.IsAny<Dictionary<int, List<Game>>>())).Verifiable();
-
-
-			List<int> sizes = new List<int>() { test };
-			int numberOfGames = test;
-			GameLibrary gameLibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
-
-			gameLibrary.GenerateAndSave(sizes, numberOfGames);
-			gameGenerator.Verify();
-			gameDataController.Verify();
-		}
 		[Fact]
 		public void GetGameWithSize_NoGameAvailable()
 		{
@@ -82,9 +63,9 @@ namespace Wortfinder.XUnitTests
 			
 			gameLibrary.CheckLoadedGamesThread(size, minAmount);
 
-			Assert.Single(gameLibrary.loadedGames);
-			Assert.Contains(size, gameLibrary.loadedGames.Keys);
-			Assert.Equal(minAmount, gameLibrary.loadedGames[size].Count);
+			Assert.Single(gameLibrary.LoadedGames);
+			Assert.Contains(size, gameLibrary.LoadedGames.Keys);
+			Assert.Equal(minAmount, gameLibrary.LoadedGames[size].Count);
 		}
 
 		[Fact]
@@ -99,9 +80,9 @@ namespace Wortfinder.XUnitTests
 
 			gameLibrary.CheckLoadedGamesThread(size, minAmount);
 
-			Assert.Single(gameLibrary.loadedGames);
-			Assert.Contains(size, gameLibrary.loadedGames.Keys);
-			Assert.Equal(minAmount, gameLibrary.loadedGames[size].Count);
+			Assert.Single(gameLibrary.LoadedGames);
+			Assert.Contains(size, gameLibrary.LoadedGames.Keys);
+			Assert.Equal(minAmount, gameLibrary.LoadedGames[size].Count);
 		}
 	}
 }
