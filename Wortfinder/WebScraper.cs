@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Net.Http;
+using Wortfinder.Interfaces;
 
 namespace Wortfinder
 {
-	public class WebScraper
+	public class WebScraper : IWebScraper
 	{
 		public WebScraper()
 		{
@@ -11,6 +12,9 @@ namespace Wortfinder
 
 		public bool SearchWordAsync(string word)
 		{
+			return false;
+			// TODO: To be implemented correctly
+			/*
 			HttpClient httpClient = new HttpClient();
 			var request = httpClient.GetStringAsync("https://duden.de/suchen/dudenonline/" + word);
 			request.Wait();
@@ -37,6 +41,7 @@ namespace Wortfinder
 					throw new Exception();
 				}
 			}
+			*/
 		}
 	}
 }

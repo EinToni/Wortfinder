@@ -11,11 +11,11 @@ namespace Wortfinder.XUnitTests
 		public void CurrentScore()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			int testScore = 10;
 			mainWindow.Setup(x => x.SetCurrentScore(testScore.ToString())).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.SetCurrentScore(testScore);
 
@@ -26,11 +26,11 @@ namespace Wortfinder.XUnitTests
 		public void MaxWordsFindable()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			int testScore = 10;
 			mainWindow.Setup(x => x.SetFindableWordsAmount(testScore.ToString())).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.SetMaxWordsFindable(testScore);
 
@@ -41,11 +41,11 @@ namespace Wortfinder.XUnitTests
 		public void FoundWordsAmount()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			int testScore = 10;
 			mainWindow.Setup(x => x.SetFoundWordsAmount(testScore.ToString())).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.SetFoundWordsAmount(testScore);
 
@@ -56,10 +56,10 @@ namespace Wortfinder.XUnitTests
 		public void LettersInactive()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			mainWindow.Setup(x => x.LettersInactive()).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.LettersInactive();
 
@@ -70,10 +70,10 @@ namespace Wortfinder.XUnitTests
 		public void LettersActive()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			mainWindow.Setup(x => x.LettersActive()).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.LettersActive();
 
@@ -84,10 +84,10 @@ namespace Wortfinder.XUnitTests
 		public void ClearWordsToShow()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			mainWindow.Setup(x => x.ClearWords()).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.ClearWordsToShow();
 
@@ -98,11 +98,11 @@ namespace Wortfinder.XUnitTests
 		public void SetBestScores()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			List<Score> scores = new List<Score>();
 			mainWindow.Setup(x => x.SetBestScores(scores)).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.SetBestScores(scores);
 
@@ -113,11 +113,11 @@ namespace Wortfinder.XUnitTests
 		public void SetWordsToShow()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			List<Word> words = new List<Word>();
 			mainWindow.Setup(x => x.SetWordsToShow(words)).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.SetWordsToShow(words);
 
@@ -128,11 +128,11 @@ namespace Wortfinder.XUnitTests
 		public void AddWordToShow()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			Word word = new Word("", new List<Coordinate>());
 			mainWindow.Setup(x => x.AddWordToShow(word)).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.AddWordToShow(word);
 
@@ -143,12 +143,12 @@ namespace Wortfinder.XUnitTests
 		public void SetGameField()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			int size = 5;
 			char[] letters = new char[0];
 			mainWindow.Setup(x => x.SetGameField(size, letters)).Verifiable();
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 
 			mainWindowController.SetGameField(size, letters);
 
@@ -159,12 +159,12 @@ namespace Wortfinder.XUnitTests
 		public void SetTimer()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			int time = 5;
 			mainWindow.Setup(x => x.SetTime("5 s")).Verifiable();
 			
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 			bool result = mainWindowController.SetTimer(time);
 
 			mainWindow.Verify();
@@ -175,13 +175,13 @@ namespace Wortfinder.XUnitTests
 		public void ReleaseMouse()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			Mock<IGameManager> gameManager = new Mock<IGameManager>();
 			gameManager.Setup(x => x.TryWord(It.IsAny<string>())).Verifiable();
 			mainWindow.Setup(x => x.DeselectAllLetters()).Verifiable();
 
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 			mainWindowController.SetGameManager(gameManager.Object);
 			mainWindowController.ReleaseMouse();
 
@@ -193,11 +193,11 @@ namespace Wortfinder.XUnitTests
 		public void HoverLetter_NotClickedYet()
 		{
 			Mock<IMainWindow> mainWindow = new Mock<IMainWindow>();
-			Mock<IWordMissingController> wordMissingController = new Mock<IWordMissingController>();
+			Mock<IMissingWordManager> missingWordManager = new Mock<IMissingWordManager>();
 			Mock<IWordBuilder> wordBuilder = new Mock<IWordBuilder>();
 			Mock<IGameManager> gameManager = new Mock<IGameManager>();
 
-			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, wordMissingController.Object, wordBuilder.Object);
+			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 			mainWindowController.SetGameManager(gameManager.Object);
 
 			bool result = mainWindowController.HoverLetter("S", "5", "5");

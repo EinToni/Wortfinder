@@ -8,14 +8,14 @@ namespace Wortfinder
     public class MainWindowController : IMainWindowController
     {
         private readonly IMainWindow mainWindow;
-        private readonly IWordMissingController wordMissingController;
+        private readonly IMissingWordManager wordMissingManager;
         private readonly IWordBuilder wordBuilder;
         private IGameManager gameManager;
 
-        public MainWindowController(IMainWindow mainWindow, IWordMissingController wordMissingController, IWordBuilder wordBuilder) 
+        public MainWindowController(IMainWindow mainWindow, IMissingWordManager wordMissingManager, IWordBuilder wordBuilder) 
         {
             this.mainWindow = mainWindow;
-            this.wordMissingController = wordMissingController;
+            this.wordMissingManager = wordMissingManager;
             this.wordBuilder = wordBuilder;
         }
 		internal void SetGameManager(IGameManager gameManager)   => this.gameManager = gameManager;
@@ -60,7 +60,7 @@ namespace Wortfinder
 
 		internal void WordMissing()
 		{
-            wordMissingController.Open();
+            wordMissingManager.OpenWindow();
         }
 	}
 }

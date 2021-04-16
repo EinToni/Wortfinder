@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Wortfinder.Interfaces
 {
-	public interface IWordMissingWindow
+	interface IWordMissingWindowController
 	{
-		void ShowWindow();
-		void HideWindow();
+		void OpenWindow();
 		void SetCallback(Func<string, bool> func);
 	}
 }

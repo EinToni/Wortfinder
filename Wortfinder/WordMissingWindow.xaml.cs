@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Wortfinder.Interfaces;
 
 namespace Wortfinder
@@ -8,19 +9,16 @@ namespace Wortfinder
 	/// </summary>
 	public partial class WordMissingWindow : Window, IWordMissingWindow
 	{
-		private readonly WebScraper scraper;
-		public WordMissingWindow(WebScraper webScraper)
+		private Func<string, bool> reportWord;
+		public WordMissingWindow()
 		{
 			InitializeComponent();
-			scraper = webScraper;
 		}
-
 		private async void ReportMissingWord(object sender, RoutedEventArgs e)
 		{
-			SuccessMessage.Content = "";
 			ReportButton.IsEnabled = false;
 			string word = ReportedWord.Text;
-			bool wordExist = scraper.SearchWordAsync(word);
+			bool wordExist = reportWord(word);
 			if (wordExist)
 			{
 				SuccessMessage.Content = "Your word was found and added.";
@@ -31,10 +29,17 @@ namespace Wortfinder
 				ReportButton.IsEnabled = true;
 			}
 		}
+
+		public void SetCallback(Func<string,bool> func)
+		{
+			reportWord = func;
+		}
+
 		public void ShowWindow()
 		{
 			ShowDialog();
 		}
+
 		public void HideWindow()
 		{
 			Hide();

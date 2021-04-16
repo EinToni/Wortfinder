@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Wortfinder.Interfaces
 {
-	public interface IWordMissingController
+	interface IWebScraper
 	{
-		void Open();
+		bool SearchWordAsync(string word);
 	}
 }

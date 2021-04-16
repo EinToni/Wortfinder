@@ -24,11 +24,13 @@ namespace Wortfinder
 			SaveScoreWindow			saveScoreWindow			= new SaveScoreWindow();
 			ScoreWindowController	scoreWindowController	= new ScoreWindowController(saveScoreWindow);
 			ScoreManager			scoreManager			= new ScoreManager(scoreWindowController, scoreDataController);
-			WebScraper				webScraper				= new WebScraper();
-			IWordMissingWindow		wordMissingWindow		= new WordMissingWindow(webScraper);
-			IWordMissingController	wordMissingController	= new WordMissingController(wordMissingWindow);
+			IWebScraper				webScraper				= new WebScraper();
+			IWordMissingWindow		wordMissingWindow		= new WordMissingWindow();
+			IWordMissingWindowController wordMissingWindowController	= new WordMissingWindowController(wordMissingWindow);
+			IScraperController		scraperController		= new ScraperController(webScraper);
+			MissingWordManager		missingWordManager		= new MissingWordManager(scraperController, wordMissingWindowController);
 			WordBuilder				wordBuilder				= new WordBuilder();
-			MainWindowController	mainWindowController	= new MainWindowController(mainWindow, wordMissingController, wordBuilder);
+			MainWindowController	mainWindowController	= new MainWindowController(mainWindow, missingWordManager, wordBuilder);
 			GameTimer				gameTimer				= new GameTimer(new System.Windows.Threading.DispatcherTimer());
 			GameManager				gameManager				= new GameManager(mainWindowController, scoreManager, gameLibrary, gameScore, gameTimer);
 
