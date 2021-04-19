@@ -114,26 +114,26 @@ namespace Wortfinder
 			return false;
 		}
 
-		public int FindBeginningLinear(string word, int startIndex)
+		public int FindIndexOfBeginning(string word, int startIndex)
 		{
-			int begin = 0;
-			int notFound = -1;
+			int index = 0;
 			if (word == "")
 			{
-				return begin;
+				return index;
 			}
-			for (int i = startIndex; i < wordList.Count; i++)
+			for (index = startIndex; index < wordList.Count; index++)
 			{
-				string wordFromList = wordList[i];
+				string wordFromList = wordList[index];
 				if (wordFromList.StartsWith(word))
 				{
-					return i;
-				}else if (wordFromList[0] > word[0])
+					return index;
+				}
+				else if (wordFromList[0] > word[0])
 				{
-					return notFound;
+					break;
 				}
 			}
-			return notFound;
+			throw new Exception("No word begins with this string");
 		}
 	}
 }

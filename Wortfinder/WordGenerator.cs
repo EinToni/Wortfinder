@@ -60,21 +60,22 @@ namespace Wortfinder
 			{
 				word += letters[position];
 				letters[position] = '-';
-				int beginningIndex = wordList.FindBeginningLinear(word, dictStartIndex);
-				if (beginningIndex >= 0)
+				try
 				{
+					int beginningIndex = wordList.FindIndexOfBeginning(word, dictStartIndex);
 					if (wordList.CheckWord(word, beginningIndex))
 					{
 						allWords.Add(new Word(word, new List<Coordinate>(coordinates)));
 					}
 					List<Coordinate> neightbourCoordinates = GetNeighbourCoordinates(position, size);
-					foreach(Coordinate coordinate in neightbourCoordinates)
-                    {
-						List<Coordinate> newCoordinates = new List<Coordinate>(coordinates)	{ coordinate };
+					foreach (Coordinate coordinate in neightbourCoordinates)
+					{
+						List<Coordinate> newCoordinates = new List<Coordinate>(coordinates) { coordinate };
 						List<Word> words = FindWordsRecusive(word, size, (char[])letters.Clone(), newCoordinates, beginningIndex);
 						AddWords(words, allWords);
 					}
 				}
+				catch (Exception) { }
 			}
 			return allWords;
 		}

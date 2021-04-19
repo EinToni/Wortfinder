@@ -112,10 +112,8 @@ namespace Wortfinder.XUnitTests
 		public void FindBeginningLinear_emptyList()
 		{
 			WordList wordList = new WordList();
-			List<string> list = new List<string>();
-			int result = wordList.FindBeginningLinear("test", 0);
 
-			Assert.Equal(-1, result);
+			Assert.Throws<Exception>(() => wordList.FindIndexOfBeginning("test", 0));
 		}
 
 		[Fact]
@@ -124,9 +122,8 @@ namespace Wortfinder.XUnitTests
 			WordList wordList = new WordList();
 			List<string> list = new List<string>() { "hello", "world" };
 			wordList.SetList(list);
-			int result = wordList.FindBeginningLinear("test", 0);
 
-			Assert.Equal(-1, result);
+			Assert.Throws<Exception>(() => wordList.FindIndexOfBeginning("test", 0));
 		}
 
 		[Fact]
@@ -135,7 +132,7 @@ namespace Wortfinder.XUnitTests
 			WordList wordList = new WordList();
 			List<string> list = new List<string>() { "hello", "world" };
 			wordList.SetList(list);
-			int result = wordList.FindBeginningLinear("", 0);
+			int result = wordList.FindIndexOfBeginning("", 0);
 
 			Assert.Equal(0, result);
 		}
@@ -146,7 +143,7 @@ namespace Wortfinder.XUnitTests
 			WordList wordList = new WordList();
 			List<string> list = new List<string>() { "hello", "world" };
 			wordList.SetList(list);
-			int result = wordList.FindBeginningLinear("wo", 0);
+			int result = wordList.FindIndexOfBeginning("wo", 0);
 
 			Assert.Equal(1, result);
 		}
