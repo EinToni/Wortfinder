@@ -45,7 +45,7 @@ namespace Wortfinder
 
         public Game GetGameWithSize(int fieldSize)
         {
-            if (!LoadedGames.ContainsKey(fieldSize))
+            if (!LoadedGames.ContainsKey(fieldSize) || LoadedGames[fieldSize].Count == 0)
             {
                 throw new KeyNotFoundException();
             }
@@ -58,6 +58,10 @@ namespace Wortfinder
 
         public void CheckLoadedGames(int fieldSize, int minAmountLoaded)
         {
+            if (!LoadedGames.ContainsKey(fieldSize))
+            {
+                LoadedGames.Add(fieldSize, new List<Game>());
+            }
             if (!threads.ContainsKey(fieldSize))
             {
                 Thread thread = new Thread(() => CheckLoadedGamesThread(fieldSize, minAmountLoaded));
@@ -68,10 +72,6 @@ namespace Wortfinder
 
         internal void CheckLoadedGamesThread(int fieldSize, int minAmountLoaded)
         {
-            if (!LoadedGames.ContainsKey(fieldSize))
-            {
-                LoadedGames.Add(fieldSize, new List<Game>());
-            }
             for (int i = LoadedGames[fieldSize].Count; i < minAmountLoaded; i++)
             {
                 LoadedGames[fieldSize].Add(gameGenerator.NewGame(fieldSize));

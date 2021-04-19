@@ -14,11 +14,11 @@ namespace Wortfinder
         private readonly EnDecrypter enDecrypter;
         private readonly object mylock = new object();
 
-        public GameDataController()
+        public GameDataController(EnDecrypter enDecrypter)
         {
             aes = Aes.Create();
             aes.Key = key;
-            enDecrypter = new EnDecrypter();
+            this.enDecrypter = enDecrypter;
         }
 
         public Dictionary<int, List<Game>> LoadGames()
@@ -35,8 +35,7 @@ namespace Wortfinder
                 }
 				catch (SerializationException)
 				{}
-
-            }
+			}
             return Games;
         }
 

@@ -60,6 +60,7 @@ namespace Wortfinder.XUnitTests
 			int minAmount = 1;
 			gameGenerator.Setup(x => x.NewGame(size)).Returns(new Game(new char[0], size, new List<Word>()));
 			GameLibrary gameLibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
+			gameLibrary.LoadedGames.Add(size, new List<Game>());
 			
 			gameLibrary.CheckLoadedGamesThread(size, minAmount);
 
@@ -77,6 +78,7 @@ namespace Wortfinder.XUnitTests
 			int minAmount = 5;
 			gameGenerator.Setup(x => x.NewGame(size)).Returns(new Game(new char[0], size, new List<Word>()));
 			GameLibrary gameLibrary = new GameLibrary(gameGenerator.Object, gameDataController.Object);
+			gameLibrary.LoadedGames.Add(size, new List<Game>());
 
 			gameLibrary.CheckLoadedGamesThread(size, minAmount);
 

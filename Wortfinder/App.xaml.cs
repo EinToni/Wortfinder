@@ -16,11 +16,11 @@ namespace Wortfinder
 			ILetterProbability		letterProbalilitys		= new LettersGerman();
 			LetterGenerator			letterGenerator			= new LetterGenerator(letterProbalilitys);
 			IGameGenerator			gameGenerator			= new GameGenerator(wordGenerator, letterGenerator);
-			GameDataController		gameDataController		= new GameDataController();
+			GameDataController		gameDataController		= new GameDataController(new EnDecrypter());
 			GameLibrary				gameLibrary				= new GameLibrary(gameGenerator, gameDataController);
 			GameScoreCalculator		gameScoreCalculator		= new GameScoreCalculator();
 			GameScore				gameScore				= new GameScore(gameScoreCalculator);
-			ScoreDataController		scoreDataController		= new ScoreDataController();
+			ScoreDataController		scoreDataController		= new ScoreDataController(new EnDecrypter());
 			SaveScoreWindow			saveScoreWindow			= new SaveScoreWindow();
 			ScoreWindowController	scoreWindowController	= new ScoreWindowController(saveScoreWindow);
 			ScoreManager			scoreManager			= new ScoreManager(scoreWindowController, scoreDataController);
