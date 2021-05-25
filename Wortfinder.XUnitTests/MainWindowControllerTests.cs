@@ -167,8 +167,8 @@ namespace Wortfinder.XUnitTests
 			MainWindowController mainWindowController = new MainWindowController(mainWindow.Object, missingWordManager.Object, wordBuilder.Object);
 			bool result = mainWindowController.SetTimer(time);
 
-			mainWindow.Verify();
 			Assert.True(result);
+			mainWindow.Verify();
 		}
 
 		[Fact]

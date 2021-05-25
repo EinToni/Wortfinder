@@ -49,18 +49,23 @@ namespace Wortfinder.XUnitTests
 			Coordinate testCoordinate = new Coordinate(row, column);
 			Coordinate secondCoordinate = new Coordinate(row + 1, column);
 
-			Assert.True(testCoordinate.IsNeighbour(secondCoordinate));
+			bool result = testCoordinate.IsNeighbour(secondCoordinate);
+
+			Assert.True(result);
 		}
 
 		[Fact]
 		public void IsNeighbour_False()
 		{
+			// Arrange
 			int row = 5;
 			int column = 4;
 			Coordinate testCoordinate = new Coordinate(row, column);
 			Coordinate secondCoordinate = new Coordinate(row + 2, column);
-
-			Assert.False(testCoordinate.IsNeighbour(secondCoordinate));
+			// Act
+			bool result = testCoordinate.IsNeighbour(secondCoordinate);
+			// Assert
+			Assert.False(result);
 		}
 	}
 }

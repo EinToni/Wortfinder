@@ -17,22 +17,24 @@ namespace Wortfinder.XUnitTests
 
 			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
 
-			scoreDataCtr.Verify(x => x.LoadScores());
+			scoreDataCtr.Verify();
 		}
 
 		[Fact]
 		public void GetTopScores_EmptyList()
 		{
+			// Capture
 			Mock<IScoreDataController> scoreDataCtr = new Mock<IScoreDataController>();
 			Mock<IScoreWindowController> scoreWindowCtr = new Mock<IScoreWindowController>();
-
 			scoreDataCtr.Setup(x => x.LoadScores()).Returns(new List<Score>()).Verifiable();
-
+			// Arrange
 			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
+			// Act
 			var result = scoreManager.GetTopScores(5);
-
-			scoreDataCtr.Verify(x => x.LoadScores());
+			// Assert
 			Assert.Empty(result);
+			// Verify
+			scoreDataCtr.Verify();
 		}
 
 		[Fact]
@@ -48,8 +50,9 @@ namespace Wortfinder.XUnitTests
 			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
 			List<Score> result = scoreManager.GetTopScores(5);
 
-			scoreDataCtr.Verify(x => x.LoadScores());
 			Assert.True(result.Capacity == 2);
+
+			scoreDataCtr.Verify();
 		}
 
 		[Fact]
@@ -65,9 +68,10 @@ namespace Wortfinder.XUnitTests
 			ScoreManager scoreManager = new ScoreManager(scoreWindowCtr.Object, scoreDataCtr.Object);
 			List<Score> result = scoreManager.GetTopScores(1);
 
-			scoreDataCtr.Verify(x => x.LoadScores());
 			Assert.True(result.Capacity == 1);
 			Assert.Contains(scoreLarge, result);
+
+			scoreDataCtr.Verify();
 		}
 		[Fact]
 		public void AddScore()
